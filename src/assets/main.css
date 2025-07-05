@@ -1,1 +1,46 @@
 @import 'tailwindcss';
+
+/* Variables CSS globales */
+:root {
+  --color-background: #dad7cd;
+  --color-text: #3a5a40;
+  --color-primary: #588157;
+}
+
+/* Variables pour le mode sombre */
+.dark {
+  --color-background: #344e41;
+  --color-text: #dad7cd;
+  --color-primary: #a3b18a;
+}
+
+/* Utilitaires personnalisés */
+@layer utilities {
+  .bg-background {
+    background-color: var(--color-background);
+  }
+
+  .text-text {
+    color: var(--color-text);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+
+  .hover\:bg-primary:hover {
+    background-color: var(--color-primary);
+  }
+
+  .hover\:text-background:hover {
+    color: var(--color-background);
+  }
+}
