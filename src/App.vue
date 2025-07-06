@@ -1,15 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import ThemeToggle from './components/ThemeToggle.vue'
+import HeroSection from './components/section/HeroSection.vue'
 
 const isDark = ref(false)
 
 const applyTheme = (dark) => {
-  if (dark) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
+  document.documentElement.classList.toggle('dark', dark)
   isDark.value = dark
   localStorage.setItem('theme', dark ? 'dark' : 'light')
 }
@@ -24,15 +21,20 @@ onMounted(() => {
 
 <template>
   <div class="min-h-screen bg-background text-text transition-colors duration-300">
-    <!-- Header avec toggle -->
-    <header class="flex justify-end p-4">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-8 py-4">
+      <div class="text-xl font-bold text-primary">Hudayfa</div>
+      <ul class="flex gap-6 text-sm">
+        <li><a href="#" class="hover:underline">Home</a></li>
+        <li><a href="#about" class="hover:underline">About</a></li>
+        <li><a href="#skills" class="hover:underline">Skills</a></li>
+        <li><a href="#projects" class="hover:underline">Projects</a></li>
+        <li><a href="#contact" class="hover:underline">Contact</a></li>
+      </ul>
       <ThemeToggle :is-dark="isDark" @toggle="toggleTheme" />
-    </header>
+    </nav>
 
-    <!-- Section d'accueil -->
-    <main class="flex flex-col items-center justify-center px-4 py-16 text-center">
-      <h1 class="text-4xl font-bold mb-4 text-primary">Welcome to My Portfolio</h1>
-      <p class="text-lg max-w-xl">This is a simple Vue.js application styled with Tailwind CSS.</p>
-    </main>
+    <!-- Hero section -->
+    <HeroSection />
   </div>
 </template>
