@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col-reverse md:flex-row items-center justify-between px-8 py-16 md:py-24 gap-12 max-w-6xl mx-auto"
+    class="flex flex-col-reverse md:flex-row items-center justify-between px-8 py-16 md:py-24 gap-12 w-10/12 mx-auto"
   >
     <!-- Text -->
     <div class="text-left space-y-6 max-w-xl">
@@ -16,7 +16,7 @@
         href="#contact"
         class="inline-block px-6 py-3 bg-primary text-white rounded-md font-semibold hover:bg-primary-dark transition"
       >
-        Contact
+        Me contacter
       </a>
     </div>
 

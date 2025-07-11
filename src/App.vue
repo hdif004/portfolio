@@ -2,6 +2,11 @@
 import { ref, onMounted } from 'vue'
 import ThemeToggle from './components/ThemeToggle.vue'
 import HeroSection from './components/section/HeroSection.vue'
+import AboutSection from './components/section/AboutSection.vue'
+import SkillsSection from './components/section/SkillsSection.vue'
+import ProjectsSection from './components/section/ProjectsSection.vue'
+import ContactSection from './components/section/ContactSection.vue'
+import Footer from './components/section/FooterSection.vue'
 
 const isDark = ref(false)
 
@@ -34,7 +39,12 @@ onMounted(() => {
       <ThemeToggle :is-dark="isDark" @toggle="toggleTheme" />
     </nav>
 
-    <!-- Hero section -->
+    <!-- Sections -->
     <HeroSection />
+    <AboutSection />
+    <SkillsSection />
+    <ProjectsSection />
+    <ContactSection />
+    <Footer />
   </div>
 </template>
