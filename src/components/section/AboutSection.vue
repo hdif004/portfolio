@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="py-20 px-6 max-w-5xl mx-auto">
+  <section id="about" class="py-20 px-6 w-10/12 mx-auto">
     <h2 class="text-3xl font-bold mb-6 text-primary">About Me</h2>
     <p class="text-lg leading-relaxed text-text/80">
       I'm a passionate web developer with a strong interest in front-end technologies like Vue.js
