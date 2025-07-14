@@ -5,6 +5,8 @@
   --color-background: #dad7cd;
   --color-text: #3a5a40;
   --color-primary: #588157;
+  --color-card-bg: #ffffff;
+  --color-card-text: #2d3748; /* Texte sombre pour les cartes */
 }
 
 /* Variables pour le mode sombre */
@@ -12,6 +14,8 @@
   --color-background: #344e41;
   --color-text: #dad7cd;
   --color-primary: #a3b18a;
+  --color-card-bg: #2d3748;
+  --color-card-text: #e2e8f0; /* Texte clair pour les cartes en mode sombre */
 }
 
 /* Utilitaires personnalisés */
@@ -42,5 +46,12 @@
 
   .hover\:text-background:hover {
     color: var(--color-background);
+  }
+  .bg-card {
+    background-color: var(--color-card-bg);
+  }
+
+  .text-card {
+    color: var(--color-card-text);
   }
 }

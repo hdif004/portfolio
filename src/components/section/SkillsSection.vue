@@ -1,4 +1,3 @@
-// src/components/section/SkillsSection.vue
 <template>
   <section id="skills" class="py-20 px-6 w-10/12 mx-auto">
     <h2 class="text-3xl font-bold mb-10 text-primary text-center">Skills</h2>
