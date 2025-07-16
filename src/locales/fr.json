@@ -1,0 +1,59 @@
+{
+  "brand": "DevAy",
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "toggle": "☀️",
+  "hero": {
+    "greeting": "Salut, je suis Hudayfa",
+    "title": "Développeur Web",
+    "desc": "Passionné par le développement front-end, j’adore créer des interfaces propres, modernes et accessibles.",
+    "cta": "Me contacter",
+    "imageAlt": "Hudayfa photo"
+  },
+  "about": {
+    "title": "à propos de moi",
+    "steps": [
+      {
+        "label": "Le déclic",
+        "text": "Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers le développement web."
+      },
+      {
+        "label": "La formation",
+        "text": "Actuellement étudiant en licence professionnelle \"Métiers de l'Internet – Applications Web\" à l'Université de Limoges, j'ai consolidé mes compétences en Vue.js, Tailwind CSS, Strapi, Symfony, NestJS et Next.js."
+      },
+      {
+        "label": "Ma vision",
+        "text": "J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime résoudre de vrais problèmes avec créativité."
+      }
+    ]
+  },
+  "skills": {
+    "title": "Compétences",
+    "categories": {
+      "frontend": "Front-End",
+      "backend": "Back-End / CMS",
+      "tools": "Outils & Méthodes"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "items": [
+      {
+        "title": "MonFeed",
+        "desc": "Plateforme IA pour créer, planifier et publier des contenus sur les réseaux sociaux. Elle intègre un tableau de bord, un éditeur, un calendrier et des fonctionnalités d’analyse basées sur l’IA.",
+        "technos": ["Vue.js", "Strapi", "Tailwind CSS", "OpenAI API"]
+      },
+      {
+        "title": "Shopify Storefront",
+        "desc": "Création d’un thème Shopify sur mesure avec Liquid. Vitrine responsive, personnalisable et optimisée pour une navigation fluide et un bon SEO.",
+        "technos": ["Liquid", "Shopify CLI", "HTML/CSS"]
+      }
+    ],
+    "view": "Voir le projet →"
+  }
+}

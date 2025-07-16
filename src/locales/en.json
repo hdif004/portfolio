@@ -1,0 +1,59 @@
+{
+  "brand": "DevAy",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "toggle": "☀️",
+  "hero": {
+    "greeting": "Hi, I'm Hudayfa",
+    "title": "Web Developer",
+    "desc": "Passionate about front-end development, I love creating clean, modern and accessible interfaces.",
+    "cta": "Contact me",
+    "imageAlt": "Hudayfa photo"
+  },
+  "about": {
+    "title": "About Me",
+    "steps": [
+      {
+        "label": "The turning point",
+        "text": "Curious by nature, I discovered the world of coding by exploring HTML, CSS and JavaScript. I quickly became passionate about creating interfaces, which naturally led me to web development."
+      },
+      {
+        "label": "Education",
+        "text": "Currently studying for a professional degree in 'Internet Professions – Web Applications' at the University of Limoges, I have consolidated my skills in Vue.js, Tailwind CSS, Strapi, Symfony, NestJS and Next.js."
+      },
+      {
+        "label": "My vision",
+        "text": "I place great importance on accessibility, performance and aesthetics. I believe in simple, useful and well-designed interfaces that are always user-oriented. I enjoy solving real problems with creativity."
+      }
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "frontend": "Front-End",
+      "backend": "Back-End / CMS",
+      "tools": "Tools & Methods"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "items": [
+      {
+        "title": "MonFeed",
+        "desc": "AI platform for creating, planning and publishing content on social media. It includes a dashboard, an editor, a calendar and AI-based analytics features.",
+        "technologies": ["Vue.js", "Strapi", "Tailwind CSS", "OpenAI API"]
+      },
+      {
+        "title": "Shopify Storefront",
+        "desc": "Creation of a custom Shopify theme with Liquid. Responsive, customisable storefront optimised for smooth navigation and good SEO.",
+        "technologies": ["Liquid", "Shopify CLI", "HTML/CSS"]
+      }
+    ],
+    "view": "View project →"
+  }
+}

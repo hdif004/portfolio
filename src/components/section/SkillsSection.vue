@@ -1,11 +1,11 @@
 <template>
   <section id="skills" class="py-20 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-10 text-primary text-center">Skills</h2>
+    <h2 class="text-3xl font-bold mb-10 text-primary text-center">{{ t('skills.title') }}</h2>
     <div class="grid md:grid-cols-3 gap-8">
       <div
         v-for="(group, index) in skillGroups"
         :key="group.title"
-        class="bg-white p-6 rounded-lg shadow-sm opacity-0 translate-y-4 transition duration-700 ease-in-out"
+        class="bg-card p-6 rounded-lg shadow-sm opacity-0 translate-y-4 transition duration-700 ease-in-out"
         :class="'animate-fade-in-delay-' + index"
       >
         <h3 class="text-xl font-semibold mb-4 text-primary">{{ group.title }}</h3>
@@ -29,6 +29,9 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 import {
   Code2,
   FileCode,
@@ -45,28 +48,28 @@ const skillGroups = [
   {
     title: 'Front-End',
     items: [
-      { name: 'Vue.js', icon: Code2, level: 85 },
+      { name: 'Vue.js', icon: Code2, level: 75 },
       { name: 'Tailwind CSS', icon: LayoutDashboard, level: 90 },
       { name: 'JavaScript', icon: FileCode, level: 80 },
       { name: 'Bootstrap', icon: Boxes, level: 70 },
-      { name: 'Next.js (notions)', icon: LayoutDashboard, level: 45 },
+      { name: 'Next.js', icon: LayoutDashboard, level: 45 },
     ],
   },
   {
     title: 'Back-End / CMS',
     items: [
-      { name: 'PHP', icon: FileCode, level: 75 },
-      { name: 'Symfony', icon: Settings2, level: 70 },
-      { name: 'Strapi', icon: Server, level: 75 },
-      { name: 'NestJS', icon: Server, level: 65 },
-      { name: 'Shopify', icon: Boxes, level: 70 },
+      { name: 'PHP', icon: FileCode, level: 70 },
+      { name: 'Symfony', icon: Settings2, level: 60 },
+      { name: 'Strapi', icon: Server, level: 70 },
+      { name: 'NestJS', icon: Server, level: 60 },
+      { name: 'Shopify CLI', icon: Boxes, level: 60 },
     ],
   },
   {
     title: 'Outils & Méthodes',
     items: [
       { name: 'Git', icon: GitBranch, level: 80 },
-      { name: 'Figma', icon: PenTool, level: 65 },
+      { name: 'Figma', icon: PenTool, level: 55 },
       { name: 'Docker', icon: Container, level: 60 },
     ],
   },
