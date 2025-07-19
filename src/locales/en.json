@@ -9,10 +9,11 @@
   },
   "toggle": "☀️",
   "hero": {
-    "greeting": "Hi, I'm Hudayfa",
+    "greeting": "Hi, I'm ",
+    "name": "Hudayfa",
     "title": "Web Developer",
     "desc": "Passionate about front-end development, I love creating clean, modern and accessible interfaces.",
-    "cta": "Contact me",
+    "github": "My GitHub",
     "imageAlt": "Hudayfa photo"
   },
   "about": {
@@ -42,6 +43,12 @@
   },
   "projects": {
     "title": "Projects",
+    "view": "View Project",
+    "tabs": {
+      "all": "All",
+      "pro": "Pro",
+      "perso": "Personal"
+    },
     "items": [
       {
         "title": "MonFeed",

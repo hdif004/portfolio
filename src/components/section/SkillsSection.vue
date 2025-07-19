@@ -1,6 +1,6 @@
 <template>
   <section id="skills" class="py-20 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-10 text-primary text-center">{{ t('skills.title') }}</h2>
+    <h2 class="text-3xl font-bold mb-10 text-primary">{{ t('skills.title') }}</h2>
     <div class="grid md:grid-cols-3 gap-8">
       <div
         v-for="(group, index) in skillGroups"

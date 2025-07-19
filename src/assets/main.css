@@ -55,3 +55,11 @@
     color: var(--color-card-text);
   }
 }
+
+.moon-icon {
+  right: 0.6rem;
+}
+
+.sun-icon {
+  left: 0.35rem;
+}

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Languages, Menu } from 'lucide-vue-next'
 
 import ThemeToggle from './components/ThemeToggle.vue'
 import HeroSection from './components/section/HeroSection.vue'
@@ -11,6 +12,7 @@ import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
 
 const isDark = ref(false)
+const showMenu = ref(false)
 
 const applyTheme = (dark) => {
   document.documentElement.classList.toggle('dark', dark)
@@ -37,32 +39,83 @@ const toggleLang = () => {
 <template>
   <div class="min-h-screen bg-background text-text transition-colors duration-300">
     <!-- Navbar -->
-    <nav class="flex items-center justify-between px-8 py-4">
-      <div class="text-xl font-bold text-primary">{{ $t('brand') }}</div>
-      <ul class="flex gap-6 text-sm">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-6 py-4 sm:px-8">
+      <!-- Logo / Brand -->
+      <div class="text-xl sm:text-4xl font-bold text-primary">
+        {{ $t('brand') }}
+      </div>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex gap-6 text-sm">
         <li>
-          <a href="#" class="hover:underline">{{ $t('nav.home') }}</a>
+          <a href="#" class="hover:underline font-semibold">{{ $t('nav.home') }}</a>
         </li>
         <li>
-          <a href="#about" class="hover:underline">{{ $t('nav.about') }}</a>
+          <a href="#about" class="hover:underline font-semibold">{{ $t('nav.about') }}</a>
         </li>
         <li>
-          <a href="#skills" class="hover:underline">{{ $t('nav.skills') }}</a>
+          <a href="#skills" class="hover:underline font-semibold">{{ $t('nav.skills') }}</a>
         </li>
         <li>
-          <a href="#projects" class="hover:underline">{{ $t('nav.projects') }}</a>
+          <a href="#projects" class="hover:underline font-semibold">{{ $t('nav.projects') }}</a>
         </li>
         <li>
-          <a href="#contact" class="hover:underline">{{ $t('nav.contact') }}</a>
+          <a href="#contact" class="hover:underline font-semibold">{{ $t('nav.contact') }}</a>
         </li>
       </ul>
+
+      <!-- Actions -->
       <div class="flex items-center gap-4">
-        <button @click="toggleLang" class="text-sm border px-2 py-1 rounded hover:bg-muted">
-          {{ locale === 'fr' ? 'EN' : 'FR' }}
+        <!-- Desktop Lang Button -->
+        <button
+          @click="toggleLang"
+          class="hidden md:inline-flex p-2 rounded-full cursor-pointer border border-primary text-primary hover:bg-muted transition"
+          :aria-label="locale === 'fr' ? 'Passer à l’anglais' : 'Switch to French'"
+        >
+          <Languages class="w-5 h-5" />
         </button>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden">
+          <Menu @click="showMenu = !showMenu" class="w-6 h-6 cursor-pointer" />
+        </div>
+
+        <!-- Dark Mode -->
         <ThemeToggle :is-dark="isDark" @toggle="toggleTheme" />
       </div>
     </nav>
+
+    <!-- Dropdown menu (mobile only) -->
+    <div
+      v-if="showMenu"
+      class="md:hidden flex flex-col gap-4 text-center py-4 border-t border-muted text-sm"
+    >
+      <a href="#" @click="showMenu = false" class="hover:underline font-semibold">{{
+        $t('nav.home')
+      }}</a>
+      <a href="#about" @click="showMenu = false" class="hover:underline font-semibold">{{
+        $t('nav.about')
+      }}</a>
+      <a href="#skills" @click="showMenu = false" class="hover:underline font-semibold">{{
+        $t('nav.skills')
+      }}</a>
+      <a href="#projects" @click="showMenu = false" class="hover:underline font-semibold">{{
+        $t('nav.projects')
+      }}</a>
+      <a href="#contact" @click="showMenu = false" class="hover:underline font-semibold">{{
+        $t('nav.contact')
+      }}</a>
+    </div>
+
+    <!-- Lang Button sticky (mobile only) -->
+    <button
+      @click="toggleLang"
+      class="md:hidden fixed bottom-4 right-4 z-50 p-3 rounded-full border border-primary bg-background text-primary shadow hover:bg-muted transition"
+      :aria-label="locale === 'fr' ? 'Passer à l’anglais' : 'Switch to French'"
+    >
+      <Languages class="w-5 h-5" />
+    </button>
 
     <!-- Sections -->
     <HeroSection />

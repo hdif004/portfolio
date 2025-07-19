@@ -9,10 +9,11 @@
   },
   "toggle": "☀️",
   "hero": {
-    "greeting": "Salut, je suis Hudayfa",
+    "greeting": "Salut, je suis",
+    "name": "Hudayfa",
     "title": "Développeur Web",
     "desc": "Passionné par le développement front-end, j’adore créer des interfaces propres, modernes et accessibles.",
-    "cta": "Me contacter",
+    "github": "Mon GitHub",
     "imageAlt": "Hudayfa photo"
   },
   "about": {
@@ -42,6 +43,12 @@
   },
   "projects": {
     "title": "Projets",
+    "view": "Voir le projet",
+    "tabs": {
+      "all": "Tous",
+      "pro": "Pro",
+      "perso": "Personnel"
+    },
     "items": [
       {
         "title": "MonFeed",
