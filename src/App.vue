@@ -26,7 +26,6 @@ onMounted(() => {
   applyTheme(saved === 'dark')
 })
 
-// Langue avec vue-i18n
 const { locale } = useI18n()
 
 const toggleLang = () => {
@@ -37,15 +36,11 @@ const toggleLang = () => {
 
 <template>
   <div class="min-h-screen bg-background text-text transition-colors duration-300">
-    <!-- Navbar -->
-    <!-- Navbar -->
     <nav class="flex items-center justify-between px-6 py-4 sm:px-8">
-      <!-- Logo / Brand -->
       <div class="text-xl sm:text-4xl font-bold text-primary">
         {{ $t('brand') }}
       </div>
 
-      <!-- Desktop nav -->
       <ul class="hidden md:flex gap-6 text-sm">
         <li>
           <a href="#" class="hover:underline font-semibold">{{ $t('nav.home') }}</a>
@@ -61,9 +56,7 @@ const toggleLang = () => {
         </li>
       </ul>
 
-      <!-- Actions -->
       <div class="flex items-center gap-4">
-        <!-- Desktop Lang Button -->
         <button
           @click="toggleLang"
           class="hidden md:inline-flex p-2 rounded-full cursor-pointer border border-primary text-primary hover:bg-muted transition"
@@ -72,17 +65,14 @@ const toggleLang = () => {
           <Languages class="w-5 h-5" />
         </button>
 
-        <!-- Mobile Menu -->
         <div class="md:hidden">
           <Menu @click="showMenu = !showMenu" class="w-6 h-6 cursor-pointer" />
         </div>
 
-        <!-- Dark Mode -->
         <ThemeToggle :is-dark="isDark" @toggle="toggleTheme" />
       </div>
     </nav>
 
-    <!-- Dropdown menu (mobile only) -->
     <div
       v-if="showMenu"
       class="md:hidden flex flex-col gap-4 text-center py-4 border-t border-muted text-sm"
@@ -104,7 +94,6 @@ const toggleLang = () => {
       }}</a>
     </div>
 
-    <!-- Lang Button sticky (mobile only) -->
     <button
       @click="toggleLang"
       class="md:hidden fixed bottom-4 right-4 z-50 p-3 rounded-full border border-primary bg-background text-primary shadow hover:bg-muted transition"
@@ -113,7 +102,6 @@ const toggleLang = () => {
       <Languages class="w-5 h-5" />
     </button>
 
-    <!-- Sections -->
     <HeroSection />
     <AboutSection />
     <SkillsSection />

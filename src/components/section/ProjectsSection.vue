@@ -51,7 +51,6 @@ const projects = {
     </h2>
 
     <TabGroup>
-      <!-- Onglets : centrés sur mobile, alignés à gauche sur desktop -->
       <TabList
         class="flex gap-2 mb-6 bg-muted p-1 rounded-lg overflow-x-auto whitespace-nowrap scrollbar-none justify-center md:justify-start"
       >
@@ -68,7 +67,6 @@ const projects = {
         </Tab>
       </TabList>
 
-      <!-- Contenu avec animation fade -->
       <TabPanels>
         <TabPanel v-for="(group, index) in Object.values(projects)" :key="index">
           <Transition
