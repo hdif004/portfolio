@@ -8,11 +8,12 @@
   },
   "toggle": "☀️",
   "hero": {
-    "greeting": "Salut, je suis",
+    "greeting": "Salut, je m'appelle",
     "name": "Hudayfa",
-    "title": "Développeur Web",
+    "title": "et je suis développeur web",
     "desc": "Passionné par le développement front-end, j’adore créer des interfaces propres, modernes et accessibles.",
     "github": "Mon GitHub",
+    "cv": "Mon CV",
     "imageAlt": "Hudayfa photo"
   },
   "about": {
@@ -51,15 +52,25 @@
     "items": [
       {
         "title": "MonFeed",
-        "desc": "Plateforme IA pour créer, planifier et publier des contenus sur les réseaux sociaux. Elle intègre un tableau de bord, un éditeur, un calendrier et des fonctionnalités d’analyse basées sur l’IA.",
+        "desc": "Projet réalisé dans le cadre de mon stage de fin d’études chez monFeed (anciennement TheWebCake). MonFeed est une plateforme basée sur l’IA permettant de créer, planifier et publier des contenus sur les réseaux sociaux. Elle intègre un tableau de bord, un éditeur, un calendrier et des fonctionnalités d’analyse assistées par intelligence artificielle.",
         "technos": ["Vue.js", "Strapi", "Tailwind CSS", "OpenAI API"]
       },
       {
-        "title": "Shopify Storefront",
-        "desc": "Création d’un thème Shopify sur mesure avec Liquid. Vitrine responsive, personnalisable et optimisée pour une navigation fluide et un bon SEO.",
-        "technos": ["Liquid", "Shopify CLI", "HTML/CSS"]
+        "title": "Flag",
+        "desc": "Flag est un jeu passionnant conçu en 2ᵉ année de licence dans le cadre d’un travail de groupe pour tester vos connaissances en matière de drapeaux du monde. Dans ce jeu, un drapeau aléatoire provenant d'un pays du monde entier s'affiche à l'écran, et votre tâche est de deviner à quel pays il appartient. Plus vous devinez de drapeaux correctement, plus votre série de victoires s'allonge.",
+        "technos": ["HTML/CSS", "Tailwind CSS", "API REST", "JavaScript"]
+      },
+      {
+        "title": "Gourmet_Atlas",
+        "desc": "Gourmet_Atlas est une application développée en 2ᵉ année de licence dans le cadre d’un travail de groupe. Elle permet aux utilisateurs d’explorer différentes cuisines du monde entier grâce à l’API World Food Guide. L’application offre des informations détaillées sur chaque cuisine, propose la découverte de plats avec leurs ingrédients et leur préparation, et intègre une galerie de photos pour visualiser les spécialités culinaires.",
+        "technos": ["Vue.js", "Tailwind CSS", "API REST"]
       }
     ],
     "view": "Voir le projet →"
+  },
+  "banner": {
+    "title": "Vous avez une idée ou un projet ?",
+    "subtitle": "Retrouvez tous mes liens en bas de page pour me contacter.",
+    "button": "Aller au contact"
   }
 }

@@ -9,36 +9,48 @@ const projects = {
     {
       titleKey: 'projects.items[0].title',
       descKey: 'projects.items[0].desc',
-      link: 'https://github.com/hdif004',
+      link: 'https://github.com/mehdidarmiche/monfeed-front',
+      video: 'https://www.youtube.com/embed/GuS-9lHLyYA',
       technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
     },
     {
       titleKey: 'projects.items[1].title',
       descKey: 'projects.items[1].desc',
-      link: 'https://github.com/hdif004',
-      technos: ['Liquid', 'Shopify CLI', 'HTML/CSS'],
+      link: 'https://github.com/LoiseauCodeur/flag',
+      video: 'https://www.youtube.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
+      technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
+    },
+    {
+      titleKey: 'projects.items[2].title',
+      descKey: 'projects.items[2].desc',
+      link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
+      video: 'https://www.youtube.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
+      technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
     },
   ],
   [t('projects.tabs.pro')]: [
     {
-      titleKey: 'projects.items[1].title',
-      descKey: 'projects.items[1].desc',
-      link: 'https://github.com/hdif004',
-      technos: ['Liquid', 'Shopify CLI', 'HTML/CSS'],
-    },
-    {
       titleKey: 'projects.items[0].title',
       descKey: 'projects.items[0].desc',
-      link: 'https://github.com/hdif004',
+      link: 'https://github.com/mehdidarmiche/monfeed-front',
+      video: 'https://www.youtube.com/embed/GuS-9lHLyYA',
       technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
     },
   ],
   [t('projects.tabs.perso')]: [
     {
-      titleKey: 'projects.items[0].title',
-      descKey: 'projects.items[0].desc',
-      link: 'https://github.com/hdif004',
-      technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
+      titleKey: 'projects.items[1].title',
+      descKey: 'projects.items[1].desc',
+      link: 'https://github.com/LoiseauCodeur/flag',
+      video: 'https://www.youtube.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
+      technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
+    },
+    {
+      titleKey: 'projects.items[2].title',
+      descKey: 'projects.items[2].desc',
+      link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
+      video: 'https://www.youtube.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
+      technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
     },
   ],
 }
@@ -85,6 +97,13 @@ const projects = {
                 :key="project.titleKey"
                 class="bg-card p-6 rounded shadow-sm"
               >
+                <iframe
+                  v-if="project.video"
+                  :src="project.video"
+                  class="w-full h-64 rounded mb-4"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
                 <h3 class="text-xl font-semibold mb-2">
                   {{ t(project.titleKey) }}
                 </h3>

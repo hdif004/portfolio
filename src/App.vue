@@ -1,13 +1,18 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Languages, Menu } from 'lucide-vue-next'
+
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 import ThemeToggle from './components/ThemeToggle.vue'
 import HeroSection from './components/section/HeroSection.vue'
 import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
 import ProjectsSection from './components/section/ProjectsSection.vue'
+import SoftBannerSection from './components/section/SoftBannerSection.vue'
 import Footer from './components/section/FooterSection.vue'
 
 const isDark = ref(false)
@@ -24,6 +29,44 @@ const toggleTheme = () => applyTheme(!isDark.value)
 onMounted(() => {
   const saved = localStorage.getItem('theme')
   applyTheme(saved === 'dark')
+
+  nextTick(() => {
+    // Animation du header
+    gsap.from('nav', {
+      opacity: 0,
+      y: -40,
+      duration: 1,
+      ease: 'power2.out',
+    })
+
+    // Animation des sections au scroll
+    gsap.utils.toArray('section').forEach((el) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: 'power2.out',
+      })
+    })
+
+    // Animation menu mobile
+    gsap.from('.mobile-menu a', {
+      opacity: 0,
+      y: -10,
+      duration: 0.4,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.mobile-menu',
+        start: 'top 100%',
+      },
+    })
+  })
 })
 
 const { locale } = useI18n()
@@ -75,7 +118,7 @@ const toggleLang = () => {
 
     <div
       v-if="showMenu"
-      class="md:hidden flex flex-col gap-4 text-center py-4 border-t border-muted text-sm"
+      class="mobile-menu md:hidden flex flex-col gap-4 text-center py-4 border-t border-muted text-sm"
     >
       <a href="#" @click="showMenu = false" class="hover:underline font-semibold">{{
         $t('nav.home')
@@ -106,6 +149,7 @@ const toggleLang = () => {
     <AboutSection />
     <SkillsSection />
     <ProjectsSection />
+    <SoftBannerSection />
     <Footer />
   </div>
 </template>

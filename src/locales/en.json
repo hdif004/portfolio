@@ -10,9 +10,10 @@
   "hero": {
     "greeting": "Hi, I'm ",
     "name": "Hudayfa",
-    "title": "Web Developer",
+    "title": "and i am a web developer",
     "desc": "Passionate about front-end development, I love creating clean, modern and accessible interfaces.",
     "github": "My GitHub",
+    "cv": "My CV",
     "imageAlt": "Hudayfa photo"
   },
   "about": {
@@ -51,15 +52,24 @@
     "items": [
       {
         "title": "MonFeed",
-        "desc": "AI platform for creating, planning and publishing content on social media. It includes a dashboard, an editor, a calendar and AI-based analytics features.",
-        "technologies": ["Vue.js", "Strapi", "Tailwind CSS", "OpenAI API"]
+        "desc": "Project developed during my final-year internship at monFeed (formerly TheWebCake). MonFeed is an AI-powered platform that enables users to create, schedule, and publish content across social media. It features a dashboard, content editor, calendar, and AI-based analytics."
       },
       {
-        "title": "Shopify Storefront",
-        "desc": "Creation of a custom Shopify theme with Liquid. Responsive, customisable storefront optimised for smooth navigation and good SEO.",
-        "technologies": ["Liquid", "Shopify CLI", "HTML/CSS"]
+        "title": "Flag",
+        "desc": "Flag is an exciting group project developed in the second year of our degree. The game challenges your knowledge of world flags by displaying a random flag from any country. Your goal is to guess which country it belongs to. The more correct answers you give, the longer your winning streak grows.",
+        "technologies": ["HTML/CSS", "Tailwind CSS", "REST API", "JavaScript"]
+      },
+      {
+        "title": "Gourmet_Atlas",
+        "desc": "Gourmet_Atlas is a group project created during the second year of our degree. It allows users to explore cuisines from around the world using the World Food Guide API. The app provides detailed information on each cuisine, lets users discover dishes with ingredients and preparation steps, and includes a photo gallery to visualize culinary specialties.",
+        "technologies": ["Vue.js", "Tailwind CSS", "REST API"]
       }
     ],
     "view": "View project →"
+  },
+  "banner": {
+    "title": "Have a project or an idea?",
+    "subtitle": "You’ll find all my contact links at the bottom of the page.",
+    "button": "Go to contact"
   }
 }

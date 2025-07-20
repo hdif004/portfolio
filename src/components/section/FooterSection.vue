@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-primary text-white text-center py-8 mt-12">
+  <footer id="footer" class="bg-primary text-white text-center py-8 mt-12">
     <div class="container mx-auto px-4">
       <p class="text-xl font-semibold mb-4">Hudayfa Koujdal – Front-end Web Developer</p>
 

@@ -16,10 +16,15 @@
                 <component :is="skill.icon" class="w-5 h-5 text-primary" />
                 <span class="text-text/90">{{ skill.name }}</span>
               </div>
-              <span class="text-sm text-text/50">{{ skill.level }}%</span>
+              <span class="text-sm text-text/50 skill-percentage" :data-target="skill.level">
+                0%
+              </span>
             </div>
             <div class="w-full bg-primary/20 rounded-full h-2">
-              <div class="bg-primary h-2 rounded-full" :style="{ width: skill.level + '%' }"></div>
+              <div
+                class="skill-bar-fill bg-primary h-2 rounded-full"
+                :data-level="skill.level"
+              ></div>
             </div>
           </li>
         </ul>
@@ -30,6 +35,58 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { onMounted, nextTick } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
+
+  nextTick(() => {
+    // Animation des barres
+    gsap.utils.toArray('.skill-bar-fill').forEach((el) => {
+      const finalWidth = el.getAttribute('data-level')
+
+      gsap.fromTo(
+        el,
+        { width: '0%' },
+        {
+          width: finalWidth + '%',
+          duration: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        },
+      )
+    })
+
+    // Animation des nombres
+    gsap.utils.toArray('.skill-percentage').forEach((el) => {
+      const target = parseInt(el.getAttribute('data-target') || '0')
+
+      const obj = { value: 0 }
+
+      gsap.to(obj, {
+        value: target,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+        onUpdate: () => {
+          el.textContent = `${Math.round(obj.value)}%`
+        },
+      })
+    })
+  })
+})
 
 const { t } = useI18n()
 import {

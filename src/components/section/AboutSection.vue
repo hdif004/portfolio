@@ -1,7 +1,31 @@
 <script setup>
+import { onMounted, nextTick } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
+
+  nextTick(() => {
+    gsap.utils.toArray('.about-step').forEach((el, index) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: 'power2.out',
+      })
+    })
+  })
+})
 </script>
 
 <template>
@@ -11,7 +35,7 @@ const { t } = useI18n()
     <div class="grid md:grid-cols-3 gap-8">
       <!-- Step 1 -->
       <div
-        class="bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
+        class="about-step bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
       >
         <div
           class="absolute -left-3 top-6 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-md"
@@ -26,7 +50,7 @@ const { t } = useI18n()
 
       <!-- Step 2 -->
       <div
-        class="bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
+        class="about-step bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
       >
         <div
           class="absolute -left-3 top-6 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-md"
@@ -41,7 +65,7 @@ const { t } = useI18n()
 
       <!-- Step 3 -->
       <div
-        class="bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
+        class="about-step bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative group transition-colors duration-300"
       >
         <div
           class="absolute -left-3 top-6 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-md"
