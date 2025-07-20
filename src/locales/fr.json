@@ -2,10 +2,9 @@
   "brand": "DevAy",
   "nav": {
     "home": "Accueil",
-    "about": "À propos",
+    "about": "Profil",
     "skills": "Compétences",
-    "projects": "Projets",
-    "contact": "Contact"
+    "projects": "Projets"
   },
   "toggle": "☀️",
   "hero": {
@@ -17,7 +16,7 @@
     "imageAlt": "Hudayfa photo"
   },
   "about": {
-    "title": "à propos de moi",
+    "title": "Mon profil",
     "steps": [
       {
         "label": "Le déclic",
@@ -25,7 +24,7 @@
       },
       {
         "label": "La formation",
-        "text": "Actuellement étudiant en licence professionnelle \"Métiers de l'Internet – Applications Web\" à l'Université de Limoges, j'ai consolidé mes compétences en Vue.js, Tailwind CSS, Strapi, Symfony, NestJS et Next.js."
+        "text": "Titulaire d'une licence professionnelle 'Métiers de l’Internet – Applications Web' de l’Université de Limoges, j’ai acquis des compétences solides en développement front-end, back-end ainsi qu’en gestion de projet."
       },
       {
         "label": "Ma vision",

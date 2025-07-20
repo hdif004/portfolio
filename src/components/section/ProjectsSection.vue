@@ -45,8 +45,8 @@ const projects = {
 </script>
 
 <template>
-  <section id="projects" class="py-20 px-6 w-11/12 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-primary text-center">
+  <section id="projects" class="py-20 px-6 w-10/12 mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-primary">
       {{ t('projects.title') }}
     </h2>
 

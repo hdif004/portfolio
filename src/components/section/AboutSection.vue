@@ -5,8 +5,8 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section id="about" class="py-20 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-14 text-primary">{{ t('about.title') }}</h2>
+  <section id="about" class="py-16 px-6 w-10/12 mx-auto">
+    <h2 class="text-3xl font-bold mb-10 text-primary">{{ t('about.title') }}</h2>
 
     <div class="grid md:grid-cols-3 gap-8">
       <!-- Step 1 -->

@@ -4,8 +4,7 @@
     "home": "Home",
     "about": "About",
     "skills": "Skills",
-    "projects": "Projects",
-    "contact": "Contact"
+    "projects": "Projects"
   },
   "toggle": "☀️",
   "hero": {
@@ -25,7 +24,7 @@
       },
       {
         "label": "Education",
-        "text": "Currently studying for a professional degree in 'Internet Professions – Web Applications' at the University of Limoges, I have consolidated my skills in Vue.js, Tailwind CSS, Strapi, Symfony, NestJS and Next.js."
+        "text": "Holder of a professional Bachelor's degree in 'Internet Professions – Web Applications' from the University of Limoges, I have developed strong skills in front-end development, back-end development, and project management."
       },
       {
         "label": "My vision",
