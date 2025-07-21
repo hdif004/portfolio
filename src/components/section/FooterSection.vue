@@ -23,7 +23,7 @@
           <Github class="w-5 h-5" /> GitHub
         </a>
         <a
-          href="https://www.linkedin.com/in/outaharz/"
+          href="https://www.linkedin.com/in/hudayfa-koujdal-930068258/"
           target="_blank"
           rel="noopener"
           class="flex items-center gap-2 hover:underline"

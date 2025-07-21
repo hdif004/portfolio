@@ -8,7 +8,7 @@
   },
   "toggle": "☀️",
   "hero": {
-    "greeting": "Salut, je m'appelle",
+    "greeting": "Salut, moi c'est",
     "name": "Hudayfa",
     "title": "et je suis développeur web",
     "desc": "Passionné par le développement front-end, j’adore créer des interfaces propres, modernes et accessibles.",
@@ -25,7 +25,7 @@
       },
       {
         "label": "La formation",
-        "text": "Titulaire d'une licence professionnelle 'Métiers de l’Internet – Applications Web' de l’Université de Limoges, j’ai acquis des compétences solides en développement front-end, back-end ainsi qu’en gestion de projet."
+        "text": "Titulaire d'une licence professionnelle 'Métiers de l'Informatique – Applications Web' de l’Université de Limoges, j’ai acquis des compétences solides en développement front-end, back-end ainsi qu’en gestion de projet."
       },
       {
         "label": "Ma vision",

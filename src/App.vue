@@ -79,7 +79,7 @@ const toggleLang = () => {
 
 <template>
   <div class="min-h-screen bg-background text-text transition-colors duration-300">
-    <nav class="flex items-center justify-between px-6 py-4 sm:px-8">
+    <nav class="flex items-center justify-between w-11/12 mx-auto py-4 sm:px-8">
       <div class="text-xl sm:text-4xl font-bold text-primary">
         {{ $t('brand') }}
       </div>
