@@ -52,7 +52,7 @@ onMounted(() => {
 
         <!-- Bouton de téléchargement de CV -->
         <a
-          href="/CV.pdf"
+          href="/portfolio/CV.pdf"
           download
           class="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-md font-semibold hover:bg-primary/10 transition"
         >
