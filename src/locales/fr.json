@@ -4,7 +4,8 @@
     "home": "Accueil",
     "about": "Profil",
     "skills": "Compétences",
-    "projects": "Projets"
+    "projects": "Projets",
+    "contact": "Contact"
   },
   "toggle": "☀️",
   "hero": {
@@ -72,5 +73,18 @@
     "title": "Vous avez une idée ou un projet ?",
     "subtitle": "Retrouvez tous mes liens en bas de page pour me contacter.",
     "button": "Aller au contact"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Une question, une opportunité, ou juste envie de dire bonjour ? Écrivez-moi !",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "namePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "messagePlaceholder": "Votre message...",
+    "success": "Message envoyé avec succès !",
+    "error": "Une erreur est survenue. Réessayez ou contactez-moi par email."
   }
 }

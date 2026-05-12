@@ -1,59 +1,42 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
 const { t } = useI18n()
 
-const projects = {
-  [t('projects.tabs.all')]: [
-    {
-      titleKey: 'projects.items[0].title',
-      descKey: 'projects.items[0].desc',
-      link: 'https://github.com/mehdidarmiche/monfeed-front',
-      video: 'https://www.youtube.com/embed/GuS-9lHLyYA',
-      technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
-    },
-    {
-      titleKey: 'projects.items[1].title',
-      descKey: 'projects.items[1].desc',
-      link: 'https://github.com/LoiseauCodeur/flag',
-      video: 'https://www.youtube.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
-      technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
-    },
-    {
-      titleKey: 'projects.items[2].title',
-      descKey: 'projects.items[2].desc',
-      link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
-      video: 'https://www.youtube.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
-      technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
-    },
-  ],
-  [t('projects.tabs.pro')]: [
-    {
-      titleKey: 'projects.items[0].title',
-      descKey: 'projects.items[0].desc',
-      link: 'https://github.com/mehdidarmiche/monfeed-front',
-      video: 'https://www.youtube.com/embed/GuS-9lHLyYA',
-      technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
-    },
-  ],
-  [t('projects.tabs.perso')]: [
-    {
-      titleKey: 'projects.items[1].title',
-      descKey: 'projects.items[1].desc',
-      link: 'https://github.com/LoiseauCodeur/flag',
-      video: 'https://www.youtube.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
-      technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
-    },
-    {
-      titleKey: 'projects.items[2].title',
-      descKey: 'projects.items[2].desc',
-      link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
-      video: 'https://www.youtube.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
-      technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
-    },
-  ],
-}
+const projectItems = [
+  {
+    titleKey: 'projects.items[0].title',
+    descKey: 'projects.items[0].desc',
+    link: 'https://github.com/mehdidarmiche/monfeed-front',
+    video: 'https://www.youtube.com/embed/GuS-9lHLyYA',
+    technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
+    tab: 'pro',
+  },
+  {
+    titleKey: 'projects.items[1].title',
+    descKey: 'projects.items[1].desc',
+    link: 'https://github.com/LoiseauCodeur/flag',
+    video: 'https://www.youtube.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
+    technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
+    tab: 'perso',
+  },
+  {
+    titleKey: 'projects.items[2].title',
+    descKey: 'projects.items[2].desc',
+    link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
+    video: 'https://www.youtube.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
+    technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
+    tab: 'perso',
+  },
+]
+
+const projects = computed(() => ({
+  [t('projects.tabs.all')]: projectItems,
+  [t('projects.tabs.pro')]: projectItems.filter((p) => p.tab === 'pro'),
+  [t('projects.tabs.perso')]: projectItems.filter((p) => p.tab === 'perso'),
+}))
 </script>
 
 <template>

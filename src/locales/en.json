@@ -4,7 +4,8 @@
     "home": "Home",
     "about": "About",
     "skills": "Skills",
-    "projects": "Projects"
+    "projects": "Projects",
+    "contact": "Contact"
   },
   "toggle": "☀️",
   "hero": {
@@ -71,5 +72,18 @@
     "title": "Have a project or an idea?",
     "subtitle": "You’ll find all my contact links at the bottom of the page.",
     "button": "Go to contact"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "A question, an opportunity, or just want to say hi? Write to me!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "Your message...",
+    "success": "Message sent successfully!",
+    "error": "Something went wrong. Try again or contact me by email."
   }
 }

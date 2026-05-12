@@ -13,6 +13,7 @@ import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
 import ProjectsSection from './components/section/ProjectsSection.vue'
 import SoftBannerSection from './components/section/SoftBannerSection.vue'
+import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
 
 const isDark = ref(false)
@@ -97,6 +98,9 @@ const toggleLang = () => {
         <li>
           <a href="#projects" class="hover:underline font-semibold">{{ $t('nav.projects') }}</a>
         </li>
+        <li>
+          <a href="#contact" class="hover:underline font-semibold">{{ $t('nav.contact') }}</a>
+        </li>
       </ul>
 
       <div class="flex items-center gap-4">
@@ -150,6 +154,7 @@ const toggleLang = () => {
     <SkillsSection />
     <ProjectsSection />
     <SoftBannerSection />
+    <ContactSection />
     <Footer />
   </div>
 </template>
