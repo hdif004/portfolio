@@ -1,0 +1,43 @@
+# Hudayfa Koujdal
+
+> Hudayfa Koujdal est un développeur Shopify freelance basé en France, spécialisé dans les
+> migrations WooCommerce vers Shopify, la personnalisation de thèmes Liquid (dont Horizon),
+> le SEO technique et la performance des boutiques e-commerce. Disponible pour de nouvelles
+> missions. Contact : hudayfa.k.pro@gmail.com
+
+## Prestations
+
+- Migration WooCommerce → Shopify : produits, collections, clients, avis, redirections 301 et
+  préservation du référencement existant.
+- Développement et personnalisation de thèmes Shopify en Liquid (sections, blocs, panier, tunnel
+  d'achat).
+- Optimisation SEO technique et performance (Core Web Vitals, poids des pages, images, CLS).
+- Sites vitrines et WordPress headless.
+
+## Réalisations vérifiables
+
+- **Mudaparis** (novembre 2025) — migration complète WooCommerce → Shopify d'une marque de mode
+  masculine marocaine traditionnelle : produits, collections et avis clients transférés, thème
+  Horizon personnalisé à l'identité de la marque. https://mudaparis.com
+- **Amadal Global Systems** (avril 2026) — refonte avec back-office WordPress headless, travail
+  back-end, SEO et performance : chargement en moins d'une seconde, ~286 Ko transférés, CLS de 0.
+  https://amadal.ma
+- **Sàntibé** — refonte du panier et du parcours d'achat sur thème Shopify Horizon.
+  https://santibe.fr
+- **Soliferme** — thème Shopify sur mesure, intégration responsive. https://soliferme.fr
+- **Soraali** — développement et débogage de thème Shopify. https://soraali.com
+
+## Parcours
+
+Licence professionnelle « Métiers de l'informatique – Applications web », Université de Limoges
+(2025). Expériences en entreprise : WordPress chez Synergie Media (2023), Shopify et Liquid chez
+Zakaria Outahar (2024), Vue.js et Strapi chez monFeed (2025). Freelance depuis novembre 2025,
+6 clients accompagnés.
+
+## Contact
+
+- E-mail : hudayfa.k.pro@gmail.com
+- Téléphone : +33 7 68 64 45 45
+- GitHub : https://github.com/hdif004
+- LinkedIn : https://www.linkedin.com/in/hudayfa-koujdal-930068258/
+- Site : https://devay.dev/

@@ -11,26 +11,32 @@
   "hero": {
     "greeting": "Salut, moi c'est",
     "name": "Hudayfa",
-    "title": "et je suis développeur web",
-    "desc": "Passionné par le développement front-end, j’adore créer des interfaces propres, modernes et accessibles.",
-    "github": "Mon GitHub",
-    "cv": "Mon CV",
-    "imageAlt": "Hudayfa photo"
+    "title": "et je suis développeur web freelance spécialisé Shopify",
+    "desc": "Je migre, refonds et débogue des boutiques e-commerce. Depuis novembre 2025, j'accompagne des marques sur Shopify : migrations WooCommerce, refontes de thèmes, optimisation des performances.",
+    "github": "GitHub",
+    "cv": "Télécharger mon CV",
+    "imageAlt": "Hudayfa Koujdal, développeur Shopify freelance, au travail sur son ordinateur",
+    "available": "Disponible pour de nouvelles missions",
+    "ctaPrimary": "Discutons de votre projet",
+    "ctaSecondary": "Voir mes réalisations",
+    "titleBefore": "Développeur",
+    "titleHighlight": "Shopify",
+    "titleAfter": "freelance"
   },
   "about": {
     "title": "Mon profil",
     "steps": [
       {
-        "label": "Le déclic",
-        "text": "Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers le développement web."
+        "label": "Ce que je fais",
+        "text": "J'accompagne des marques e-commerce sur Shopify : migration depuis WooCommerce sans perdre le référencement acquis, développement et refonte de thèmes en Liquid, corrections et évolutions ponctuelles. Six boutiques livrées depuis novembre 2025."
       },
       {
-        "label": "La formation",
-        "text": "Titulaire d'une licence professionnelle 'Métiers de l'Informatique – Applications Web' de l’Université de Limoges, j’ai acquis des compétences solides en développement front-end, back-end ainsi qu’en gestion de projet."
+        "label": "Mon parcours",
+        "text": "Diplômé en 2025 d'une licence professionnelle « Métiers de l'informatique – Applications web » à l'Université de Limoges, j'ai complété ma formation par trois expériences en entreprise : WordPress chez Synergie Media (2023), Shopify et Liquid chez Zakaria Outahar (2024), puis Vue.js et Strapi chez monFeed (2025)."
       },
       {
-        "label": "Ma vision",
-        "text": "J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime résoudre de vrais problèmes avec créativité."
+        "label": "Ma façon de travailler",
+        "text": "Un cadre écrit dès le départ (périmètre, délai, prix), une préproduction pour valider avant la mise en ligne, et des résultats mesurables plutôt que des promesses : sur amadal.ma, la page d'accueil s'affiche en moins d'une seconde, pour 286 Ko transférés et aucun décalage visuel (CLS de 0)."
       }
     ]
   },
@@ -38,13 +44,21 @@
     "title": "Compétences",
     "categories": {
       "frontend": "Front-End",
-      "backend": "Back-End / CMS",
-      "tools": "Outils & Méthodes"
+      "backend": "E-commerce / CMS",
+      "tools": "Back-End & Outils",
+      "daily": "Au quotidien",
+      "solid": "Maîtrisé",
+      "learning": "Notions"
+    },
+    "subtitle": "Regroupées par usage réel, pas par pourcentages inventés.",
+    "captions": {
+      "daily": "Ce que j'utilise sur mes missions clients, chaque semaine.",
+      "solid": "Suffisamment maîtrisé pour livrer un projet complet.",
+      "learning": "Bases solides, utilisées ponctuellement ou en formation."
     }
   },
   "projects": {
     "title": "Projets",
-    "view": "Voir le projet",
     "tabs": {
       "all": "Tous",
       "pro": "Pro",
@@ -52,39 +66,136 @@
     },
     "items": [
       {
+        "title": "Mudaparis — migration WooCommerce → Shopify",
+        "desc": "Mission freelance (novembre 2025) pour Mudaparis, marque de tenues traditionnelles marocaines pour hommes. Migration complète de la boutique depuis WooCommerce vers Shopify : transfert des produits, des collections et des avis clients, puis personnalisation du thème Horizon pour retrouver l'identité de la marque.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "WooCommerce",
+          "Migration de données"
+        ]
+      },
+      {
+        "title": "Amadal.ma — refonte & WordPress headless",
+        "desc": "Mission freelance (avril 2026) pour Amadal Global Systems, spécialiste des solutions d'irrigation. Refonte du site avec un back-office WordPress utilisé en headless, retravail du back-end et optimisation du SEO et des performances. Le site charge aujourd'hui en moins d'une seconde, pour environ 286 Ko transférés et aucun décalage de mise en page (CLS à 0).",
+        "technos": [
+          "WordPress headless",
+          "PHP",
+          "SEO",
+          "Performance web"
+        ]
+      },
+      {
+        "title": "Sàntibé — refonte du panier",
+        "desc": "Mission freelance (avril 2026) pour Sàntibé Bijoux. Refonte complète du drawer panier (mini-panier latéral) du thème Horizon : ergonomie du parcours d'achat, mise à jour des quantités, cohérence visuelle avec le reste de la boutique.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "JavaScript",
+          "UX e-commerce"
+        ]
+      },
+      {
+        "title": "Soliferme — refonte de la landing page",
+        "desc": "Mission freelance (décembre 2025) pour Soliferme. Refonte de la landing page de la boutique Shopify : nouvelle structure de sections, intégration responsive et personnalisation du thème Horizon pour mettre en avant l'offre.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "Tailwind CSS",
+          "Intégration responsive"
+        ]
+      },
+      {
+        "title": "Maintenance & évolutions Shopify",
+        "desc": "Missions récurrentes de personnalisation de thèmes Shopify Horizon pour Soraali (juin 2026) et LXIR (2026, marque de pastilles d'hydratation) : création et modification de snippets, de sections et de boutons, débogage du thème et corrections ponctuelles selon les besoins des marques.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "JavaScript",
+          "Débogage"
+        ]
+      },
+      {
         "title": "MonFeed",
-        "desc": "Projet réalisé dans le cadre de mon stage de fin d’études chez monFeed (anciennement TheWebCake). MonFeed est une plateforme basée sur l’IA permettant de créer, planifier et publier des contenus sur les réseaux sociaux. Elle intègre un tableau de bord, un éditeur, un calendrier et des fonctionnalités d’analyse assistées par intelligence artificielle.",
-        "technos": ["Vue.js", "Strapi", "Tailwind CSS", "OpenAI API"]
+        "desc": "Projet réalisé dans le cadre de mon stage de fin d'études chez monFeed (anciennement TheWebCake). MonFeed est une plateforme basée sur l'IA permettant de créer, planifier et publier des contenus sur les réseaux sociaux. Elle intègre un tableau de bord, un éditeur, un calendrier et des fonctionnalités d'analyse assistées par intelligence artificielle.",
+        "technos": [
+          "Vue.js",
+          "Strapi",
+          "Tailwind CSS",
+          "OpenAI API"
+        ]
       },
       {
         "title": "Flag",
-        "desc": "Flag est un jeu passionnant conçu en 2ᵉ année de licence dans le cadre d’un travail de groupe pour tester vos connaissances en matière de drapeaux du monde. Dans ce jeu, un drapeau aléatoire provenant d'un pays du monde entier s'affiche à l'écran, et votre tâche est de deviner à quel pays il appartient. Plus vous devinez de drapeaux correctement, plus votre série de victoires s'allonge.",
-        "technos": ["HTML/CSS", "Tailwind CSS", "API REST", "JavaScript"]
+        "desc": "Flag est un jeu passionnant conçu en 2ᵉ année de licence dans le cadre d'un travail de groupe pour tester vos connaissances en matière de drapeaux du monde. Dans ce jeu, un drapeau aléatoire provenant d'un pays du monde entier s'affiche à l'écran, et votre tâche est de deviner à quel pays il appartient. Plus vous devinez de drapeaux correctement, plus votre série de victoires s'allonge.",
+        "technos": [
+          "HTML/CSS",
+          "Tailwind CSS",
+          "API REST",
+          "JavaScript"
+        ]
       },
       {
         "title": "Gourmet_Atlas",
-        "desc": "Gourmet_Atlas est une application développée en 2ᵉ année de licence dans le cadre d’un travail de groupe. Elle permet aux utilisateurs d’explorer différentes cuisines du monde entier grâce à l’API World Food Guide. L’application offre des informations détaillées sur chaque cuisine, propose la découverte de plats avec leurs ingrédients et leur préparation, et intègre une galerie de photos pour visualiser les spécialités culinaires.",
-        "technos": ["Vue.js", "Tailwind CSS", "API REST"]
+        "desc": "Gourmet_Atlas est une application développée en 2ᵉ année de licence dans le cadre d'un travail de groupe. Elle permet aux utilisateurs d'explorer différentes cuisines du monde entier grâce à l'API World Food Guide. L'application offre des informations détaillées sur chaque cuisine, propose la découverte de plats avec leurs ingrédients et leur préparation, et intègre une galerie de photos pour visualiser les spécialités culinaires.",
+        "technos": [
+          "Vue.js",
+          "Tailwind CSS",
+          "API REST"
+        ]
       }
     ],
-    "view": "Voir le projet →"
+    "view": "Voir le projet →",
+    "viewSite": "Voir le site →",
+    "viewCode": "Voir le code →"
   },
   "banner": {
-    "title": "Vous avez une idée ou un projet ?",
-    "subtitle": "Retrouvez tous mes liens en bas de page pour me contacter.",
-    "button": "Aller au contact"
+    "title": "Un projet Shopify, une migration ou un site à refondre ?",
+    "subtitle": "Je suis disponible pour de nouvelles missions freelance, en télétravail complet.",
+    "button": "Me contacter"
+  },
+  "footer": {
+    "role": "Développeur web freelance spécialisé Shopify",
+    "rights": "Tous droits réservés."
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Une question, une opportunité, ou juste envie de dire bonjour ? Écrivez-moi !",
+    "subtitle": "Une migration, une refonte ou un bug qui traîne sur votre boutique ? Décrivez-moi votre projet en deux lignes, je réponds sous 24 h ouvrées.",
     "name": "Nom",
     "email": "Email",
     "message": "Message",
     "send": "Envoyer",
     "namePlaceholder": "Votre nom",
-    "emailPlaceholder": "votre@email.com",
+    "emailPlaceholder": "votre{'@'}email.com",
     "messagePlaceholder": "Votre message...",
     "success": "Message envoyé avec succès !",
-    "error": "Une erreur est survenue. Réessayez ou contactez-moi par email."
+    "error": "Une erreur est survenue. Réessayez ou contactez-moi par email.",
+    "projectType": "Type de projet",
+    "projectTypeOptions": {
+      "migration": "Migration vers Shopify",
+      "theme": "Création ou refonte de thème",
+      "fix": "Correction / évolution ponctuelle",
+      "perf": "SEO & performance",
+      "other": "Autre"
+    },
+    "budget": "Budget envisagé",
+    "budgetOptions": {
+      "unknown": "Je ne sais pas encore",
+      "s": "Moins de 1 000 €",
+      "m": "1 000 – 3 000 €",
+      "l": "3 000 – 8 000 €",
+      "xl": "Plus de 8 000 €"
+    },
+    "optional": "facultatif",
+    "select": "Sélectionnez…",
+    "sending": "Envoi en cours…",
+    "privacy": "Les informations transmises servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées à des fins commerciales, et sont supprimées sur simple demande à hudayfa.k.pro{'@'}gmail.com.",
+    "responseTime": "Réponse sous 24 h ouvrées."
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal",
+    "openMenu": "Ouvrir le menu de navigation",
+    "closeMenu": "Fermer le menu de navigation",
+    "contactShortcut": "Aller au formulaire de contact"
   }
 }

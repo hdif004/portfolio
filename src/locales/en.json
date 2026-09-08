@@ -9,28 +9,34 @@
   },
   "toggle": "☀️",
   "hero": {
-    "greeting": "Hi, I'm ",
+    "greeting": "Hi, I'm",
     "name": "Hudayfa",
-    "title": "and i am a web developer",
-    "desc": "Passionate about front-end development, I love creating clean, modern and accessible interfaces.",
-    "github": "My GitHub",
-    "cv": "My CV",
-    "imageAlt": "Hudayfa photo"
+    "title": "a freelance web developer specialised in Shopify",
+    "desc": "I migrate, rebuild and debug e-commerce stores. Since November 2025 I have been working with brands on Shopify: WooCommerce migrations, theme rebuilds and performance optimisation.",
+    "github": "GitHub",
+    "cv": "Download my CV",
+    "imageAlt": "Hudayfa Koujdal, freelance Shopify developer, working at his computer",
+    "available": "Available for new projects",
+    "ctaPrimary": "Let's talk about your project",
+    "ctaSecondary": "See my work",
+    "titleBefore": "Freelance",
+    "titleHighlight": "Shopify",
+    "titleAfter": "developer"
   },
   "about": {
-    "title": "About Me",
+    "title": "About me",
     "steps": [
       {
-        "label": "The turning point",
-        "text": "Curious by nature, I discovered the world of coding by exploring HTML, CSS and JavaScript. I quickly became passionate about creating interfaces, which naturally led me to web development."
+        "label": "What I do",
+        "text": "I work with e-commerce brands on Shopify: migrations from WooCommerce without losing existing search rankings, theme development and rebuilds in Liquid, plus one-off fixes and improvements. Six stores delivered since November 2025."
       },
       {
-        "label": "Education",
-        "text": "Holder of a professional Bachelor's degree in 'IT Professions – Web Applications' from the University of Limoges, I have developed strong skills in front-end development, back-end development, and project management."
+        "label": "My background",
+        "text": "I graduated in 2025 with a professional Bachelor's degree in 'IT Professions – Web Applications' from the University of Limoges, and completed it with three in-company experiences: WordPress at Synergie Media (2023), Shopify and Liquid at Zakaria Outahar (2024), then Vue.js and Strapi at monFeed (2025)."
       },
       {
-        "label": "My vision",
-        "text": "I place great importance on accessibility, performance and aesthetics. I believe in simple, useful and well-designed interfaces that are always user-oriented. I enjoy solving real problems with creativity."
+        "label": "How I work",
+        "text": "A written scope, deadline and price up front, a staging environment to validate before going live, and measurable results rather than promises: on amadal.ma the homepage renders in under a second, with 286 KB transferred and no layout shift (CLS of 0)."
       }
     ]
   },
@@ -38,13 +44,21 @@
     "title": "Skills",
     "categories": {
       "frontend": "Front-End",
-      "backend": "Back-End / CMS",
-      "tools": "Tools & Methods"
+      "backend": "E-commerce / CMS",
+      "tools": "Back-End & Tools",
+      "daily": "Every day",
+      "solid": "Solid",
+      "learning": "Working knowledge"
+    },
+    "subtitle": "Grouped by how I actually use them, not by made-up percentages.",
+    "captions": {
+      "daily": "What I use on client projects, every week.",
+      "solid": "Comfortable enough to ship a complete project.",
+      "learning": "Solid basics, used occasionally or currently learning."
     }
   },
   "projects": {
     "title": "Projects",
-    "view": "View Project",
     "tabs": {
       "all": "All",
       "pro": "Pro",
@@ -52,38 +66,136 @@
     },
     "items": [
       {
+        "title": "Mudaparis — WooCommerce → Shopify migration",
+        "desc": "Freelance project (November 2025) for Mudaparis, a brand of traditional Moroccan menswear. Full migration of the store from WooCommerce to Shopify: products, collections and customer reviews were transferred, then the Horizon theme was customised to match the brand's identity.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "WooCommerce",
+          "Data migration"
+        ]
+      },
+      {
+        "title": "Amadal.ma — rebuild & headless WordPress",
+        "desc": "Freelance project (April 2026) for Amadal Global Systems, an irrigation solutions company. Rebuild of the site with a headless WordPress back-office, back-end work and SEO and performance optimisation. The site now loads in under a second, with around 286 KB transferred and no layout shift (CLS of 0).",
+        "technos": [
+          "Headless WordPress",
+          "PHP",
+          "SEO",
+          "Web performance"
+        ]
+      },
+      {
+        "title": "Sàntibé — cart redesign",
+        "desc": "Freelance project (April 2026) for Sàntibé Bijoux. Complete redesign of the cart drawer (side mini-cart) of the Horizon theme: smoother checkout journey, quantity updates and visual consistency with the rest of the store.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "JavaScript",
+          "E-commerce UX"
+        ]
+      },
+      {
+        "title": "Soliferme — landing page rebuild",
+        "desc": "Freelance project (December 2025) for Soliferme. Rebuild of the Shopify store's landing page: new section structure, responsive integration and customisation of the Horizon theme to showcase the offer.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "Tailwind CSS",
+          "Responsive integration"
+        ]
+      },
+      {
+        "title": "Shopify maintenance & enhancements",
+        "desc": "Recurring theme customisation work on Shopify Horizon for Soraali (June 2026) and LXIR (2026, a hydration tablet brand): building and editing snippets, sections and buttons, theme debugging and ad-hoc fixes based on each brand's needs.",
+        "technos": [
+          "Shopify",
+          "Liquid",
+          "JavaScript",
+          "Debugging"
+        ]
+      },
+      {
         "title": "MonFeed",
-        "desc": "Project developed during my final-year internship at monFeed (formerly TheWebCake). MonFeed is an AI-powered platform that enables users to create, schedule, and publish content across social media. It features a dashboard, content editor, calendar, and AI-based analytics."
+        "desc": "Project developed during my final-year internship at monFeed (formerly TheWebCake). MonFeed is an AI-powered platform that enables users to create, schedule, and publish content across social media. It features a dashboard, content editor, calendar, and AI-based analytics.",
+        "technos": [
+          "Vue.js",
+          "Strapi",
+          "Tailwind CSS",
+          "OpenAI API"
+        ]
       },
       {
         "title": "Flag",
         "desc": "Flag is an exciting group project developed in the second year of our degree. The game challenges your knowledge of world flags by displaying a random flag from any country. Your goal is to guess which country it belongs to. The more correct answers you give, the longer your winning streak grows.",
-        "technologies": ["HTML/CSS", "Tailwind CSS", "REST API", "JavaScript"]
+        "technos": [
+          "HTML/CSS",
+          "Tailwind CSS",
+          "REST API",
+          "JavaScript"
+        ]
       },
       {
         "title": "Gourmet_Atlas",
         "desc": "Gourmet_Atlas is a group project created during the second year of our degree. It allows users to explore cuisines from around the world using the World Food Guide API. The app provides detailed information on each cuisine, lets users discover dishes with ingredients and preparation steps, and includes a photo gallery to visualize culinary specialties.",
-        "technologies": ["Vue.js", "Tailwind CSS", "REST API"]
+        "technos": [
+          "Vue.js",
+          "Tailwind CSS",
+          "REST API"
+        ]
       }
     ],
-    "view": "View project →"
+    "view": "View project →",
+    "viewSite": "Visit the site →",
+    "viewCode": "View the code →"
   },
   "banner": {
-    "title": "Have a project or an idea?",
-    "subtitle": "You’ll find all my contact links at the bottom of the page.",
-    "button": "Go to contact"
+    "title": "A Shopify project, a migration or a site to rebuild?",
+    "subtitle": "I'm available for new freelance projects, fully remote.",
+    "button": "Get in touch"
+  },
+  "footer": {
+    "role": "Freelance web developer specialised in Shopify",
+    "rights": "All rights reserved."
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "A question, an opportunity, or just want to say hi? Write to me!",
+    "subtitle": "A migration, a rebuild or a bug dragging on your store? Describe your project in two lines — I reply within one business day.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
     "send": "Send",
     "namePlaceholder": "Your name",
-    "emailPlaceholder": "your@email.com",
+    "emailPlaceholder": "your{'@'}email.com",
     "messagePlaceholder": "Your message...",
     "success": "Message sent successfully!",
-    "error": "Something went wrong. Try again or contact me by email."
+    "error": "Something went wrong. Try again or contact me by email.",
+    "projectType": "Project type",
+    "projectTypeOptions": {
+      "migration": "Migration to Shopify",
+      "theme": "New theme or rebuild",
+      "fix": "One-off fix or improvement",
+      "perf": "SEO & performance",
+      "other": "Something else"
+    },
+    "budget": "Estimated budget",
+    "budgetOptions": {
+      "unknown": "Not sure yet",
+      "s": "Under €1,000",
+      "m": "€1,000 – €3,000",
+      "l": "€3,000 – €8,000",
+      "xl": "Over €8,000"
+    },
+    "optional": "optional",
+    "select": "Select…",
+    "sending": "Sending…",
+    "privacy": "The information you send is used only to answer your request. It is never sold or used for marketing, and is deleted on request at hudayfa.k.pro{'@'}gmail.com.",
+    "responseTime": "Reply within one business day."
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "contactShortcut": "Go to the contact form"
   }
 }

@@ -1,59 +1,105 @@
 @import 'tailwindcss';
 
-/* Variables CSS globales */
+/*
+ * Palette — tous les couples texte/fond ci-dessous sont vérifiés WCAG 2.2 AA (≥ 4,5:1 pour le
+ * texte courant, ≥ 3:1 pour les bordures et composants d'interface).
+ * Ne jamais appliquer d'opacité (`text-text/70`) sur du texte : cela casse systématiquement
+ * le contraste. Utiliser `text-text-muted` à la place.
+ */
 :root {
-  --color-background: #dad7cd;
-  --color-text: #3a5a40;
-  --color-primary: #588157;
-  --color-card-bg: #ffffff;
-  --color-card-text: #2d3748; /* Texte sombre pour les cartes */
+  --app-background: #dad7cd;
+  --app-surface: #cfccc1; /* bandeaux discrets */
+  --app-muted: #c6c3b7; /* survols, séparateurs */
+  --app-text: #3a5a40; /* 5,37:1 sur le fond */
+  --app-text-muted: #3f6046; /* 4,91:1 sur le fond */
+  --app-primary: #588157; /* marque : fonds, icônes, bordures (3,11:1 → OK non-texte) */
+  --app-primary-text: #2f5233; /* 6,14:1 — pour le primaire appliqué à du texte */
+  --app-primary-strong: #46704a; /* fond de bouton : blanc dessus = 5,71:1 */
+  --app-primary-dark: #385c3b;
+  --app-on-primary: #ffffff;
+  --app-card-bg: #ffffff;
+  --app-card-text: #2d3748; /* 12,6:1 sur blanc */
+  --app-card-muted: #4b5563; /* 7,56:1 sur blanc */
 }
 
-/* Variables pour le mode sombre */
 .dark {
-  --color-background: #344e41;
-  --color-text: #dad7cd;
-  --color-primary: #a3b18a;
-  --color-card-bg: #2d3748;
-  --color-card-text: #e2e8f0; /* Texte clair pour les cartes en mode sombre */
+  --app-background: #344e41;
+  --app-surface: #3d5a4b;
+  --app-muted: #456655;
+  --app-text: #dad7cd; /* 6,31:1 */
+  --app-text-muted: #c3cdb4; /* 5,50:1 */
+  --app-primary: #a3b18a; /* 3,98:1 → OK non-texte */
+  --app-primary-text: #c3cdb4; /* 5,50:1 */
+  --app-primary-strong: #a3b18a; /* fond de bouton : texte foncé dessus = 6,72:1 */
+  --app-primary-dark: #b7c4a3;
+  --app-on-primary: #1b2820;
+  --app-card-bg: #2d3748;
+  --app-card-text: #e2e8f0;
+  --app-card-muted: #c3cdb4; /* 7,26:1 sur la carte sombre */
 }
 
-/* Utilitaires personnalisés */
-@layer utilities {
-  .bg-background {
-    background-color: var(--color-background);
+/* Exposition des variables à Tailwind : génère bg-*, text-*, border-*, /opacité, etc. */
+@theme inline {
+  --color-background: var(--app-background);
+  --color-surface: var(--app-surface);
+  --color-muted: var(--app-muted);
+  --color-text: var(--app-text);
+  --color-text-muted: var(--app-text-muted);
+  --color-primary: var(--app-primary-text);
+  --color-primary-fill: var(--app-primary);
+  --color-primary-strong: var(--app-primary-strong);
+  --color-primary-dark: var(--app-primary-dark);
+  --color-on-primary: var(--app-on-primary);
+  --color-card: var(--app-card-bg);
+  --color-card-text: var(--app-card-text);
+  --color-card-muted: var(--app-card-muted);
+}
+
+/* Révélation au scroll : uniquement quand le JS a posé la classe `js` sur <html>. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out var(--reveal-delay, 0ms),
+    transform 0.6s ease-out var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js .reveal-left {
+  transform: translateX(-40px);
+}
+
+.js .reveal-right {
+  transform: translateX(40px);
+}
+
+.js .reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Le contenu reste visible si le JS ne s'exécute pas ou si l'utilisateur refuse les animations. */
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  .text-text {
-    color: var(--color-text);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
 
-  .text-primary {
-    color: var(--color-primary);
-  }
-
-  .bg-primary {
-    background-color: var(--color-primary);
-  }
-
-  .border-primary {
-    border-color: var(--color-primary);
-  }
-
-  .hover\:bg-primary:hover {
-    background-color: var(--color-primary);
-  }
-
-  .hover\:text-background:hover {
-    color: var(--color-background);
-  }
-  .bg-card {
-    background-color: var(--color-card-bg);
-  }
-
-  .text-card {
-    color: var(--color-card-text);
-  }
+/* Focus visible cohérent sur tout le site (navigation clavier) */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--app-primary-text);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
 }
 
 .moon-icon {
