@@ -56,7 +56,7 @@ onMounted(() => {
     </a>
 
     <nav class="flex items-center justify-between w-11/12 mx-auto py-4 sm:px-8">
-      <a href="#hero" class="text-xl sm:text-3xl font-bold text-primary"> Hudayfa Koujdal </a>
+      <a href="#hero" class="text-xl sm:text-4xl font-bold text-primary">{{ t('brand') }}</a>
 
       <ul class="hidden md:flex gap-6 text-sm">
         <li>

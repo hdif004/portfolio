@@ -22,7 +22,7 @@ const form = ref(emptyForm())
 const status = ref(null) // 'success' | 'error' | null
 const sending = ref(false)
 
-const projectTypes = ['migration', 'theme', 'fix', 'perf', 'other']
+const projectTypes = ['showcase', 'shopify', 'migration', 'theme', 'fix', 'other']
 const budgets = ['unknown', 's', 'm', 'l', 'xl']
 
 async function handleSubmit() {

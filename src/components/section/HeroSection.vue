@@ -29,10 +29,12 @@ const cvUrl = `${import.meta.env.BASE_URL}CV.pdf`
       </p>
 
       <h1 class="md:text-5xl text-3xl font-extrabold leading-tight">
-        {{ t('hero.titleBefore') }}
-        <span class="text-primary">{{ t('hero.titleHighlight') }}</span>
-        {{ t('hero.titleAfter') }}
+        {{ t('hero.title') }}
       </h1>
+
+      <p class="text-lg font-semibold text-primary">
+        {{ t('hero.offers') }}
+      </p>
       <p class="md:text-lg text-text-muted">
         {{ t('hero.desc') }}
       </p>

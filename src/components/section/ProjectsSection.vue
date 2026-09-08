@@ -84,9 +84,10 @@ const projects = computed(() => ({
 
 <template>
   <section id="projects" class="py-20 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-primary">
+    <h2 class="text-3xl font-bold mb-2 text-primary">
       {{ t('projects.title') }}
     </h2>
+    <p class="text-text-muted mb-8 max-w-2xl">{{ t('projects.subtitle') }}</p>
 
     <TabGroup>
       <TabList
