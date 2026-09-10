@@ -14,6 +14,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@tailwindcss/vite": "^4.1.11",
+    "@vercel/analytics": "^2.0.1",
     "lucide-vue-next": "^0.525.0",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.17",
