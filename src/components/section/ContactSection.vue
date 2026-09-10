@@ -1,9 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import QuestHeader from '@/components/game/QuestHeader.vue'
+import { useGame } from '@/composables/useGame'
 import { Send, Mail, Phone, Github, Linkedin, Loader2 } from 'lucide-vue-next'
 
 const { t } = useI18n()
+const { completeQuest } = useGame()
 
 // Identifiant du formulaire Formspree (la partie après /f/ dans l'endpoint fourni par Formspree)
 const FORMSPREE_ID = 'mkjwavgk'
@@ -39,7 +42,10 @@ async function handleSubmit() {
       body: JSON.stringify(form.value),
     })
     status.value = res.ok ? 'success' : 'error'
-    if (res.ok) form.value = emptyForm()
+    if (res.ok) {
+      form.value = emptyForm()
+      completeQuest('contact')
+    }
   } catch {
     status.value = 'error'
   } finally {
@@ -50,6 +56,7 @@ async function handleSubmit() {
 
 <template>
   <section id="contact" class="py-20 px-6 w-10/12 mx-auto">
+    <QuestHeader id="contact" />
     <h2 class="text-3xl font-bold mb-2 text-primary">{{ t('contact.title') }}</h2>
     <p class="text-text-muted mb-10 max-w-2xl">{{ t('contact.subtitle') }}</p>
 
@@ -100,7 +107,11 @@ async function handleSubmit() {
               class="w-full px-4 py-3 rounded-lg border border-primary/30 bg-card text-card-text focus:outline-none focus:ring-2 focus:ring-primary transition"
             >
               <option value="">{{ t('contact.select') }}</option>
-              <option v-for="type in projectTypes" :key="type" :value="t(`contact.projectTypeOptions.${type}`)">
+              <option
+                v-for="type in projectTypes"
+                :key="type"
+                :value="t(`contact.projectTypeOptions.${type}`)"
+              >
                 {{ t(`contact.projectTypeOptions.${type}`) }}
               </option>
             </select>
@@ -118,7 +129,11 @@ async function handleSubmit() {
               class="w-full px-4 py-3 rounded-lg border border-primary/30 bg-card text-card-text focus:outline-none focus:ring-2 focus:ring-primary transition"
             >
               <option value="">{{ t('contact.select') }}</option>
-              <option v-for="range in budgets" :key="range" :value="t(`contact.budgetOptions.${range}`)">
+              <option
+                v-for="range in budgets"
+                :key="range"
+                :value="t(`contact.budgetOptions.${range}`)"
+              >
                 {{ t(`contact.budgetOptions.${range}`) }}
               </option>
             </select>
@@ -143,7 +158,14 @@ async function handleSubmit() {
         <!-- Honeypot anti-spam : masqué visuellement et pour les lecteurs d'écran. -->
         <div class="hidden" aria-hidden="true">
           <label for="contact-gotcha">Ne remplissez pas ce champ</label>
-          <input id="contact-gotcha" v-model="form._gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          <input
+            id="contact-gotcha"
+            v-model="form._gotcha"
+            type="text"
+            name="_gotcha"
+            tabindex="-1"
+            autocomplete="off"
+          />
         </div>
 
         <button

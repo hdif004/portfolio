@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import heroImg from '@/assets/images/hero.webp'
+import QuestHeader from '@/components/game/QuestHeader.vue'
 
 const { t } = useI18n()
 
@@ -14,18 +15,22 @@ const cvUrl = `${import.meta.env.BASE_URL}CV.pdf`
   >
     <!-- Texte -->
     <div v-reveal="{ from: 'left' }" class="hero-text text-left md:w-7/12 space-y-5">
+      <QuestHeader id="hero" />
       <p
         class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary"
       >
         <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span
+            class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+          ></span>
           <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
         </span>
         {{ t('hero.available') }}
       </p>
 
       <p class="text-lg text-text">
-        {{ t('hero.greeting') }} <span class="font-semibold">{{ t('hero.name') }}</span>.
+        {{ t('hero.greeting') }} <span class="font-semibold">{{ t('hero.name') }}</span
+        >.
       </p>
 
       <h1 class="md:text-5xl text-3xl font-extrabold leading-tight">
@@ -68,7 +73,11 @@ const cvUrl = `${import.meta.env.BASE_URL}CV.pdf`
           {{ t('hero.github') }}
         </a>
         <span aria-hidden="true">·</span>
-        <a :href="cvUrl" download class="underline underline-offset-4 hover:text-primary transition">
+        <a
+          :href="cvUrl"
+          download
+          class="underline underline-offset-4 hover:text-primary transition"
+        >
           {{ t('hero.cv') }}
         </a>
       </p>

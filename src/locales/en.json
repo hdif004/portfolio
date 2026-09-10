@@ -145,5 +145,106 @@
   "footer": {
     "role": "Freelance web developer",
     "rights": "All rights reserved."
+  },
+  "game": {
+    "journal": "Quest log",
+    "openJournal": "Open the quest log",
+    "closeJournal": "Close the quest log",
+    "levelShort": "Lv. {level}",
+    "levels": {
+      "1": "Visitor",
+      "2": "Curious",
+      "3": "Explorer",
+      "4": "Ally"
+    },
+    "questProgress": "{done} of {total} quests",
+    "questLabel": "Quest {number}",
+    "objective": "Objective:",
+    "reward": "Reward: +{xp} xp",
+    "xpBar": "Progress: {xp} experience points",
+    "xpToNext": "{xp} xp to the next level",
+    "maxLevel": "Max level reached — {xp} xp",
+    "xpGain": "+{xp} xp",
+    "badges": "Badges",
+    "badgeLocked": "Badge still locked",
+    "reset": "Reset my progress",
+    "status": {
+      "done": "completed",
+      "current": "in progress",
+      "todo": "not started"
+    },
+    "toast": {
+      "quest": "Quest completed",
+      "badge": "Badge unlocked",
+      "level": "Level up"
+    },
+    "modeToggle": {
+      "toClassic": "Switch to classic mode",
+      "toAdventure": "Switch to adventure mode"
+    },
+    "quests": {
+      "hero": {
+        "name": "The threshold",
+        "objective": "step through the door"
+      },
+      "about": {
+        "name": "Meet the developer",
+        "objective": "learn the three-step method"
+      },
+      "skills": {
+        "name": "Open the inventory",
+        "objective": "inspect the technical gear"
+      },
+      "projects": {
+        "name": "Feats",
+        "objective": "review the delivered work"
+      },
+      "contact": {
+        "name": "Final quest",
+        "objective": "send a message and get a reply within 24 h"
+      }
+    },
+    "badgeList": {
+      "firstQuest": {
+        "name": "First step"
+      },
+      "darkMode": {
+        "name": "Night mode"
+      },
+      "polyglot": {
+        "name": "Polyglot"
+      },
+      "konami": {
+        "name": "Secret code"
+      },
+      "completionist": {
+        "name": "Completionist"
+      }
+    },
+    "slides": {
+      "hero": "Home",
+      "about": "About",
+      "skills": "Skills",
+      "projects": "Work",
+      "banner": "Got a project?",
+      "contact": "Contact",
+      "footer": "Details"
+    },
+    "deck": {
+      "previous": "Previous stop",
+      "next": "Next stop",
+      "mapLabel": "Map stops",
+      "goTo": "Go to stop {index} of {total}: {name}",
+      "position": "Stop {index} of {total}: {name}"
+    },
+    "places": {
+      "hero": "The starting point",
+      "about": "The workshop",
+      "skills": "The workbench",
+      "projects": "The build site",
+      "banner": "The crossroads",
+      "contact": "The waystation",
+      "footer": "The details"
+    }
   }
 }

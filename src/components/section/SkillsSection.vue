@@ -1,5 +1,6 @@
 <template>
   <section id="skills" class="py-16 px-6 w-10/12 mx-auto">
+    <QuestHeader id="skills" />
     <h2 class="text-3xl font-bold mb-2 text-primary">{{ t('skills.title') }}</h2>
     <p class="text-text-muted mb-10">{{ t('skills.subtitle') }}</p>
 
@@ -29,6 +30,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import QuestHeader from '@/components/game/QuestHeader.vue'
 import {
   Code2,
   FileCode,

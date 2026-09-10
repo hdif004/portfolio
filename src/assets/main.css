@@ -78,6 +78,356 @@
   transform: none;
 }
 
+/*
+ * Mode aventure. Aucune de ces règles ne conditionne la lisibilité : la couche jeu n'est qu'un
+ * habillage, elle est neutralisée avec le reste des animations plus bas.
+ */
+.xp-fill {
+  transition: width 0.6s ease-out;
+}
+
+.quest-header {
+  animation: quest-header-in 0.4s ease-out both;
+}
+
+@keyframes quest-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Mode carte (mode aventure uniquement)
+ *
+ * Les sections sont posées à des endroits d'un monde ; la scène entière est déplacée sous une
+ * caméra fixe, avec un dézoom franc pendant les trajets. Tout est piloté par des classes ajoutées
+ * après le montage (voir `useDeck`) : sans JavaScript, la page reste la page qui défile.
+ *
+ * Trois états posés sur <html> :
+ *   .deck-mode      la carte est active
+ *   .is-traveling   un vol est en cours
+ *   .is-far         la caméra a pris de l'altitude, on voit le monde
+ * ---------------------------------------------------------------------------
+ */
+.deck-mode,
+.deck-mode body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/*
+ * Le levier central du mode carte : la taille de police racine suit la hauteur de l'écran.
+ * Tailwind exprime tout en rem — titres, marges, espacements, rayons —, donc cette seule ligne
+ * comprime la page entière proportionnellement et fait tenir chaque lieu dans son cadre.
+ *
+ * Bornes en rem et non en px : `rem` sur l'élément racine renvoie à la taille de police choisie
+ * par l'utilisateur dans son navigateur. Quelqu'un qui a réglé une police plus grande la garde.
+ */
+.deck-mode {
+  font-size: clamp(0.7rem, 1.55vh, 1rem);
+}
+
+.deck-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* `main` ne doit plus produire de boîte, sinon les lieux se positionneraient par rapport à lui. */
+.deck-stage > main {
+  display: contents;
+}
+
+.deck-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  /* Opaque : pendant un vol, le relief passe derrière et ne doit pas traverser le texte. */
+  background: var(--app-background);
+  /* Un lieu plus haut que l'écran défile chez lui : le contenu reste toujours atteignable. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /*
+   * `safe` empêche le contenu plus haut que l'écran d'être rogné par le haut : le centrage est
+   * abandonné plutôt que de pousser le début du contenu hors du cadre (cas du hero, qui est
+   * lui-même une boîte flexible, et des sections denses sur petit écran).
+   */
+  align-content: safe center;
+  align-items: safe center;
+  padding-block: 4rem 2.5rem;
+  /*
+   * Aucune barre de défilement visible : le contenu est dimensionné pour tenir dans l'écran.
+   * Le défilement reste possible (molette, doigt, clavier) — c'est le filet de sécurité si le
+   * contenu déborde malgré tout : écran très bas, police agrandie, traduction plus longue. Cacher
+   * la barre sans garder le défilement rendrait ce contenu définitivement inatteignable.
+   */
+  scrollbar-width: none;
+  padding-inline: max(1.5rem, calc((100% - 78rem) / 2));
+  /*
+   * `translate` et non `transform` : les sections portent déjà `v-reveal`, dont la règle
+   * `.js .reveal` pilote leur `transform`. Les deux propriétés se composent au lieu de se marcher
+   * dessus, le placement sur la carte ne dépend donc plus de l'état de la révélation au scroll.
+   */
+  translate: calc(var(--x, 0) * 110%) calc(var(--y, 0) * 110%);
+  transition:
+    opacity 0.4s ease,
+    border-radius 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.deck-slide::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * ---- Compactage des lieux denses ----
+ * La compression globale ne suffit pas pour les deux sections les plus chargées : leur mise en
+ * page change, elle ne fait pas que rétrécir. Rien de tout cela ne s'applique en mode classique.
+ */
+
+/* Réalisations : huit projets. En colonnes plus étroites et descriptions écourtées, ils tiennent
+   en deux rangées au lieu de quatre. */
+.deck-mode #projects .grid {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+}
+
+.deck-mode #projects .grid > div {
+  padding: min(0.85rem, 1.6vh);
+}
+
+.deck-mode #projects .grid h3 {
+  margin-bottom: 0.15rem;
+  font-size: 1rem;
+}
+
+.deck-mode #projects .grid p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-bottom: 0.35rem;
+  overflow: hidden;
+}
+
+.deck-mode #projects iframe {
+  /* Écrans très bas : la vignette vidéo cède la place avant le texte. */
+  height: min(7.5rem, 11vh);
+  margin-bottom: 0.45rem;
+}
+
+.deck-mode #projects .grid ul {
+  gap: 0.25rem;
+  margin: 0.3rem 0;
+}
+
+.deck-mode #projects .grid ul li {
+  padding: 0.05rem 0.35rem;
+  font-size: 0.72rem;
+}
+
+/* Contact : le formulaire est le plus haut de tous. On resserre les champs sans les rendre
+   moins cliquables (les cibles restent au-dessus de 24 px une fois la police compressée). */
+.deck-mode #contact .grid {
+  gap: 1.5rem;
+}
+
+.deck-mode #contact form > * + * {
+  margin-top: 0.55rem;
+}
+
+.deck-mode #contact input,
+.deck-mode #contact select,
+.deck-mode #contact textarea {
+  padding: 0.45rem 0.7rem;
+}
+
+.deck-mode #contact textarea {
+  height: 4.5rem;
+}
+
+.deck-mode #contact .space-y-6 > * + * {
+  margin-top: 0.6rem;
+}
+
+.deck-mode #contact .space-y-6 span[class*='p-3'] {
+  padding: 0.5rem;
+}
+
+/*
+ * Hero sur mobile : l'illustration passe au-dessus du texte et prend toute la largeur, soit
+ * environ 350 px de haut sur un téléphone — c'est elle, et elle seule, qui faisait déborder le
+ * premier écran. On la plafonne en hauteur d'écran plutôt qu'en largeur, puisque c'est la hauteur
+ * qui manque.
+ */
+@media (max-width: 767px) {
+  .deck-mode #hero {
+    gap: 1rem;
+  }
+
+  .deck-mode #hero .hero-img img {
+    max-height: 26vh;
+    width: auto;
+    margin-inline: auto;
+  }
+}
+
+/* À propos : trois cartes de texte, on réduit surtout leur rembourrage. */
+.deck-mode #about .grid > div {
+  padding: 0.9rem;
+}
+
+/* Vus d'en haut, les lieux deviennent des tuiles posées sur le relief. */
+.is-far .deck-slide {
+  border-radius: 2rem;
+  box-shadow: 0 2.5rem 5rem rgb(0 0 0 / 0.35);
+  outline: 3px solid var(--app-primary);
+  outline-offset: -3px;
+}
+
+.is-far .deck-slide:not(.is-here) {
+  opacity: 0.72;
+}
+
+/* Pendant un vol, plus rien n'est cliquable : on ne rattrape pas une carte au passage. */
+.is-traveling .deck-slide {
+  pointer-events: none;
+}
+
+/* Le contenu du lieu se pose juste après la caméra. */
+.deck-mode .deck-slide.is-here > * {
+  animation: land 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.deck-mode .deck-slide.is-here > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.deck-mode .deck-slide.is-here > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+/*
+ * Uniquement du mouvement, aucune opacité : une animation qui démarre à `opacity: 0` laisse le
+ * contenu invisible tant qu'elle ne tourne pas (onglet en arrière-plan, moteur d'animation gelé,
+ * robot d'indexation qui exécute le JavaScript). Le texte doit être lisible même immobile.
+ */
+@keyframes land {
+  from {
+    transform: translateY(1.25rem);
+  }
+}
+
+/* Sur la carte, c'est le déplacement de la caméra qui fait l'animation : la révélation au scroll
+   n'a plus lieu d'être, et un lieu jamais visité ne doit pas rester invisible. */
+.deck-mode .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/*
+ * ---- Marqueurs de lieux ----
+ * Ils vivent dans la scène, donc ils voyagent avec la carte. `--cam-scale` compense le dézoom
+ * pour qu'un nom reste lisible vu de 3 000 pieds.
+ */
+.map-markers {
+  position: absolute;
+  inset: 0;
+  /* Au-dessus des lieux : les cartes sont opaques, un marqueur derrière ne se verrait pas. */
+  z-index: 5;
+  pointer-events: none;
+}
+
+.map-marker {
+  position: absolute;
+  left: calc(50% + var(--x) * 110vw);
+  /* Planté juste au-dessus de la tuile, comme une punaise sur une carte. */
+  top: calc(50% + var(--y) * 110vh - 56vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  translate: -50% -50%;
+  scale: calc(1 / var(--cam-scale, 1));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.is-far .map-marker {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.map-marker-pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: var(--app-primary-strong);
+  color: var(--app-on-primary);
+  box-shadow: 0 0.5rem 1.25rem rgb(0 0 0 / 0.35);
+}
+
+.map-marker.is-here .map-marker-pin {
+  animation: beacon 1.8s ease-in-out infinite;
+}
+
+@keyframes beacon {
+  50% {
+    box-shadow:
+      0 0.5rem 1.25rem rgb(0 0 0 / 0.35),
+      0 0 0 0.75rem rgb(88 129 87 / 0.25);
+  }
+}
+
+.map-marker-name {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--app-card-bg);
+  color: var(--app-card-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.2);
+}
+
+/*
+ * Plus de flux à suivre : la navigation se pose au-dessus de la carte. Le sélecteur vise la barre
+ * du site par son identifiant — les commandes de la carte sont elles aussi un `nav`.
+ */
+.deck-mode #site-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  margin: 0;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--app-background) 92%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.deck-mode .mobile-menu {
+  position: fixed;
+  inset-inline: 0;
+  top: 3.25rem;
+  z-index: 40;
+  background: var(--app-background);
+}
+
+.deck-mode #footer {
+  margin-top: 0;
+}
+
 /* Le contenu reste visible si le JS ne s'exécute pas ou si l'utilisateur refuse les animations. */
 @media (prefers-reduced-motion: reduce) {
   .js .reveal {

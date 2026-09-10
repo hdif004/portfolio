@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import QuestHeader from '@/components/game/QuestHeader.vue'
 
 const { t } = useI18n()
 
@@ -84,6 +85,7 @@ const projects = computed(() => ({
 
 <template>
   <section id="projects" class="py-20 px-6 w-10/12 mx-auto">
+    <QuestHeader id="projects" />
     <h2 class="text-3xl font-bold mb-2 text-primary">
       {{ t('projects.title') }}
     </h2>
@@ -98,7 +100,9 @@ const projects = computed(() => ({
             :class="[
               'px-4 py-2 rounded-lg text-sm font-semibold transition duration-300',
               'cursor-pointer whitespace-nowrap',
-              selected ? 'bg-primary-strong text-on-primary shadow' : 'text-text hover:bg-primary/10',
+              selected
+                ? 'bg-primary-strong text-on-primary shadow'
+                : 'text-text hover:bg-primary/10',
             ]"
           >
             {{ tab }}

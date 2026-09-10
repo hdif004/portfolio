@@ -4,6 +4,12 @@ import { useI18n } from 'vue-i18n'
 import { Languages, Menu, X, MessageCircle } from 'lucide-vue-next'
 
 import ThemeToggle from './components/ThemeToggle.vue'
+import ModeToggle from './components/game/ModeToggle.vue'
+import QuestJournal from './components/game/QuestJournal.vue'
+import AchievementToast from './components/game/AchievementToast.vue'
+import DeckControls from './components/game/DeckControls.vue'
+import MapWorld from './components/game/MapWorld.vue'
+import MapMarkers from './components/game/MapMarkers.vue'
 import HeroSection from './components/section/HeroSection.vue'
 import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
@@ -11,11 +17,14 @@ import ProjectsSection from './components/section/ProjectsSection.vue'
 import SoftBannerSection from './components/section/SoftBannerSection.vue'
 import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
+import { hydrateGame, useGame } from './composables/useGame'
+import { initDeck } from './composables/useDeck'
 
 const isDark = ref(false)
 const showMenu = ref(false)
 
 const { t, locale } = useI18n()
+const { unlockBadge } = useGame()
 
 const applyTheme = (dark) => {
   document.documentElement.classList.toggle('dark', dark)
@@ -23,11 +32,15 @@ const applyTheme = (dark) => {
   localStorage.setItem('theme', dark ? 'dark' : 'light')
 }
 
-const toggleTheme = () => applyTheme(!isDark.value)
+const toggleTheme = () => {
+  applyTheme(!isDark.value)
+  if (isDark.value) unlockBadge('darkMode')
+}
 
 const toggleLang = () => {
   locale.value = locale.value === 'fr' ? 'en' : 'fr'
   localStorage.setItem('lang', locale.value)
+  unlockBadge('polyglot')
 }
 
 // L'attribut lang doit suivre la langue affichée (crawlers + lecteurs d'écran).
@@ -43,6 +56,8 @@ watch(
 onMounted(() => {
   const saved = localStorage.getItem('theme')
   applyTheme(saved === 'dark')
+  hydrateGame()
+  initDeck()
 })
 </script>
 
@@ -55,8 +70,8 @@ onMounted(() => {
       {{ t('a11y.skipToContent') }}
     </a>
 
-    <nav class="flex items-center justify-between w-11/12 mx-auto py-4 sm:px-8">
-      <a href="#hero" class="text-xl sm:text-4xl font-bold text-primary">{{ t('brand') }}</a>
+    <nav id="site-nav" class="mx-auto flex w-11/12 items-center justify-between py-2.5 sm:px-8">
+      <a href="#hero" class="text-lg font-bold text-primary sm:text-2xl">{{ t('brand') }}</a>
 
       <ul class="hidden md:flex gap-6 text-sm">
         <li>
@@ -77,6 +92,8 @@ onMounted(() => {
       </ul>
 
       <div class="flex items-center gap-4">
+        <ModeToggle class="hidden md:inline-flex" />
+
         <button
           @click="toggleLang"
           class="hidden md:inline-flex p-2 rounded-full cursor-pointer border border-primary text-primary hover:bg-muted transition"
@@ -129,6 +146,8 @@ onMounted(() => {
         <Languages class="w-4 h-4" aria-hidden="true" />
         {{ locale === 'fr' ? 'English' : 'Français' }}
       </button>
+
+      <ModeToggle variant="full" />
     </div>
 
     <!-- Raccourci mobile : la position la plus visible sert à convertir, pas à changer de langue. -->
@@ -141,14 +160,28 @@ onMounted(() => {
       {{ t('nav.contact') }}
     </a>
 
-    <main id="main">
-      <HeroSection />
-      <AboutSection v-reveal />
-      <SkillsSection v-reveal />
-      <ProjectsSection v-reveal />
-      <SoftBannerSection v-reveal />
-      <ContactSection v-reveal />
-    </main>
-    <Footer />
+    <!--
+      En mode classique, ce conteneur est un simple bloc sans style : la page défile normalement.
+      En mode carte, il devient la scène déplacée par la caméra (voir `useDeck` et `main.css`).
+    -->
+    <MapWorld />
+
+    <div id="deck-stage">
+      <MapMarkers />
+      <main id="main">
+        <HeroSection />
+        <AboutSection v-reveal />
+        <SkillsSection v-reveal />
+        <ProjectsSection v-reveal />
+        <SoftBannerSection v-reveal />
+        <ContactSection v-reveal />
+      </main>
+      <Footer />
+    </div>
+
+    <!-- Couche jeu : ajoutée par-dessus le contenu, jamais entre le visiteur et le contenu. -->
+    <QuestJournal />
+    <AchievementToast />
+    <DeckControls />
   </div>
 </template>

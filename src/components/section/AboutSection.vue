@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
+import QuestHeader from '@/components/game/QuestHeader.vue'
 
 const { t } = useI18n()
 
@@ -8,6 +9,7 @@ const steps = [0, 1, 2]
 
 <template>
   <section id="about" class="py-16 px-6 w-10/12 mx-auto">
+    <QuestHeader id="about" />
     <h2 class="text-3xl font-bold mb-10 text-primary">{{ t('about.title') }}</h2>
 
     <div class="grid md:grid-cols-3 gap-8">

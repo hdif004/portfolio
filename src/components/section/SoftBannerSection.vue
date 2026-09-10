@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-surface text-center py-12 px-6">
+  <section id="banner" class="bg-surface text-center py-12 px-6">
     <div class="max-w-3xl mx-auto space-y-4">
       <p class="text-2xl md:text-3xl font-semibold text-primary">
         {{ t('banner.title') }}

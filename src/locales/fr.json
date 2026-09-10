@@ -145,5 +145,106 @@
   "footer": {
     "role": "Développeur web freelance",
     "rights": "Tous droits réservés."
+  },
+  "game": {
+    "journal": "Journal de quêtes",
+    "openJournal": "Ouvrir le journal de quêtes",
+    "closeJournal": "Fermer le journal de quêtes",
+    "levelShort": "Niv. {level}",
+    "levels": {
+      "1": "Visiteur",
+      "2": "Curieux",
+      "3": "Explorateur",
+      "4": "Allié"
+    },
+    "questProgress": "{done} quête(s) sur {total}",
+    "questLabel": "Quête {number}",
+    "objective": "Objectif :",
+    "reward": "Récompense : +{xp} xp",
+    "xpBar": "Progression : {xp} points d'expérience",
+    "xpToNext": "Encore {xp} xp avant le niveau suivant",
+    "maxLevel": "Niveau maximum atteint — {xp} xp",
+    "xpGain": "+{xp} xp",
+    "badges": "Badges",
+    "badgeLocked": "Badge encore verrouillé",
+    "reset": "Réinitialiser ma progression",
+    "status": {
+      "done": "terminée",
+      "current": "en cours",
+      "todo": "à découvrir"
+    },
+    "toast": {
+      "quest": "Quête terminée",
+      "badge": "Badge débloqué",
+      "level": "Niveau supérieur"
+    },
+    "modeToggle": {
+      "toClassic": "Passer en mode classique",
+      "toAdventure": "Passer en mode aventure"
+    },
+    "quests": {
+      "hero": {
+        "name": "Le seuil",
+        "objective": "franchir la porte"
+      },
+      "about": {
+        "name": "Rencontrer le développeur",
+        "objective": "découvrir la méthode en trois étapes"
+      },
+      "skills": {
+        "name": "Ouvrir l'inventaire",
+        "objective": "inspecter l'équipement technique"
+      },
+      "projects": {
+        "name": "Hauts faits",
+        "objective": "examiner les réalisations livrées"
+      },
+      "contact": {
+        "name": "Quête finale",
+        "objective": "envoyer un message et obtenir une réponse sous 24 h"
+      }
+    },
+    "badgeList": {
+      "firstQuest": {
+        "name": "Premier pas"
+      },
+      "darkMode": {
+        "name": "Mode nocturne"
+      },
+      "polyglot": {
+        "name": "Polyglotte"
+      },
+      "konami": {
+        "name": "Code secret"
+      },
+      "completionist": {
+        "name": "Complétiste"
+      }
+    },
+    "slides": {
+      "hero": "Accueil",
+      "about": "À propos",
+      "skills": "Compétences",
+      "projects": "Réalisations",
+      "banner": "Un projet en tête ?",
+      "contact": "Contact",
+      "footer": "Coordonnées"
+    },
+    "deck": {
+      "previous": "Étape précédente",
+      "next": "Étape suivante",
+      "mapLabel": "Étapes de la carte",
+      "goTo": "Aller à l'étape {index} sur {total} : {name}",
+      "position": "Étape {index} sur {total} : {name}"
+    },
+    "places": {
+      "hero": "Le point de départ",
+      "about": "L'atelier",
+      "skills": "L'établi",
+      "projects": "Le chantier",
+      "banner": "La bifurcation",
+      "contact": "Le relais",
+      "footer": "Les coordonnées"
+    }
   }
 }
