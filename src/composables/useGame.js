@@ -45,10 +45,10 @@ const completed = ref([])
 const badges = ref([])
 const journalOpen = ref(false)
 /**
- * Vrai quand le mode carte pilote l'affichage (voir `useDeck`). Le drapeau vit ici pour que
- * `useDeck` puisse importer `useGame` sans dépendance circulaire.
+ * Vrai quand le monde 3D pilote l'affichage (voir `useWorld`). Le drapeau vit ici pour que
+ * `useWorld` puisse importer `useGame` sans dépendance circulaire.
  */
-const deckActive = ref(false)
+const worldActive = ref(false)
 const toasts = ref([])
 
 let toastId = 0
@@ -169,11 +169,6 @@ function resetProgress() {
 }
 
 /**
- * Les quêtes « vue » se terminent quand leur section entre dans le champ de vision.
- * L'observation tourne dans les deux modes : en repassant en aventure, le visiteur retrouve la
- * progression correspondant à ce qu'il a réellement lu.
- */
-/**
  * Première visite : le journal se déplie à la deuxième quête, c'est-à-dire quand le visiteur a
  * quitté le hero et que le jeu a réellement commencé. Sur mobile il reste en pastille, l'écran
  * est trop petit pour un panneau permanent.
@@ -191,7 +186,7 @@ function revealJournalOnFirstScroll() {
 function watchQuestSections() {
   if (typeof IntersectionObserver === 'undefined') return
 
-  const pending = QUESTS.filter((quest) => quest.trigger === 'view')
+  const pending = QUESTS.filter((quest) => quest.trigger === 'visit')
   if (!pending.length) return
 
   // Bande centrale de l'écran plutôt qu'un pourcentage de surface : une section très haute
@@ -200,9 +195,9 @@ function watchQuestSections() {
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue
-        // En mode carte, c'est l'arrivée sur une case qui valide la quête : sans ce garde-fou,
-        // les sections survolées par la caméra pendant un trajet seraient toutes validées d'un coup.
-        if (deckActive.value) continue
+        // En mode aventure, c'est l'ouverture d'un lieu qui valide la quête (voir `useWorld`) :
+        // il faut un clic. Ici on est en mode classique, la lecture suffit.
+        if (worldActive.value) continue
         const quest = pending.find((item) => item.anchor === entry.target.id)
         if (quest) completeQuest(quest.id)
         observer.unobserve(entry.target)
@@ -221,7 +216,7 @@ function watchKonami() {
   const buffer = []
 
   window.addEventListener('keydown', (event) => {
-    // Un utilisateur en train de remplir le formulaire de contact ne joue pas au Konami.
+    // Un utilisateur en train de taper dans un champ ne joue pas au Konami.
     const tag = event.target?.tagName
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
 
@@ -266,9 +261,6 @@ export function hydrateGame() {
     revealJournalOnFirstScroll()
   }
 
-  // Quêtes validées par la simple arrivée : le retour est immédiat, avant tout scroll.
-  for (const quest of QUESTS.filter((item) => item.trigger === 'enter')) completeQuest(quest.id)
-
   watchQuestSections()
   watchKonami()
 
@@ -280,12 +272,12 @@ watch(isAdventure, (adventure) => {
   if (!adventure) toasts.value = []
 })
 
-export { deckActive }
+export { worldActive }
 
 export function useGame() {
   return {
     ready,
-    deckActive,
+    worldActive,
     mode,
     isAdventure,
     quests,

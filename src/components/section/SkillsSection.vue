@@ -31,59 +31,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import QuestHeader from '@/components/game/QuestHeader.vue'
-import {
-  Code2,
-  FileCode,
-  LayoutDashboard,
-  Server,
-  Boxes,
-  Settings2,
-  GitBranch,
-  Container,
-  PenTool,
-  ShoppingBag,
-  Globe,
-  Gauge,
-  Terminal,
-} from 'lucide-vue-next'
+import { SKILL_GROUPS as skillGroups } from '@/data/skills'
 
 const { t } = useI18n()
-
-const skillGroups = [
-  {
-    titleKey: 'skills.categories.daily',
-    captionKey: 'skills.captions.daily',
-    items: [
-      { name: 'Shopify', icon: ShoppingBag },
-      { name: 'Liquid', icon: FileCode },
-      { name: 'JavaScript', icon: FileCode },
-      { name: 'Tailwind CSS', icon: LayoutDashboard },
-      { name: 'WordPress / WooCommerce', icon: Globe },
-      { name: 'SEO & performance', icon: Gauge },
-      { name: 'Git', icon: GitBranch },
-    ],
-  },
-  {
-    titleKey: 'skills.categories.solid',
-    captionKey: 'skills.captions.solid',
-    items: [
-      { name: 'Vue.js', icon: Code2 },
-      { name: 'PHP', icon: FileCode },
-      { name: 'Strapi', icon: Server },
-      { name: 'Bootstrap', icon: Boxes },
-      { name: 'Shopify CLI', icon: Terminal },
-    ],
-  },
-  {
-    titleKey: 'skills.categories.learning',
-    captionKey: 'skills.captions.learning',
-    items: [
-      { name: 'React.js', icon: Code2 },
-      { name: 'Symfony', icon: Settings2 },
-      { name: 'Python', icon: Terminal },
-      { name: 'Docker', icon: Container },
-      { name: 'Figma', icon: PenTool },
-    ],
-  },
-]
 </script>

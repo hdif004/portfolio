@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Languages, Menu, X, MessageCircle } from 'lucide-vue-next'
 
@@ -7,24 +7,40 @@ import ThemeToggle from './components/ThemeToggle.vue'
 import ModeToggle from './components/game/ModeToggle.vue'
 import QuestJournal from './components/game/QuestJournal.vue'
 import AchievementToast from './components/game/AchievementToast.vue'
-import DeckControls from './components/game/DeckControls.vue'
-import MapWorld from './components/game/MapWorld.vue'
-import MapMarkers from './components/game/MapMarkers.vue'
+import WorldScene from './components/game/WorldScene.vue'
+import WorldMarkers from './components/game/WorldMarkers.vue'
+import PanelChrome from './components/game/PanelChrome.vue'
+import WorldPanels from './components/panel/WorldPanels.vue'
 import HeroSection from './components/section/HeroSection.vue'
 import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
 import ProjectsSection from './components/section/ProjectsSection.vue'
 import SoftBannerSection from './components/section/SoftBannerSection.vue'
-import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
 import { hydrateGame, useGame } from './composables/useGame'
-import { initDeck } from './composables/useDeck'
+import { initWorld, useWorld } from './composables/useWorld'
+import { mailtoHref } from './game/contact'
 
 const isDark = ref(false)
 const showMenu = ref(false)
 
 const { t, locale } = useI18n()
-const { unlockBadge } = useGame()
+const { unlockBadge, completeQuest, worldActive } = useGame()
+const { activeId, panelOpen } = useWorld()
+
+/**
+ * Le formulaire de contact a été retiré : écrire passe désormais par le client mail du visiteur,
+ * avec un objet pré-rempli. Un seul chemin, aucune étape intermédiaire.
+ */
+const mailHref = computed(() => mailtoHref(t('mail.subject')))
+
+/** Écrire est la dernière quête : c'est le seul geste du site qui engage vraiment le visiteur. */
+const onContactClick = () => completeQuest('contact')
+
+const onMobileContactClick = () => {
+  showMenu.value = false
+  onContactClick()
+}
 
 const applyTheme = (dark) => {
   document.documentElement.classList.toggle('dark', dark)
@@ -57,7 +73,7 @@ onMounted(() => {
   const saved = localStorage.getItem('theme')
   applyTheme(saved === 'dark')
   hydrateGame()
-  initDeck()
+  initWorld()
 })
 </script>
 
@@ -73,7 +89,7 @@ onMounted(() => {
     <nav id="site-nav" class="mx-auto flex w-11/12 items-center justify-between py-2.5 sm:px-8">
       <a href="#hero" class="text-lg font-bold text-primary sm:text-2xl">{{ t('brand') }}</a>
 
-      <ul class="hidden md:flex gap-6 text-sm">
+      <ul class="site-links hidden md:flex gap-6 text-sm">
         <li>
           <a href="#hero" class="hover:underline font-semibold">{{ t('nav.home') }}</a>
         </li>
@@ -87,7 +103,9 @@ onMounted(() => {
           <a href="#projects" class="hover:underline font-semibold">{{ t('nav.projects') }}</a>
         </li>
         <li>
-          <a href="#contact" class="hover:underline font-semibold">{{ t('nav.contact') }}</a>
+          <a :href="mailHref" class="hover:underline font-semibold" @click="onContactClick">
+            {{ t('nav.contact') }}
+          </a>
         </li>
       </ul>
 
@@ -104,7 +122,7 @@ onMounted(() => {
 
         <button
           type="button"
-          class="md:hidden p-2 -m-2 text-text"
+          class="menu-toggle md:hidden p-2 -m-2 text-text"
           :aria-expanded="showMenu"
           aria-controls="mobile-menu"
           :aria-label="showMenu ? t('a11y.closeMenu') : t('a11y.openMenu')"
@@ -135,9 +153,12 @@ onMounted(() => {
       <a href="#projects" @click="showMenu = false" class="hover:underline font-semibold">{{
         t('nav.projects')
       }}</a>
-      <a href="#contact" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.contact')
-      }}</a>
+      <a
+        :href="mailHref"
+        class="hover:underline font-semibold"
+        @click="onMobileContactClick"
+        >{{ t('nav.contact') }}</a
+      >
       <button
         type="button"
         class="mx-auto inline-flex items-center gap-2 rounded-full border border-primary px-4 py-2 text-primary"
@@ -150,31 +171,45 @@ onMounted(() => {
       <ModeToggle variant="full" />
     </div>
 
-    <!-- Raccourci mobile : la position la plus visible sert à convertir, pas à changer de langue. -->
+    <!-- Raccourci mobile : la position la plus visible sert à convertir, pas à changer de langue.
+         En mode aventure, la barre de navigation du monde occupe déjà le bas de l'écran. -->
     <a
-      href="#contact"
-      class="md:hidden fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-primary-strong px-5 py-3 font-semibold text-on-primary shadow-lg"
+      :href="mailHref"
+      class="contact-shortcut md:hidden fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-primary-strong px-5 py-3 font-semibold text-on-primary shadow-lg"
       :aria-label="t('a11y.contactShortcut')"
+      @click="onContactClick"
     >
       <MessageCircle class="w-5 h-5" aria-hidden="true" />
       {{ t('nav.contact') }}
     </a>
 
+    <!-- Le monde : rendu en permanence en mode aventure, derrière le contenu. -->
+    <WorldScene />
+    <WorldMarkers />
+
     <!--
       En mode classique, ce conteneur est un simple bloc sans style : la page défile normalement.
-      En mode carte, il devient la scène déplacée par la caméra (voir `useDeck` et `main.css`).
+      En mode aventure, il devient le panneau de contenu posé par-dessus le monde (voir `useWorld`
+      et `main.css`). Le DOM ne change pas d'un mode à l'autre — seules des classes s'ajoutent.
     -->
-    <MapWorld />
+    <div
+      id="world-panel"
+      tabindex="-1"
+      :class="{ 'is-open': panelOpen, 'is-bubble': activeId === 'hero' }"
+      :inert="worldActive && !panelOpen"
+    >
+      <PanelChrome />
+      <WorldPanels />
 
-    <div id="deck-stage">
-      <MapMarkers />
+      <!-- La page classique. En mode aventure elle est masquée au profit des panneaux ci-dessus,
+           mais elle reste le contenu pré-rendu : c'est elle que voient les moteurs de recherche
+           et un visiteur sans JavaScript. -->
       <main id="main">
         <HeroSection />
         <AboutSection v-reveal />
         <SkillsSection v-reveal />
         <ProjectsSection v-reveal />
         <SoftBannerSection v-reveal />
-        <ContactSection v-reveal />
       </main>
       <Footer />
     </div>
@@ -182,6 +217,5 @@ onMounted(() => {
     <!-- Couche jeu : ajoutée par-dessus le contenu, jamais entre le visiteur et le contenu. -->
     <QuestJournal />
     <AchievementToast />
-    <DeckControls />
   </div>
 </template>

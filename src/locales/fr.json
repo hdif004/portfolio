@@ -11,7 +11,7 @@
     "skipToContent": "Aller au contenu principal",
     "openMenu": "Ouvrir le menu de navigation",
     "closeMenu": "Fermer le menu de navigation",
-    "contactShortcut": "Aller au formulaire de contact"
+    "contactShortcut": "M’écrire un e-mail"
   },
   "hero": {
     "available": "Disponible pour de nouvelles missions",
@@ -108,40 +108,6 @@
     "subtitle": "Écrivez-moi, je réponds sous 24 h ouvrées.",
     "button": "Me contacter"
   },
-  "contact": {
-    "title": "Contact",
-    "subtitle": "Décrivez votre projet en quelques lignes. Je réponds sous 24 h ouvrées.",
-    "name": "Nom",
-    "email": "E-mail",
-    "message": "Message",
-    "namePlaceholder": "Votre nom",
-    "emailPlaceholder": "vous{'@'}exemple.fr",
-    "messagePlaceholder": "Votre projet, en quelques lignes…",
-    "projectType": "Type de projet",
-    "projectTypeOptions": {
-      "showcase": "Site vitrine",
-      "shopify": "Création de boutique Shopify",
-      "migration": "Migration vers Shopify",
-      "theme": "Refonte de thème",
-      "fix": "Correction ou évolution",
-      "other": "Autre"
-    },
-    "budget": "Budget envisagé",
-    "budgetOptions": {
-      "unknown": "Je ne sais pas encore",
-      "s": "Moins de 1 000 €",
-      "m": "1 000 – 3 000 €",
-      "l": "3 000 – 8 000 €",
-      "xl": "Plus de 8 000 €"
-    },
-    "optional": "facultatif",
-    "select": "Sélectionnez…",
-    "send": "Envoyer",
-    "sending": "Envoi…",
-    "success": "Message envoyé. Je réponds sous 24 h ouvrées.",
-    "error": "L'envoi a échoué. Vous pouvez m'écrire directement à hudayfa.k.pro{'@'}gmail.com.",
-    "privacy": "Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées pour de la prospection, et sont supprimées sur demande."
-  },
   "footer": {
     "role": "Développeur web freelance",
     "rights": "Tous droits réservés."
@@ -201,7 +167,7 @@
       },
       "contact": {
         "name": "Quête finale",
-        "objective": "envoyer un message et obtenir une réponse sous 24 h"
+        "objective": "m’écrire un e-mail — je réponds sous 24 h ouvrées"
       }
     },
     "badgeList": {
@@ -227,15 +193,7 @@
       "skills": "Compétences",
       "projects": "Réalisations",
       "banner": "Un projet en tête ?",
-      "contact": "Contact",
       "footer": "Coordonnées"
-    },
-    "deck": {
-      "previous": "Étape précédente",
-      "next": "Étape suivante",
-      "mapLabel": "Étapes de la carte",
-      "goTo": "Aller à l'étape {index} sur {total} : {name}",
-      "position": "Étape {index} sur {total} : {name}"
     },
     "places": {
       "hero": "Le point de départ",
@@ -243,8 +201,18 @@
       "skills": "L'établi",
       "projects": "Le chantier",
       "banner": "La bifurcation",
-      "contact": "Le relais",
-      "footer": "Les coordonnées"
+      "footer": "Le campement"
+    },
+    "world": {
+      "navLabel": "Lieux de la clairière",
+      "open": "Ouvrir {name}",
+      "close": "Fermer et revenir à la clairière",
+      "overview": "Vue d’ensemble",
+      "overviewHint": "Prendre de la hauteur et voir toute la clairière (touche M)",
+      "hint": "Cliquez sur un lieu pour l’explorer."
     }
+  },
+  "mail": {
+    "subject": "Projet de site — prise de contact"
   }
 }

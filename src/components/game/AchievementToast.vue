@@ -27,7 +27,7 @@ const bodyOf = (toast) => {
 <template>
   <div
     v-if="ready && isAdventure"
-    class="pointer-events-none fixed top-20 right-4 z-60 flex w-[min(20rem,calc(100vw-2rem))] flex-col gap-2 print:hidden"
+    class="achievement-toasts pointer-events-none fixed top-20 right-4 z-60 flex w-[min(20rem,calc(100vw-2rem))] flex-col gap-2 print:hidden"
     role="status"
     aria-live="polite"
   >

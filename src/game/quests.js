@@ -5,23 +5,22 @@
  * le navigateur, il ne doit donc jamais toucher à `window`.
  *
  * Règle de conception : le jeu habille le portfolio, il ne le conditionne jamais. Aucune section
- * n'est masquée tant qu'une quête n'est pas terminée — le contenu reste lisible, indexable et
- * accessible même si le mode aventure est désactivé.
+ * n'est verrouillée derrière une quête — le contenu reste lisible, indexable et accessible même
+ * si le mode aventure est désactivé.
  */
 
 /**
- * `trigger: 'enter'` → validée dès l'arrivée sur la page (le premier retour immédiat, celui qui
- *                     fait comprendre au visiteur qu'il y a un jeu).
- * `trigger: 'view'`  → validée quand la section traverse le milieu de l'écran, donc quand elle a
- *                     réellement eu une chance d'être lue.
- * `trigger: 'action'`→ validée par un vrai geste (ici : envoyer le formulaire).
+ * `trigger: 'visit'`  → validée quand le visiteur ouvre réellement le lieu (mode aventure), ou
+ *                      quand la section traverse le milieu de l'écran (mode classique). Dans les
+ *                      deux cas il a fallu un geste : plus rien ne se valide au simple survol.
+ * `trigger: 'action'` → validée par un geste sans ambiguïté (ici : ouvrir le mail).
  */
 export const QUESTS = [
-  { id: 'hero', anchor: 'hero', xp: 50, trigger: 'enter' },
-  { id: 'about', anchor: 'about', xp: 100, trigger: 'view' },
-  { id: 'skills', anchor: 'skills', xp: 100, trigger: 'view' },
-  { id: 'projects', anchor: 'projects', xp: 150, trigger: 'view' },
-  { id: 'contact', anchor: 'contact', xp: 200, trigger: 'action' },
+  { id: 'hero', anchor: 'hero', xp: 50, trigger: 'visit' },
+  { id: 'about', anchor: 'about', xp: 100, trigger: 'visit' },
+  { id: 'skills', anchor: 'skills', xp: 100, trigger: 'visit' },
+  { id: 'projects', anchor: 'projects', xp: 150, trigger: 'visit' },
+  { id: 'contact', anchor: 'banner', xp: 200, trigger: 'action' },
 ]
 
 export const QUEST_IDS = QUESTS.map((quest) => quest.id)
@@ -55,6 +54,11 @@ export function isKnownQuest(id) {
 
 export function isKnownBadge(id) {
   return BADGE_IDS.has(id)
+}
+
+/** Quête attachée à un lieu, s'il y en a une. */
+export function questForPlace(id) {
+  return QUESTS.find((quest) => quest.trigger === 'visit' && quest.id === id) ?? null
 }
 
 /** Niveau atteint pour un total d'expérience donné (1 à MAX_LEVEL). */

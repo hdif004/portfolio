@@ -6,7 +6,8 @@
  * le seul chemin fiable pour un visiteur qui n'a pas envie de jouer.
  *
  * Déplié par défaut sur grand écran, replié en pastille sur mobile (voir `hydrateGame`), à gauche
- * pour ne jamais recouvrir le raccourci « Contact » fixé en bas à droite.
+ * pour ne jamais recouvrir le raccourci « Contact » fixé en bas à droite. En mode aventure il
+ * remonte sous la barre du site, où la barre des lieux ne le percute pas (voir `main.css`).
  */
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -73,7 +74,7 @@ const onQuestClick = () => {
 <template>
   <aside
     v-if="ready && isAdventure"
-    class="fixed bottom-4 left-4 z-50 print:hidden"
+    class="quest-journal fixed bottom-4 left-4 z-50 print:hidden"
     :aria-label="t('game.journal')"
   >
     <!-- Panneau déplié -->

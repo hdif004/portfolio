@@ -1,11 +1,18 @@
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import heroImg from '@/assets/images/hero.webp'
 import QuestHeader from '@/components/game/QuestHeader.vue'
+import { mailtoHref } from '@/game/contact'
+import { useGame } from '@/composables/useGame'
 
 const { t } = useI18n()
+const { completeQuest } = useGame()
 
 const cvUrl = `${import.meta.env.BASE_URL}CV.pdf`
+
+// Plus de formulaire : le bouton principal ouvre directement le mail, objet pré-rempli.
+const mailHref = computed(() => mailtoHref(t('mail.subject')))
 </script>
 
 <template>
@@ -47,8 +54,9 @@ const cvUrl = `${import.meta.env.BASE_URL}CV.pdf`
       <div class="flex flex-wrap items-center gap-4">
         <!-- CTA principal : contact -->
         <a
-          href="#contact"
+          :href="mailHref"
           class="inline-flex items-center gap-2 px-6 py-3 bg-primary-strong text-on-primary rounded-md font-semibold hover:bg-primary-dark transition"
+          @click="completeQuest('contact')"
         >
           {{ t('hero.ctaPrimary') }}
         </a>

@@ -11,7 +11,7 @@
     "skipToContent": "Skip to main content",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
-    "contactShortcut": "Go to the contact form"
+    "contactShortcut": "Email me"
   },
   "hero": {
     "available": "Available for new projects",
@@ -108,40 +108,6 @@
     "subtitle": "Write to me — I reply within one business day.",
     "button": "Get in touch"
   },
-  "contact": {
-    "title": "Contact",
-    "subtitle": "Describe your project in a few lines. I reply within one business day.",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "namePlaceholder": "Your name",
-    "emailPlaceholder": "you{'@'}example.com",
-    "messagePlaceholder": "Your project, in a few lines…",
-    "projectType": "Project type",
-    "projectTypeOptions": {
-      "showcase": "Business website",
-      "shopify": "New Shopify store",
-      "migration": "Migration to Shopify",
-      "theme": "Theme rebuild",
-      "fix": "Fix or improvement",
-      "other": "Something else"
-    },
-    "budget": "Estimated budget",
-    "budgetOptions": {
-      "unknown": "Not sure yet",
-      "s": "Under €1,000",
-      "m": "€1,000 – €3,000",
-      "l": "€3,000 – €8,000",
-      "xl": "Over €8,000"
-    },
-    "optional": "optional",
-    "select": "Select…",
-    "send": "Send",
-    "sending": "Sending…",
-    "success": "Message sent. I reply within one business day.",
-    "error": "That didn't go through. You can email me directly at hudayfa.k.pro{'@'}gmail.com.",
-    "privacy": "Your details are only used to answer your request. They are never sold or used for outreach, and are deleted on request."
-  },
   "footer": {
     "role": "Freelance web developer",
     "rights": "All rights reserved."
@@ -201,7 +167,7 @@
       },
       "contact": {
         "name": "Final quest",
-        "objective": "send a message and get a reply within 24 h"
+        "objective": "send me an email — I reply within one business day"
       }
     },
     "badgeList": {
@@ -227,15 +193,7 @@
       "skills": "Skills",
       "projects": "Work",
       "banner": "Got a project?",
-      "contact": "Contact",
       "footer": "Details"
-    },
-    "deck": {
-      "previous": "Previous stop",
-      "next": "Next stop",
-      "mapLabel": "Map stops",
-      "goTo": "Go to stop {index} of {total}: {name}",
-      "position": "Stop {index} of {total}: {name}"
     },
     "places": {
       "hero": "The starting point",
@@ -243,8 +201,18 @@
       "skills": "The workbench",
       "projects": "The build site",
       "banner": "The crossroads",
-      "contact": "The waystation",
-      "footer": "The details"
+      "footer": "The camp"
+    },
+    "world": {
+      "navLabel": "Places in the clearing",
+      "open": "Open {name}",
+      "close": "Close and return to the clearing",
+      "overview": "Overview",
+      "overviewHint": "Pull back and see the whole clearing (M key)",
+      "hint": "Click a place to explore it."
     }
+  },
+  "mail": {
+    "subject": "Website project — getting in touch"
   }
 }
