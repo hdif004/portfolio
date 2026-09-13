@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, watch } from 'vue'
+import { computed, defineAsyncComponent, ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Languages, Menu, X, MessageCircle } from 'lucide-vue-next'
 
@@ -7,10 +7,8 @@ import ThemeToggle from './components/ThemeToggle.vue'
 import ModeToggle from './components/game/ModeToggle.vue'
 import QuestJournal from './components/game/QuestJournal.vue'
 import AchievementToast from './components/game/AchievementToast.vue'
-import WorldScene from './components/game/WorldScene.vue'
+import WorldScene from './components/world/WorldScene.vue'
 import WorldMarkers from './components/game/WorldMarkers.vue'
-import PanelChrome from './components/game/PanelChrome.vue'
-import WorldPanels from './components/panel/WorldPanels.vue'
 import HeroSection from './components/section/HeroSection.vue'
 import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
@@ -18,15 +16,17 @@ import ProjectsSection from './components/section/ProjectsSection.vue'
 import SoftBannerSection from './components/section/SoftBannerSection.vue'
 import Footer from './components/section/FooterSection.vue'
 import { hydrateGame, useGame } from './composables/useGame'
-import { initWorld, useWorld } from './composables/useWorld'
+import { initWorld } from './composables/useWorld'
 import { mailtoHref } from './game/contact'
+
+// Chargé à la demande : GSAP et le contenu des zones ne servent qu'en mode aventure.
+const WorldStage = defineAsyncComponent(() => import('./components/world/WorldStage.vue'))
 
 const isDark = ref(false)
 const showMenu = ref(false)
 
 const { t, locale } = useI18n()
 const { unlockBadge, completeQuest, worldActive } = useGame()
-const { activeId, panelOpen } = useWorld()
 
 /**
  * Le formulaire de contact a été retiré : écrire passe désormais par le client mail du visiteur,
@@ -186,20 +186,14 @@ onMounted(() => {
     <!-- Le monde : rendu en permanence en mode aventure, derrière le contenu. -->
     <WorldScene />
     <WorldMarkers />
+    <!-- Le contenu des zones, déployé dans la scène elle-même. -->
+    <WorldStage />
 
     <!--
-      En mode classique, ce conteneur est un simple bloc sans style : la page défile normalement.
-      En mode aventure, il devient le panneau de contenu posé par-dessus le monde (voir `useWorld`
-      et `main.css`). Le DOM ne change pas d'un mode à l'autre — seules des classes s'ajoutent.
+      La page classique. En mode aventure elle est masquée : le contenu vit dans le monde (voir
+      `WorldStage`). Le DOM ne change pas d'un mode à l'autre — seules des classes s'ajoutent.
     -->
-    <div
-      id="world-panel"
-      tabindex="-1"
-      :class="{ 'is-open': panelOpen, 'is-bubble': activeId === 'hero' }"
-      :inert="worldActive && !panelOpen"
-    >
-      <PanelChrome />
-      <WorldPanels />
+    <div id="world-panel" :inert="worldActive">
 
       <!-- La page classique. En mode aventure elle est masquée au profit des panneaux ci-dessus,
            mais elle reste le contenu pré-rendu : c'est elle que voient les moteurs de recherche

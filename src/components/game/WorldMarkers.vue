@@ -16,7 +16,7 @@ import { useWorld } from '@/composables/useWorld'
 
 const { t } = useI18n()
 const { worldActive, quests } = useGame()
-const { places, panelOpen, everOpened, openPlace } = useWorld()
+const { places, panelOpen, everOpened, isOverview, openPlace, showOverview } = useWorld()
 
 /** Une quête terminée se voit sur le marqueur : c'est la carte qui sert de progression. */
 const isDone = (id) => quests.value.some((quest) => quest.id === id && quest.done)
@@ -41,6 +41,17 @@ const isDone = (id) => quests.value.some((quest) => quest.id === id && quest.don
       <span class="world-marker-dot" aria-hidden="true"></span>
       <span class="world-marker-name">{{ t(`game.places.${place.id}`) }}</span>
       <span class="world-marker-section">{{ t(`game.slides.${place.id}`) }}</span>
+    </button>
+
+    <!-- Retour à la vue d'ensemble : la touche M fait la même chose, mais rien ne l'annonce. -->
+    <button
+      v-if="!isOverview"
+      type="button"
+      class="world-overview"
+      :title="t('game.world.overviewHint')"
+      @click="showOverview"
+    >
+      {{ t('game.world.overview') }}
     </button>
   </div>
 </template>

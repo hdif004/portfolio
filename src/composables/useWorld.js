@@ -2,8 +2,8 @@
  * Mode aventure : le portfolio devient une clairière vue du dessus.
  *
  * Le monde est permanent. On ne passe pas d'une diapositive à l'autre : la caméra se déplace vers
- * un lieu, et le contenu de la section s'ouvre dans un panneau posé par-dessus, pendant que la
- * forêt reste visible derrière. C'est l'inverse de l'ancien mode carte, où le décor 3D n'existait
+ * un lieu, et le contenu de la section se déploie dans la scène elle-même, accroché aux objets de
+ * la zone (voir `WorldStage`). C'est l'inverse de l'ancien mode carte, où le décor 3D n'existait
  * que pendant les transitions et n'était donc jamais réellement vu.
  *
  * Trois contraintes ont guidé l'implémentation :
@@ -16,12 +16,13 @@
  */
 import { computed, reactive, ref, watch } from 'vue'
 import { PLACES, HOME_PLACE, isKnownPlace, placeById } from '@/game/world'
+import { OVERVIEW_SHOT, shotForPlace } from '@/world/cameraShots'
 import { questForPlace } from '@/game/quests'
 import { worldActive, useGame } from '@/composables/useGame'
 
 /** Lieu sur lequel la caméra est posée. */
 const activeId = ref(HOME_PLACE)
-/** Vrai quand le panneau de contenu est ouvert. Fermé, on voit le monde en entier. */
+/** Vrai quand le contenu de la zone active est déployé dans la scène. */
 const panelOpen = ref(false)
 /**
  * Vrai dès qu'un lieu a été ouvert une fois. Sert à n'afficher l'indice d'entrée (« cliquez sur
@@ -31,32 +32,17 @@ const panelOpen = ref(false)
 const everOpened = ref(false)
 
 /**
- * Position visée par la caméra, en unités de monde. `WorldScene` lit ces valeurs à chaque image et
- * s'en rapproche progressivement : c'est la scène qui possède le temps, pas ce module.
- *
- * `height` est l'altitude de survol : basse quand on examine un lieu, haute quand on prend du
- * recul pour voir la clairière entière.
+ * Plan visé par la caméra : sa position et le point qu'elle regarde, en unités de monde.
+ * `CameraRig` s'y rend avec une transition GSAP : ce module décide où aller, la scène possède le
+ * temps. Les cadrages eux-mêmes sont calculés dans `src/world/cameraShots.js`.
  */
-export const worldCamera = reactive({ x: 0, z: 0, height: 26 })
+export const worldCamera = reactive({
+  position: { ...OVERVIEW_SHOT.position },
+  target: { ...OVERVIEW_SHOT.target },
+})
 
-/** Altitudes de survol. Un seul endroit à régler pour changer la sensation de la caméra. */
-const HEIGHT_OVERVIEW = 96
-const HEIGHT_PLACE = 42
-const HEIGHT_PANEL = 48
-
-/**
- * Décalage latéral de la caméra quand la bulle du point de départ est ouverte : le personnage
- * glisse vers la droite de l'écran, la bulle occupe la gauche. Une bulle de dialogue qui recouvre
- * celui qui parle n'est plus une bulle de dialogue.
- *
- * Le décalage est latéral et non en profondeur : vue du dessus, la caméra n'est reculée que d'un
- * quart de son altitude, si bien qu'avancer la cible de quelques mètres fait passer le lieu
- * derrière la caméra au lieu de le faire descendre à l'écran.
- */
-const BUBBLE_OFFSET = 13
-
-/** En dessous de cette largeur, la bulle occupe tout l'écran : il n'y a plus de côté où pousser. */
-const WIDE_SCREEN = 900
+/** Vrai quand la caméra montre tout le campement plutôt qu'une zone. */
+const isOverview = ref(false)
 
 const { isAdventure, ready, completeQuest } = useGame()
 
@@ -77,12 +63,13 @@ function on(target, type, handler, options) {
 /** Recalcule la cible de la caméra d'après le lieu actif et l'état du panneau. */
 function aimCamera() {
   const place = activePlace.value
-  const bubble =
-    panelOpen.value && place.id === HOME_PLACE && window.innerWidth >= WIDE_SCREEN
+  isOverview.value = false
+  setShot(shotForPlace(place, { open: panelOpen.value }))
+}
 
-  worldCamera.x = place.x - (bubble ? BUBBLE_OFFSET : 0)
-  worldCamera.z = place.z
-  worldCamera.height = panelOpen.value ? HEIGHT_PANEL : HEIGHT_PLACE
+function setShot({ position, target }) {
+  Object.assign(worldCamera.position, position)
+  Object.assign(worldCamera.target, target)
 }
 
 /** Déplace la caméra vers un lieu sans ouvrir son contenu. */
@@ -111,9 +98,9 @@ export function openPlace(id, { focus = true } = {}) {
   if (quest) completeQuest(quest.id)
 
   if (!focus) return
-  // Le focus part sur le panneau : la suite de la tabulation se passe dans le contenu ouvert.
+  // Le focus part sur le contenu déployé : la suite de la tabulation se passe dans la zone.
   requestAnimationFrame(() => {
-    document.getElementById('world-panel')?.focus({ preventScroll: true })
+    document.getElementById('world-stage')?.focus({ preventScroll: true })
   })
 }
 
@@ -138,9 +125,8 @@ export function togglePlace(id) {
 /** Prend de l'altitude : le panneau se ferme et on voit la clairière entière. */
 export function showOverview() {
   panelOpen.value = false
-  worldCamera.x = 0
-  worldCamera.z = 0
-  worldCamera.height = HEIGHT_OVERVIEW
+  isOverview.value = true
+  setShot(OVERVIEW_SHOT)
 }
 
 function step(offset) {
@@ -255,6 +241,7 @@ export function useWorld() {
     everOpened,
     activePlace,
     panelOpen,
+    isOverview,
     total,
     camera: worldCamera,
     goToPlace,

@@ -142,8 +142,36 @@
   opacity: 0;
 }
 
+/* Le canevas de TresJS prend la taille de son parent. */
+.world-canvas canvas {
+  display: block;
+}
+
+.world-overview {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  translate: -50% 0;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--app-primary);
+  border-radius: 999px;
+  background: var(--app-card-bg);
+  color: var(--app-card-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.22);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.world-overview:hover,
+.world-overview:focus-visible {
+  background: var(--app-muted);
+}
+
 /* ---- Marqueurs de lieux ----
-   Positionnés à chaque image par `WorldScene`, qui projette la position 3D du lieu dans `--sx`
+   Positionnés à chaque image par `CameraRig`, qui projette la position 3D du lieu dans `--sx`
    et `--sy`. Ils restent des boutons HTML : focus clavier, libellé traduit, lecteur d'écran. */
 .world-markers {
   position: fixed;
@@ -233,133 +261,6 @@
   white-space: nowrap;
 }
 
-/* ---- Panneau de contenu ----
-   En mode classique, `#world-panel` n'a aucun style : c'est un simple bloc et la page défile. */
-.world-mode #world-panel {
-  position: fixed;
-  top: 4.25rem;
-  left: 50%;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  /* 52rem : au-delà, les lignes de texte deviennent trop longues pour être lues confortablement. */
-  width: min(52rem, calc(100vw - 1.5rem));
-  max-height: calc(100dvh - 8rem);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  border: 1px solid var(--app-primary);
-  border-radius: 1.25rem;
-  background: var(--app-card-bg);
-  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.35);
-  translate: -50% 0;
-  transition:
-    opacity 0.3s ease,
-    translate 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Fermé : le panneau s'efface, le monde reprend tout l'écran. Son contenu est déjà retiré du
-   parcours de tabulation par `inert` (voir `useWorld`), l'effacement n'est donc que visuel. */
-.world-mode #world-panel:not(.is-open) {
-  opacity: 0;
-  pointer-events: none;
-  translate: -50% 1.5rem;
-}
-
-/*
- * En mode aventure, la page classique est masquée au profit des panneaux dédiés.
- *
- * `display: none` est sans conséquence sur le référencement ici : le mode aventure n'est appliqué
- * qu'après l'hydratation, côté navigateur. Le HTML pré-rendu — celui que reçoit un robot, et celui
- * que voit un visiteur sans JavaScript — contient toutes les sections, dépliées, dans l'ordre.
- * Voir le bloc « Panneaux du mode aventure » plus bas.
- */
-
-/*
- * Le point de départ s'ouvre en bulle de dialogue.
- *
- * Sur grand écran elle se range à gauche, pendant que la caméra pousse le personnage vers la
- * droite (voir `useWorld`) : on voit qui parle et ce qu'il dit en même temps. Sur écran étroit il
- * n'y a pas de côté libre, la bulle redevient un panneau centré.
- */
-.world-mode #world-panel.is-bubble {
-  width: min(34rem, calc(100vw - 1.5rem));
-  max-height: calc(100dvh - 10rem);
-}
-
-@media (min-width: 900px) {
-  .world-mode #world-panel.is-bubble {
-    left: clamp(1.5rem, 6vw, 5rem);
-    translate: 0 0;
-  }
-
-  .world-mode #world-panel.is-bubble:not(.is-open) {
-    translate: 0 1.5rem;
-  }
-}
-
-/* ---- En-tête du panneau ---- */
-.panel-chrome {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.6rem 1rem 0.6rem 1.25rem;
-  border-bottom: 1px solid var(--app-muted);
-  background: var(--app-card-bg);
-}
-
-.panel-chrome-place {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--app-primary);
-}
-
-.panel-chrome-dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: var(--app-primary-strong);
-}
-
-.panel-chrome-close {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.6rem;
-  border: 1px solid var(--app-muted);
-  border-radius: 999px;
-  color: var(--app-card-muted);
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.panel-chrome-close:hover {
-  border-color: var(--app-primary);
-  color: var(--app-card-text);
-}
-
-.panel-chrome-esc {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.04em;
-}
-
-@media (max-width: 480px) {
-  .panel-chrome-esc {
-    display: none;
-  }
-}
 
 .world-hint {
   /* Posé en bas de l'écran, au-dessus du monde : il ne recouvre aucun lieu. */
@@ -469,416 +370,448 @@
 
 /*
  * ---------------------------------------------------------------------------
- * Panneaux du mode aventure
+ * Contenu des zones, déployé dans le monde (voir `WorldStage` et `WorldPin`)
  *
- * Les sections classiques sont écrites pour une page qui défile ; ces panneaux sont écrits pour
- * un cadre posé sur un monde. Ce ne sont pas les mêmes composants et ce n'est pas la même mise en
- * page — seules les données sont partagées (voir `src/data/`).
+ * Chaque élément est accroché à un objet 3D : un point sur l'objet, un trait pointillé, puis la
+ * carte. `CameraRig` écrit la position du point (`--sx`, `--sy`) à chaque image ; la carte est
+ * décalée de `--dx`, `--dy`, réduits sur les écrans moyens par `--pin-scale`.
  *
- * Le préfixe `gp-` (game panel) évite toute collision avec les classes utilitaires du site.
+ * Les couleurs de parchemin et de bois sont des couleurs d'objets, pas d'interface : elles ne
+ * suivent pas le thème, comme les modèles 3D.
  * ---------------------------------------------------------------------------
  */
-.world-mode #main,
-.world-mode #world-panel > footer {
+.world-mode #world-panel {
   display: none;
 }
 
-.gp {
-  padding: 1.5rem clamp(1rem, 3vw, 2rem) 1.75rem;
-  color: var(--app-card-text);
+.world-stage {
+  --pin-scale: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
 }
 
-.gp-centered {
-  text-align: center;
+@media (max-width: 1280px) {
+  .world-stage {
+    --pin-scale: 0.82;
+  }
 }
 
-.gp-title {
-  margin-bottom: 0.35rem;
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: var(--app-primary);
+@media (max-width: 960px) {
+  .world-stage {
+    --pin-scale: 0.66;
+  }
 }
 
-.gp-lead {
-  margin-bottom: 1.5rem;
-  color: var(--app-card-muted);
+.world-stage:focus {
+  outline: none;
 }
 
-/* ---- Dialogue (le point de départ) ---- */
-.gp-speaker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.15rem 0.6rem;
-}
-
-.gp-speaker-name {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--app-primary);
-}
-
-.gp-speaker-role {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--app-card-muted);
-}
-
-.gp-status {
+.world-stage-close {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  z-index: 5;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0.6rem 0 1.1rem;
-  padding: 0.2rem 0.7rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--app-primary);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--app-primary) 14%, transparent);
-  font-size: 0.8rem;
+  background: var(--app-card-bg);
+  color: var(--app-card-text);
+  font-size: 0.85rem;
   font-weight: 600;
+  box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.22);
+  translate: -50% 0;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.world-stage-close kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  color: var(--app-card-muted);
+}
+
+.world-pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  translate: var(--sx, -100vw) var(--sy, -100vh);
+}
+
+.world-pin[data-offscreen] {
+  visibility: hidden;
+}
+
+/* La carte survolée, lue au clavier ou dépliée passe devant ses voisines. */
+.world-pin:hover,
+.world-pin:focus-within,
+.world-pin.is-raised {
+  z-index: 3;
+}
+
+.world-pin-dot {
+  position: absolute;
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid var(--app-primary-strong);
+  border-radius: 999px;
+  background: var(--app-card-bg);
+  box-shadow: 0 0 0 0.35rem rgb(255 255 255 / 0.25);
+  translate: -50% -50%;
+}
+
+.world-pin-leader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--len) * var(--pin-scale));
+  border-top: 2px dashed rgb(255 255 255 / 0.85);
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.45));
+  transform-origin: 0 0;
+  rotate: var(--angle);
+}
+
+.world-pin-card {
+  position: absolute;
+  top: calc(var(--dy) * var(--pin-scale));
+  left: calc(var(--dx) * var(--pin-scale));
+  width: max-content;
+  max-width: 21rem;
+  font-size: clamp(0.78rem, calc(0.95rem * var(--pin-scale)), 0.95rem);
+  line-height: 1.45;
+  color: var(--app-card-text);
+  translate: -50% -50%;
+  pointer-events: auto;
+}
+
+/* La réplique de l'avatar. */
+.world-pin-card.is-bubble {
+  max-width: 24rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--app-primary);
+  border-radius: 1.1rem;
+  background: var(--app-card-bg);
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.35);
+}
+
+/* Parchemin : papier clair, deux rouleaux en haut et en bas. */
+.world-pin-card.is-parchment {
+  max-width: 19rem;
+  padding: 1.2rem 1.25rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(180deg, #f8efd8, #ead9ae);
+  box-shadow:
+    0 0.8rem 1.8rem rgb(0 0 0 / 0.35),
+    inset 0 0 1.6rem rgb(140 100 40 / 0.2);
+  color: #3a2d1b;
+}
+
+.world-pin-card.is-parchment::before,
+.world-pin-card.is-parchment::after {
+  content: '';
+  position: absolute;
+  inset-inline: -0.45rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #dcc28c, #b3915a);
+  box-shadow: 0 2px 3px rgb(0 0 0 / 0.3);
+}
+
+.world-pin-card.is-parchment::before {
+  top: -0.4rem;
+}
+
+.world-pin-card.is-parchment::after {
+  bottom: -0.4rem;
+}
+
+/* Planche : lattes de bois clouées. */
+.world-pin-card.is-plank {
+  max-width: 25rem;
+  padding: 0.95rem 1.15rem;
+  border: 2px solid #6b4522;
+  border-radius: 0.45rem;
+  background: repeating-linear-gradient(0deg, #a8763f 0 2.2rem, #93643a 2.2rem calc(2.2rem + 2px));
+  box-shadow: 0 0.8rem 1.8rem rgb(0 0 0 / 0.35);
+  color: #fff7e8;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.35);
+}
+
+.world-pin-card.is-plank::before,
+.world-pin-card.is-plank::after {
+  content: '';
+  position: absolute;
+  top: 0.45rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #4a3018;
+}
+
+.world-pin-card.is-plank::before {
+  left: 0.45rem;
+}
+
+.world-pin-card.is-plank::after {
+  right: 0.45rem;
+}
+
+.world-pin-card.is-tag {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--app-primary);
+  border-radius: 0.55rem;
+  background: var(--app-card-bg);
+  box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 0.28);
+}
+
+/* Carte projet : compacte, se déplie au clic. */
+.world-pin-card.is-card {
+  width: 14.5rem;
+  max-width: none;
+  padding: 0.75rem 2.2rem 0.8rem 0.9rem;
+  border: 1px solid var(--app-primary);
+  border-radius: 0.8rem;
+  background: var(--app-card-bg);
+  box-shadow: 0 0.8rem 1.8rem rgb(0 0 0 / 0.3);
+}
+
+.world-pin.is-raised .world-pin-card.is-card {
+  width: 20rem;
+}
+
+/* ---- Contenu des cartes ---- */
+.stage-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.stage-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.2rem;
+  font-size: 1.08em;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.world-pin-card.is-bubble .stage-title {
+  font-size: 1.5em;
   color: var(--app-primary);
 }
 
-.gp-status-dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: var(--app-primary-strong);
+.stage-count {
+  padding: 0 0.4rem;
+  border-radius: 0.3rem;
+  background: rgb(0 0 0 / 0.22);
+  font-size: 0.75em;
 }
 
-.gp-line {
-  margin-bottom: 0.85rem;
-  line-height: 1.6;
-  color: var(--app-card-text);
+.stage-text {
+  font-size: 0.92em;
 }
 
-.gp-line-lead {
+.stage-lead {
+  margin: 0.55rem 0 0.25rem;
   font-weight: 700;
   color: var(--app-primary);
 }
 
-/* ---- Boutons ---- */
-.gp-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.25rem;
+.stage-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--app-primary);
 }
 
-.gp-actions.is-centered {
+.stage-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--app-primary-strong);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-primary) 25%, transparent);
+}
+
+.stage-step {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.stage-numeral {
+  flex-shrink: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.7em;
+  font-weight: 700;
+  line-height: 1;
+  color: #8a5a22;
+}
+
+.stage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+
+.stage-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.35rem;
+  background: rgb(0 0 0 / 0.22);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.stage-chip svg {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.world-pin-card.is-card .stage-chip {
+  background: var(--app-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7em;
+}
+
+.stage-details {
+  margin-top: 0.6rem;
+}
+
+.stage-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+  font-size: 0.85em;
+  font-weight: 700;
+  color: var(--app-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.stage-more {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--app-primary);
+  border-radius: 999px;
+  color: var(--app-primary);
+  cursor: pointer;
+}
+
+.stage-more:hover {
+  background: var(--app-muted);
+}
+
+.stage-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+}
+
+.stage-action:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.stage-links {
+  display: flex;
+  gap: 0.9rem;
+  font-size: 0.85em;
+}
+
+.stage-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.stage-links a:hover {
+  color: var(--app-primary);
+}
+
+.stage-centered {
+  text-align: center;
+}
+
+.stage-centered .stage-title {
   justify-content: center;
 }
 
-.gp-button {
+.stage-button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0 1.1rem;
-  border: 1px solid var(--app-primary);
-  border-radius: 0.6rem;
-  font-weight: 600;
-  color: var(--app-primary);
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.gp-button:hover {
-  background: color-mix(in srgb, var(--app-primary) 12%, transparent);
-}
-
-.gp-button.is-primary {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
   background: var(--app-primary-strong);
-  border-color: var(--app-primary-strong);
-  color: var(--app-on-primary);
+  color: var(--app-on-primary, #fff);
+  font-weight: 700;
+  text-shadow: none;
 }
 
-.gp-button.is-primary:hover {
+.stage-button:hover {
   filter: brightness(1.08);
 }
 
-.gp-button.is-big {
-  min-height: 3.25rem;
-  padding: 0 1.6rem;
-  font-size: 1.05rem;
-}
+/*
+ * Écran étroit : pas de place autour des objets. Le même contenu passe dans un volet en bas de
+ * l'écran, au-dessus du monde qui reste visible en haut.
+ */
+@media (max-width: 640px) {
+  .world-stage-scene {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 62dvh;
+    padding: 1.5rem 1rem 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.45) 2.5rem);
+    pointer-events: auto;
+  }
 
-.gp-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.1rem;
-  font-size: 0.85rem;
-}
+  .world-pin {
+    position: static;
+    translate: none;
+  }
 
-.gp-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--app-card-muted);
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
+  .world-pin-leader,
+  .world-pin-dot {
+    display: none;
+  }
 
-.gp-links a:hover {
-  color: var(--app-primary);
-}
-
-/* ---- Étapes (l'atelier) ---- */
-.gp-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  margin-top: 1.25rem;
-}
-
-.gp-step {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-  padding: 0.9rem 1rem 0.9rem 0.85rem;
-  border: 1px solid var(--app-muted);
-  border-left: 3px solid var(--app-primary);
-  border-radius: 0.6rem;
-  background: color-mix(in srgb, var(--app-primary) 5%, transparent);
-}
-
-.gp-step-mark {
-  flex-shrink: 0;
-  width: 2rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5;
-  text-align: center;
-  color: var(--app-primary);
-}
-
-.gp-step-label {
-  margin-bottom: 0.15rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--app-primary);
-}
-
-.gp-step-text {
-  line-height: 1.55;
-  color: var(--app-card-text);
-}
-
-/* ---- Inventaire (l'établi) ---- */
-.gp-pouch {
-  margin-bottom: 1.5rem;
-}
-
-.gp-pouch-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--app-primary);
-}
-
-.gp-pouch-count {
-  padding: 0 0.4rem;
-  border-radius: 0.25rem;
-  background: var(--app-muted);
-  font-size: 0.7rem;
-  color: var(--app-card-muted);
-}
-
-.gp-pouch-caption {
-  margin: 0.2rem 0 0.7rem;
-  font-size: 0.85rem;
-  color: var(--app-card-muted);
-}
-
-/* Les cases de l'inventaire : une grille régulière, pas une liste d'étiquettes. */
-.gp-slots {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-  gap: 0.5rem;
-}
-
-.gp-slot {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  min-height: 3rem;
-  padding: 0.5rem 0.7rem;
-  border: 1px solid var(--app-muted);
-  border-radius: 0.5rem;
-  background: color-mix(in srgb, var(--app-primary) 6%, transparent);
-  transition: border-color 0.2s ease;
-}
-
-.gp-slot:hover {
-  border-color: var(--app-primary);
-}
-
-.gp-slot-icon {
-  width: 1.1rem;
-  height: 1.1rem;
-  flex-shrink: 0;
-  color: var(--app-primary);
-}
-
-.gp-slot-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-/* ---- Hauts faits (le chantier) ---- */
-.gp-filters {
-  display: flex;
-  gap: 0.3rem;
-  margin-bottom: 1rem;
-  padding: 0.25rem;
-  border-radius: 0.6rem;
-  background: var(--app-muted);
-}
-
-.gp-filter {
-  flex: 1;
-  min-height: 2.25rem;
-  padding: 0 0.75rem;
-  border-radius: 0.45rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--app-card-text);
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.gp-filter.is-active {
-  background: var(--app-primary-strong);
-  color: var(--app-on-primary);
-}
-
-.gp-feats {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.gp-feat {
-  display: flex;
-  gap: 0.85rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--app-muted);
-  border-radius: 0.6rem;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.gp-feat:hover {
-  border-color: var(--app-primary);
-  background: color-mix(in srgb, var(--app-primary) 5%, transparent);
-}
-
-.gp-feat-number {
-  flex-shrink: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--app-card-muted);
-}
-
-.gp-feat-body {
-  min-width: 0;
-}
-
-.gp-feat-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--app-primary);
-}
-
-.gp-feat-desc {
-  margin: 0.2rem 0 0.5rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--app-card-text);
-}
-
-/* Les technologies employées, présentées comme le butin d'une mission. */
-.gp-loot {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.6rem;
-}
-
-.gp-loot li {
-  padding: 0.1rem 0.45rem;
-  border: 1px solid color-mix(in srgb, var(--app-primary) 35%, transparent);
-  border-radius: 0.25rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.68rem;
-  color: var(--app-primary);
-}
-
-.gp-feat-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--app-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
-
-/* ---- Campement ---- */
-.gp-channels {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
-
-.gp-channel {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  min-height: 3rem;
-  padding: 0 1rem;
-  border: 1px solid var(--app-muted);
-  border-radius: 0.6rem;
-  font-weight: 600;
-  color: var(--app-card-text);
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.gp-channel:hover {
-  border-color: var(--app-primary);
-  background: color-mix(in srgb, var(--app-primary) 8%, transparent);
-}
-
-.gp-channel svg {
-  color: var(--app-primary);
-}
-
-.gp-fineprint {
-  margin-top: 1.25rem;
-  font-size: 0.75rem;
-  color: var(--app-card-muted);
-}
-
-/* L'étiquette de quête est posée par `WorldPanels`, au-dessus du panneau lui-même. */
-.world-panels > .quest-header {
-  margin: 1.25rem clamp(1rem, 3vw, 2rem) -0.75rem;
+  .world-pin-card,
+  .world-pin-card.is-card,
+  .world-pin.is-raised .world-pin-card.is-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    max-width: none;
+    translate: none;
+  }
 }
