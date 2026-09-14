@@ -147,7 +147,12 @@ export const TREES = [
   { model: 'treeOak', weight: 1 },
 ]
 
-export const TREE_COUNT = 650
+/**
+ * Assez dense pour que les zones se lisent comme des clairières dans une forêt, et non comme des
+ * campements posés sur une pelouse parsemée d'arbres. Instanciés : le nombre ne change pas le
+ * nombre d'appels de dessin.
+ */
+export const TREE_COUNT = 2200
 
 /** Petits éléments semés au sol, en lisière et entre les arbres. */
 export const GROUND_COVER = [
@@ -159,7 +164,7 @@ export const GROUND_COVER = [
   { model: 'flowers', weight: 2, scale: [1.5, 2.5], castShadow: false },
 ]
 
-export const GROUND_COVER_COUNT = 420
+export const GROUND_COVER_COUNT = 900
 
 /** Toutes les clés à précharger avant d'afficher le monde. L'avatar, facultatif, n'en fait pas partie. */
 export const WORLD_MODELS = [

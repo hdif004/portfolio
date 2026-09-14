@@ -6,8 +6,13 @@
  */
 import { HOME_PLACE, PLACES, clearingRadius, placeById } from '@/game/world'
 
-/** Côté du terrain, en unités de monde. */
-export const WORLD_SIZE = 260
+/**
+ * Côté du terrain, en unités de monde.
+ *
+ * Assez grand pour que ses bords restent dans le brouillard (voir `WorldLights`), même en vue
+ * d'ensemble : un monde dont on voit la fin se lit comme une maquette posée sur la page.
+ */
+export const WORLD_SIZE = 400
 
 /** Bruit de valeur bilinéaire — un relief crédible sans embarquer de bibliothèque de bruit. */
 function noise(x, z) {

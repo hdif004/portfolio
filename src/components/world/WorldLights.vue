@@ -48,7 +48,8 @@ const sky = shallowRef()
 const sun = shallowRef()
 
 const { scene } = useTres()
-scene.value.fog = new Fog(new Color(), 110, 280)
+// Opaque à 260 : en vue d'ensemble, les bords du terrain (à 250–290 de la caméra) s'y fondent.
+scene.value.fog = new Fog(new Color(), 110, 260)
 
 watchEffect(() => {
   scene.value.fog.color.set(props.palette.background)

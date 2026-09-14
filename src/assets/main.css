@@ -147,27 +147,50 @@
   display: block;
 }
 
+/*
+ * Bois : la matière des étiquettes posées sur le monde.
+ *
+ * Des pastilles blanches arrondies se lisaient comme une interface web collée sur une maquette.
+ * Des planches clouées appartiennent au décor, comme les poteaux indicateurs des zones. Ce sont des
+ * couleurs d'objets : elles ne suivent pas le thème, pas plus que les modèles 3D.
+ */
+.world-overview,
+.world-marker,
+.world-hint {
+  --wood: #a8763f;
+  --wood-dark: #93643a;
+  --wood-edge: #5e3c1d;
+  border: 2px solid var(--wood-edge);
+  background: repeating-linear-gradient(
+    0deg,
+    var(--wood) 0 1.1rem,
+    var(--wood-dark) 1.1rem calc(1.1rem + 2px)
+  );
+  color: #fff7e8;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.4);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 0.3rem 0 rgb(0 0 0 / 0.18),
+    0 0.6rem 1.2rem rgb(0 0 0 / 0.28);
+}
+
 .world-overview {
   position: absolute;
   top: 1rem;
   left: 50%;
   translate: -50% 0;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid var(--app-primary);
-  border-radius: 999px;
-  background: var(--app-card-bg);
-  color: var(--app-card-text);
+  padding: 0.45rem 1rem;
+  border-radius: 0.35rem;
   font-size: 0.85rem;
-  font-weight: 600;
-  box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.22);
+  font-weight: 700;
   pointer-events: auto;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: filter 0.2s ease;
 }
 
 .world-overview:hover,
 .world-overview:focus-visible {
-  background: var(--app-muted);
+  filter: brightness(1.12);
 }
 
 /* ---- Marqueurs de lieux ----
@@ -193,12 +216,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid var(--app-primary);
-  border-radius: 999px;
-  background: var(--app-card-bg);
-  box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.22);
+  gap: 0.1rem;
+  padding: 0.35rem 0.9rem 0.4rem;
+  border-radius: 0.3rem;
   pointer-events: auto;
   cursor: pointer;
   /*
@@ -221,43 +241,63 @@
   pointer-events: none;
 }
 
+/* Le piquet : relie le panneau au sol du lieu qu'il désigne. */
+.world-marker::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0.3rem;
+  height: 3.25rem;
+  translate: -50% 2px;
+  border-radius: 0 0 0.15rem 0.15rem;
+  background: linear-gradient(90deg, #6b4522, #4a3018);
+  box-shadow: 0 0.2rem 0.3rem rgb(0 0 0 / 0.25);
+  pointer-events: none;
+}
+
 .world-marker:hover,
 .world-marker:focus-visible {
   scale: 1.06;
-  background: var(--app-muted);
+  filter: brightness(1.12);
 }
 
+/* Lieu où se trouve la caméra : planche plus claire, bordure dorée. */
 .world-marker.is-here {
-  border-width: 2px;
-  box-shadow:
-    0 0.35rem 1rem rgb(0 0 0 / 0.22),
-    0 0 0 0.4rem rgb(88 129 87 / 0.18);
+  --wood: #c08a4d;
+  --wood-dark: #a9773f;
+  border-color: #f2c46b;
 }
 
+/* Le clou : vert tant que le lieu reste à découvrir, sombre une fois visité. */
 .world-marker-dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.35rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 999px;
-  background: var(--app-primary-strong);
+  background: #9fd37a;
+  box-shadow: 0 0 0 1px #3b2614;
 }
 
 .world-marker.is-done .world-marker-dot {
-  background: var(--app-card-muted);
+  background: #4a3018;
 }
 
 .world-marker-name {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--app-card-text);
+  font-size: 0.85rem;
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .world-marker-section {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--app-card-muted);
+  color: #f3dfbd;
   white-space: nowrap;
 }
 
@@ -269,10 +309,9 @@
   left: 50%;
   translate: -50% 0;
   padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--app-card-bg) 92%, transparent);
+  border-radius: 0.3rem;
   font-size: 0.8rem;
-  color: var(--app-card-muted);
+  font-weight: 600;
   animation: world-hint-in 0.5s ease-out 1.2s both;
 }
 
@@ -313,6 +352,13 @@
 
 .world-mode #site-nav > * {
   pointer-events: auto;
+}
+
+/* Posés directement sur l'herbe, les boutons (vert foncé, fond transparent) se confondaient avec
+   le décor : ils reçoivent le même fond de carte que les marqueurs de lieux. */
+.world-mode #site-nav > div > button:not([role='switch']) {
+  background: var(--app-card-bg);
+  box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.22);
 }
 
 .world-mode .site-links,

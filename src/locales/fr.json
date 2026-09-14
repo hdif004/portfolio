@@ -1,5 +1,4 @@
 {
-  "brand": "DevAy",
   "nav": {
     "home": "Accueil",
     "about": "À propos",
@@ -63,11 +62,6 @@
     "view": "Voir le projet",
     "viewSite": "Voir le site",
     "viewCode": "Voir le code",
-    "tabs": {
-      "all": "Tout",
-      "pro": "Clients",
-      "perso": "Perso"
-    },
     "items": [
       {
         "title": "Mudaparis — migration WooCommerce vers Shopify",
@@ -88,20 +82,9 @@
       {
         "title": "Soraali et LXIR — maintenance Shopify",
         "desc": "Sections, snippets et boutons sur mesure, débogage de thème et corrections ponctuelles sur Shopify Horizon, pour une marque de mode et une marque de pastilles d'hydratation. 2026."
-      },
-      {
-        "title": "monFeed",
-        "desc": "Plateforme de création, de planification et de publication de contenus pour les réseaux sociaux : tableau de bord, éditeur, calendrier et analyses assistées par IA. Stage de fin d'études."
-      },
-      {
-        "title": "Flag",
-        "desc": "Jeu de devinettes sur les drapeaux du monde, en JavaScript autour d'une API REST. Projet de groupe, 2ᵉ année de licence."
-      },
-      {
-        "title": "Gourmet Atlas",
-        "desc": "Explorateur de cuisines du monde en Vue.js, sur l'API World Food Guide. Projet de groupe, 2ᵉ année de licence."
       }
-    ]
+    ],
+    "clients": "Clients"
   },
   "banner": {
     "title": "Un site à créer ou une boutique à reprendre ?",
@@ -150,16 +133,16 @@
     },
     "quests": {
       "hero": {
-        "name": "Le seuil",
-        "objective": "franchir la porte"
+        "name": "Le point de départ",
+        "objective": "écouter la présentation"
       },
       "about": {
         "name": "Rencontrer le développeur",
         "objective": "découvrir la méthode en trois étapes"
       },
       "skills": {
-        "name": "Ouvrir l'inventaire",
-        "objective": "inspecter l'équipement technique"
+        "name": "Passer à l'établi",
+        "objective": "inspecter les outils du métier"
       },
       "projects": {
         "name": "Hauts faits",
@@ -197,7 +180,7 @@
     },
     "places": {
       "hero": "Le point de départ",
-      "about": "L'atelier",
+      "about": "L'abri",
       "skills": "L'établi",
       "projects": "Le chantier",
       "banner": "La bifurcation",

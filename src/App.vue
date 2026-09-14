@@ -87,8 +87,6 @@ onMounted(() => {
     </a>
 
     <nav id="site-nav" class="mx-auto flex w-11/12 items-center justify-between py-2.5 sm:px-8">
-      <a href="#hero" class="text-lg font-bold text-primary sm:text-2xl">{{ t('brand') }}</a>
-
       <ul class="site-links hidden md:flex gap-6 text-sm">
         <li>
           <a href="#hero" class="hover:underline font-semibold">{{ t('nav.home') }}</a>
@@ -109,7 +107,7 @@ onMounted(() => {
         </li>
       </ul>
 
-      <div class="flex items-center gap-4">
+      <div class="ml-auto flex items-center gap-4">
         <ModeToggle class="hidden md:inline-flex" />
 
         <button

@@ -1,10 +1,9 @@
 <script setup>
 /**
- * Projets : les cartes jaillissent des caisses du chantier.
+ * Projets : les cartes jaillissent de la grande caisse du chantier.
  *
- * La grande caisse contient les missions clients, la caisse ouverte les projets personnels — la
- * distinction compte pour un prospect. Chaque carte est compacte (titre, technos) et se déplie au
- * clic pour la description et le lien, qui sont la vraie preuve.
+ * Chaque carte est compacte (titre, technos) et se déplie au clic pour la description et le lien,
+ * qui sont la vraie preuve.
  */
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -14,32 +13,23 @@ import { PROJECT_ITEMS } from '@/data/projects'
 
 const { t } = useI18n()
 
-/** Emplacements des cartes autour de leur caisse, en pixels pour un écran large. */
-const SLOTS = {
-  pro: [
-    [-520, -170],
-    [-520, 0],
-    [-520, 170],
-    [330, -170],
-    [330, 0],
-    [330, 170],
-  ],
-  perso: [
-    [-130, -235],
-    [170, -235],
-  ],
-}
+/**
+ * Emplacements des cartes autour de la caisse, en pixels pour un écran large : trois à gauche, deux
+ * à droite. Rien au-dessus de la caisse, où se trouve le bouton de fermeture.
+ */
+const SLOTS = [
+  [-520, -170],
+  [-520, 0],
+  [-520, 170],
+  [330, -90],
+  [330, 90],
+]
 
-const CRATES = { pro: 'crateLarge', perso: 'crateOpen' }
-
-const used = { pro: 0, perso: 0 }
-const cards = PROJECT_ITEMS.map((project, index) => {
-  const slots = SLOTS[project.tab]
-  const offset = slots[used[project.tab]++ % slots.length]
-  return { project, index, anchor: CRATES[project.tab], offset }
-})
-
-const count = (tab) => PROJECT_ITEMS.filter((project) => project.tab === tab).length
+const cards = PROJECT_ITEMS.map((project, index) => ({
+  project,
+  index,
+  offset: SLOTS[index % SLOTS.length],
+}))
 
 const expanded = ref(null)
 const toggle = (index) => (expanded.value = expanded.value === index ? null : index)
@@ -47,18 +37,14 @@ const toggle = (index) => (expanded.value = expanded.value === index ? null : in
 
 <template>
   <WorldPin place="projects" anchor="crateLarge" :offset="[0, 80]" variant="tag">
-    <p class="stage-kicker">{{ t('projects.tabs.pro') }} · {{ count('pro') }}</p>
-  </WorldPin>
-
-  <WorldPin place="projects" anchor="crateOpen" :offset="[170, 20]" variant="tag">
-    <p class="stage-kicker">{{ t('projects.tabs.perso') }} · {{ count('perso') }}</p>
+    <p class="stage-kicker">{{ t('projects.clients') }} · {{ PROJECT_ITEMS.length }}</p>
   </WorldPin>
 
   <WorldPin
     v-for="card in cards"
     :key="card.project.titleKey"
     place="projects"
-    :anchor="card.anchor"
+    anchor="crateLarge"
     :offset="card.offset"
     variant="card"
     emerge

@@ -12,7 +12,8 @@ import { WORLD_SIZE, clearingDepth, heightAt } from '@/world/terrain'
 
 const props = defineProps({ palette: { type: Object, required: true } })
 
-const SEGMENTS = 130
+/** Environ deux mètres par facette : le relief garde son grain quelle que soit la taille du monde. */
+const SEGMENTS = Math.round(WORLD_SIZE / 2)
 
 const geometry = new PlaneGeometry(WORLD_SIZE, WORLD_SIZE, SEGMENTS, SEGMENTS)
 geometry.rotateX(-Math.PI / 2)
