@@ -63,11 +63,6 @@
     "view": "Voir le projet",
     "viewSite": "Voir le site",
     "viewCode": "Voir le code",
-    "tabs": {
-      "all": "Tout",
-      "pro": "Clients",
-      "perso": "Perso"
-    },
     "items": [
       {
         "title": "Mudaparis — migration WooCommerce vers Shopify",
@@ -88,20 +83,10 @@
       {
         "title": "Soraali et LXIR — maintenance Shopify",
         "desc": "Sections, snippets et boutons sur mesure, débogage de thème et corrections ponctuelles sur Shopify Horizon, pour une marque de mode et une marque de pastilles d'hydratation. 2026."
-      },
-      {
-        "title": "monFeed",
-        "desc": "Plateforme de création, de planification et de publication de contenus pour les réseaux sociaux : tableau de bord, éditeur, calendrier et analyses assistées par IA. Stage de fin d'études."
-      },
-      {
-        "title": "Flag",
-        "desc": "Jeu de devinettes sur les drapeaux du monde, en JavaScript autour d'une API REST. Projet de groupe, 2ᵉ année de licence."
-      },
-      {
-        "title": "Gourmet Atlas",
-        "desc": "Explorateur de cuisines du monde en Vue.js, sur l'API World Food Guide. Projet de groupe, 2ᵉ année de licence."
       }
-    ]
+    ],
+    "previewDesktop": "Page d’accueil de {site} sur ordinateur",
+    "previewMobile": "Page d’accueil de {site} sur mobile"
   },
   "banner": {
     "title": "Un site à créer ou une boutique à reprendre ?",

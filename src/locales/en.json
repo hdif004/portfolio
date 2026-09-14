@@ -63,11 +63,6 @@
     "view": "View project",
     "viewSite": "Visit the site",
     "viewCode": "View the code",
-    "tabs": {
-      "all": "All",
-      "pro": "Clients",
-      "perso": "Personal"
-    },
     "items": [
       {
         "title": "Mudaparis — WooCommerce to Shopify migration",
@@ -88,20 +83,10 @@
       {
         "title": "Soraali and LXIR — Shopify maintenance",
         "desc": "Custom sections, snippets and buttons, theme debugging and one-off fixes on Shopify Horizon, for a fashion brand and a hydration tablet brand. 2026."
-      },
-      {
-        "title": "monFeed",
-        "desc": "A platform to create, schedule and publish social media content: dashboard, editor, calendar and AI-assisted analytics. Final-year internship."
-      },
-      {
-        "title": "Flag",
-        "desc": "A guess-the-flag game in JavaScript around a REST API. Group project, second year of my degree."
-      },
-      {
-        "title": "Gourmet Atlas",
-        "desc": "A world cuisine explorer in Vue.js, on the World Food Guide API. Group project, second year of my degree."
       }
-    ]
+    ],
+    "previewDesktop": "{site} homepage on desktop",
+    "previewMobile": "{site} homepage on mobile"
   },
   "banner": {
     "title": "A site to build or a store to take over?",

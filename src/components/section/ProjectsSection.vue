@@ -1,85 +1,64 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
 const { t } = useI18n()
 
+/**
+ * Uniquement des missions livrées pour des clients : les projets d'études et de stage ont été
+ * retirés, ils diluaient la preuve plus qu'ils ne l'appuyaient.
+ *
+ * `preview` : nom des captures dans `public/previews/` (`<preview>-desktop.webp` et
+ * `<preview>-mobile.webp`), générées par `npm run screenshots`. Les boutiques Shopify refusent
+ * d'être affichées dans une iframe : une capture est le seul aperçu fiable.
+ */
 const projectItems = [
   {
     titleKey: 'projects.items[0].title',
     descKey: 'projects.items[0].desc',
     link: 'https://mudaparis.com',
     linkKey: 'projects.viewSite',
+    preview: 'mudaparis',
     technos: ['Shopify', 'Liquid', 'WooCommerce', 'Migration'],
-    tab: 'pro',
   },
   {
     titleKey: 'projects.items[1].title',
     descKey: 'projects.items[1].desc',
     link: 'https://amadal.ma',
     linkKey: 'projects.viewSite',
+    preview: 'amadal',
     technos: ['WordPress headless', 'PHP', 'SEO', 'Performance'],
-    tab: 'pro',
   },
   {
     titleKey: 'projects.items[2].title',
     descKey: 'projects.items[2].desc',
     link: 'https://santibe.fr',
     linkKey: 'projects.viewSite',
+    preview: 'santibe',
     technos: ['Shopify', 'Liquid', 'JavaScript', 'UX e-commerce'],
-    tab: 'pro',
   },
   {
     titleKey: 'projects.items[3].title',
     descKey: 'projects.items[3].desc',
     link: 'https://soliferme.fr',
     linkKey: 'projects.viewSite',
+    preview: 'soliferme',
     technos: ['Shopify', 'Liquid', 'Tailwind CSS', 'Responsive'],
-    tab: 'pro',
   },
   {
     titleKey: 'projects.items[4].title',
     descKey: 'projects.items[4].desc',
     link: 'https://soraali.com',
     linkKey: 'projects.viewSite',
+    preview: 'soraali',
     technos: ['Shopify', 'Liquid', 'JavaScript', 'Debug'],
-    tab: 'pro',
-  },
-  {
-    titleKey: 'projects.items[5].title',
-    descKey: 'projects.items[5].desc',
-    link: 'https://github.com/mehdidarmiche/monfeed-front',
-    linkKey: 'projects.viewCode',
-    video: 'https://www.youtube-nocookie.com/embed/GuS-9lHLyYA',
-    technos: ['Vue.js', 'Strapi', 'Tailwind CSS', 'OpenAI API'],
-    tab: 'pro',
-  },
-  {
-    titleKey: 'projects.items[6].title',
-    descKey: 'projects.items[6].desc',
-    link: 'https://github.com/LoiseauCodeur/flag',
-    linkKey: 'projects.viewCode',
-    video: 'https://www.youtube-nocookie.com/embed/F4A3qHNe8ds?si=K6SIWnh1x5zCwvG6',
-    technos: ['Html/CSS', 'JavaScript', 'API REST', 'Tailwind CSS'],
-    tab: 'perso',
-  },
-  {
-    titleKey: 'projects.items[7].title',
-    descKey: 'projects.items[7].desc',
-    link: 'https://github.com/Boushow/Gourmet_Atlas-Project',
-    linkKey: 'projects.viewCode',
-    video: 'https://www.youtube-nocookie.com/embed/HdrDRILdhjc?si=lWOAqCs4LLaLkwRJ',
-    technos: ['Vue.js', 'Tailwind CSS', 'API REST'],
-    tab: 'perso',
   },
 ]
 
-const projects = computed(() => ({
-  [t('projects.tabs.all')]: projectItems,
-  [t('projects.tabs.pro')]: projectItems.filter((p) => p.tab === 'pro'),
-  [t('projects.tabs.perso')]: projectItems.filter((p) => p.tab === 'perso'),
-}))
+const previewSrc = (project, format) =>
+  `${import.meta.env.BASE_URL}previews/${project.preview}-${format}.webp`
+
+/** Adresse affichée dans la barre du faux navigateur : le domaine seul, sans protocole. */
+const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
 </script>
 
 <template>
@@ -89,81 +68,82 @@ const projects = computed(() => ({
     </h2>
     <p class="text-text-muted mb-8 max-w-2xl">{{ t('projects.subtitle') }}</p>
 
-    <TabGroup>
-      <TabList
-        class="flex gap-2 mb-6 bg-muted p-1 rounded-lg overflow-x-auto whitespace-nowrap scrollbar-none justify-center md:justify-start"
-      >
-        <Tab v-for="tab in Object.keys(projects)" as="template" :key="tab" v-slot="{ selected }">
-          <button
-            :class="[
-              'px-4 py-2 rounded-lg text-sm font-semibold transition duration-300',
-              'cursor-pointer whitespace-nowrap',
-              selected ? 'bg-primary-strong text-on-primary shadow' : 'text-text hover:bg-primary/10',
-            ]"
+    <div class="grid md:grid-cols-2 gap-6">
+      <div v-for="project in projectItems" :key="project.titleKey" class="bg-card p-6 rounded shadow-sm">
+        <!-- Aperçu : faux navigateur (capture bureau) et téléphone (capture mobile) par-dessus.
+             Le lien est retiré de la tabulation et masqué aux lecteurs d'écran : il double le lien
+             « Voir le site » plus bas, qui reste le chemin accessible. -->
+        <a
+          :href="project.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          tabindex="-1"
+          aria-hidden="true"
+          class="group relative mb-10 block"
+        >
+          <div
+            class="overflow-hidden rounded-lg border border-muted bg-background shadow-md transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
           >
-            {{ tab }}
-          </button>
-        </Tab>
-      </TabList>
-
-      <TabPanels>
-        <TabPanel v-for="(group, index) in Object.values(projects)" :key="index">
-          <Transition
-            appear
-            enter-active-class="transition-opacity duration-500"
-            enter-from-class="opacity-0"
-            enter-to-class="opacity-100"
-            leave-active-class="transition-opacity duration-300"
-            leave-from-class="opacity-100"
-            leave-to-class="opacity-0"
-            mode="out-in"
-          >
-            <div class="grid md:grid-cols-2 gap-6">
-              <div
-                v-for="project in group"
-                :key="project.titleKey"
-                class="bg-card p-6 rounded shadow-sm"
+            <div class="flex items-center gap-2 border-b border-muted bg-surface px-3 py-2">
+              <span class="flex gap-1.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
+              </span>
+              <span
+                class="mx-auto truncate rounded-md bg-background px-3 py-0.5 text-xs text-text-muted"
               >
-                <iframe
-                  v-if="project.video"
-                  :src="project.video"
-                  :title="t(project.titleKey)"
-                  class="w-full h-64 rounded mb-4"
-                  loading="lazy"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  frameborder="0"
-                  allowfullscreen
-                ></iframe>
-                <h3 class="text-xl font-semibold mb-2">
-                  {{ t(project.titleKey) }}
-                </h3>
-                <p class="text-sm text-text-muted mb-4">
-                  {{ t(project.descKey) }}
-                </p>
-
-                <ul class="flex flex-wrap gap-2 text-sm my-2 text-primary">
-                  <li
-                    v-for="tech in project.technos"
-                    :key="tech"
-                    class="bg-primary/10 px-2 py-1 border font-bold rounded"
-                  >
-                    {{ tech }}
-                  </li>
-                </ul>
-
-                <a
-                  :href="project.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-primary hover:underline"
-                >
-                  {{ t(project.linkKey || 'projects.view') }}
-                </a>
-              </div>
+                {{ hostname(project.link) }}
+              </span>
             </div>
-          </Transition>
-        </TabPanel>
-      </TabPanels>
-    </TabGroup>
+            <img
+              :src="previewSrc(project, 'desktop')"
+              :alt="t('projects.previewDesktop', { site: hostname(project.link) })"
+              width="1200"
+              height="750"
+              loading="lazy"
+              decoding="async"
+              class="block aspect-[8/5] w-full object-cover object-top"
+            />
+          </div>
+
+          <img
+            :src="previewSrc(project, 'mobile')"
+            :alt="t('projects.previewMobile', { site: hostname(project.link) })"
+            width="390"
+            height="844"
+            loading="lazy"
+            decoding="async"
+            class="absolute -bottom-6 right-3 w-[22%] min-w-20 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
+          />
+        </a>
+
+        <h3 class="text-xl font-semibold mb-2">
+          {{ t(project.titleKey) }}
+        </h3>
+        <p class="text-sm text-text-muted mb-4">
+          {{ t(project.descKey) }}
+        </p>
+
+        <ul class="flex flex-wrap gap-2 text-sm my-2 text-primary">
+          <li
+            v-for="tech in project.technos"
+            :key="tech"
+            class="bg-primary/10 px-2 py-1 border font-bold rounded"
+          >
+            {{ tech }}
+          </li>
+        </ul>
+
+        <a
+          :href="project.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary hover:underline"
+        >
+          {{ t(project.linkKey || 'projects.view') }}
+        </a>
+      </div>
+    </div>
   </section>
 </template>
