@@ -16,25 +16,28 @@
 
 ## Réalisations
 
-- **Mudaparis** (novembre 2025) — migration complète WooCommerce → Shopify d'une marque de tenues
-  traditionnelles marocaines pour hommes : produits, collections et avis clients transférés, thème
-  Horizon personnalisé à l'identité de la marque. https://mudaparis.com
-- **Amadal Global Systems** (avril 2026) — refonte avec back-office WordPress headless, travail
-  back-end, SEO et performance : page d'accueil affichée en moins d'une seconde, 286 Ko transférés,
-  aucun décalage de mise en page (CLS de 0). https://amadal.ma
-- **Sàntibé** (avril 2026) — refonte du panier latéral et du parcours d'achat sur thème Shopify
-  Horizon. https://santibe.fr
-- **Soliferme** (décembre 2025) — refonte de la page d'accueil, intégration responsive.
-  https://soliferme.fr
-- **Soraali et LXIR** (2026) — maintenance et évolutions de thèmes Shopify : sections, snippets,
-  boutons sur mesure et débogage.
+- **Mudaparis** (novembre 2025) — migration WooCommerce → Shopify d'une marque de tenues
+  traditionnelles marocaines pour hommes : plus de 100 produits, une dizaine de collections et les
+  avis clients transférés par export CSV et script, redirections 301 de toutes les anciennes URL,
+  configuration du thème Horizon. https://mudaparis.com
+- **Amadal Global Systems** (avril 2026) — refonte avec un front-end React et un WordPress headless
+  (API et administration configurées pour que le client gère son contenu). SEO et performance :
+  page d'accueil affichée en moins d'une seconde, 286 Ko transférés, CLS de 0 (PageSpeed Insights).
+  https://amadal.ma
+- **Sàntibé** (avril 2026) — refonte du panier latéral : interface, parcours, barre de livraison
+  offerte et suggestions de produits, en Liquid et JavaScript. https://santibe.fr
+- **Soliferme** (décembre 2025) — intégration de la page d'accueil à partir d'une maquette fournie
+  et modifications de la page produit. https://soliferme.fr
+- **Soraali** (juin 2026) — correction ponctuelle de bugs à l'ajout au panier sur thème Shopify
+  Horizon.
+  https://soraali.com
 
 ## Parcours
 
 Licence professionnelle en programmation informatique, Université de Limoges, suivie à distance
 (2022 – 2025). Stages : Synergie Media à Agadir (2023, intégration Bootstrap et thèmes WordPress),
 Zakaria Outahar (2024, thèmes Shopify et Liquid), TheWebcake à Casablanca (2025, MonFeed, SaaS de
-gestion de réseaux sociaux avec IA). Freelance depuis novembre 2025, six clients.
+gestion de réseaux sociaux avec IA, en Vue.js et Strapi). Freelance depuis novembre 2025, cinq clients.
 
 ## Contact
 

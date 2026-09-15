@@ -34,13 +34,13 @@
         "date": "Depuis novembre 2025",
         "role": "Développeur web freelance",
         "place": "à distance",
-        "text": "Migrations, refontes et corrections sur Shopify et WordPress pour six clients."
+        "text": "Migrations, refontes et corrections sur Shopify et WordPress pour cinq clients."
       },
       {
         "date": "Mars – juin 2025",
         "role": "Stage de fin de licence",
         "place": "TheWebcake, Casablanca",
-        "text": "Développement de MonFeed, un SaaS de gestion de réseaux sociaux avec IA."
+        "text": "Développement de MonFeed, un SaaS de gestion de réseaux sociaux avec IA, en Vue.js et Strapi."
       },
       {
         "date": "Mars – mai 2024",
@@ -72,30 +72,66 @@
   },
   "projects": {
     "title": "Réalisations",
-    "subtitle": "Six clients depuis novembre 2025.",
-    "view": "Voir le projet",
+    "subtitle": "Cinq clients depuis novembre 2025.",
     "viewSite": "Voir le site",
-    "viewCode": "Voir le code",
+    "details": "Voir le détail",
+    "openDetails": "Voir le détail : {project}",
+    "close": "Fermer",
+    "work": "Ce que j'ai fait",
+    "stack": "Technologies",
     "items": [
       {
         "title": "Mudaparis — migration WooCommerce vers Shopify",
-        "desc": "Migration complète de la boutique : produits, collections et avis clients transférés, puis personnalisation du thème Horizon. Marque de tenues traditionnelles marocaines pour hommes. Novembre 2025."
+        "desc": "Plus de 100 produits, une dizaine de collections et les avis clients transférés de WooCommerce vers Shopify, par export CSV et script. Redirections 301 de toutes les anciennes URL, puis configuration du thème Horizon. Marque de tenues traditionnelles marocaines pour hommes. Novembre 2025.",
+        "meta": "Marque de tenues traditionnelles marocaines pour hommes · Novembre 2025",
+        "details": [
+          "Export du catalogue WooCommerce en CSV : plus de 100 produits et plus de dix collections.",
+          "Import des produits et des avis clients dans Shopify à l'aide d'un script.",
+          "Redirections 301 de toutes les anciennes URL vers les nouvelles pages Shopify.",
+          "Configuration du thème Horizon depuis l'éditeur Shopify, sans code."
+        ]
       },
       {
-        "title": "Amadal — refonte et back-office headless",
-        "desc": "Refonte du site avec un back-office WordPress utilisé en headless, travail back-end, SEO et performances. La page d'accueil s'affiche en moins d'une seconde, pour 286 Ko transférés et un CLS à 0. Spécialiste des solutions d'irrigation. Avril 2026."
+        "title": "Amadal — refonte en React et WordPress headless",
+        "desc": "Front-end en React relié à un WordPress headless : développement de l'API et configuration de l'administration, où le client gère son contenu. Travail SEO et performance : page d'accueil affichée en moins d'une seconde, 286 Ko transférés, CLS à 0 (mesures PageSpeed Insights). Entreprise de systèmes d'irrigation. Avril 2026.",
+        "meta": "Entreprise de systèmes d'irrigation · Avril 2026",
+        "details": [
+          "Développement du front-end en React.",
+          "WordPress utilisé en headless : développement de l'API qui fournit le contenu au front-end.",
+          "Configuration de l'administration WordPress, où le client modifie lui-même le contenu du site.",
+          "Travail SEO et performance. Page d'accueil mesurée avec PageSpeed Insights : affichage en moins d'une seconde, 286 Ko transférés, CLS à 0."
+        ]
       },
       {
         "title": "Sàntibé — refonte du panier",
-        "desc": "Refonte du panier latéral du thème Horizon : mise à jour des quantités, parcours d'achat, cohérence visuelle avec le reste de la boutique. Marque de bijoux. Avril 2026."
+        "desc": "Nouvelle interface et nouveau parcours pour le panier latéral, avec une barre de livraison offerte et des suggestions de produits. Développé en Liquid et JavaScript, sans application tierce. Marque de bijoux. Avril 2026.",
+        "meta": "Marque de bijoux · Avril 2026",
+        "details": [
+          "Nouvelle interface pour le panier latéral du thème Horizon.",
+          "Nouveau parcours dans le panier.",
+          "Barre de progression vers la livraison offerte.",
+          "Suggestions de produits dans le panier.",
+          "Développé en Liquid et JavaScript, sans application tierce."
+        ]
       },
       {
-        "title": "Soliferme — refonte de la page d'accueil",
-        "desc": "Nouvelle structure de sections, intégration responsive et personnalisation du thème Horizon. Décembre 2025."
+        "title": "Soliferme — page d'accueil et page produit",
+        "desc": "Intégration de la nouvelle page d'accueil à partir d'une maquette fournie, et modifications de la page produit, sur le thème Horizon. Décembre 2025.",
+        "meta": "Décembre 2025",
+        "details": [
+          "Intégration de toute la page d'accueil à partir d'une maquette fournie.",
+          "Modifications de la page produit.",
+          "Développé en Liquid sur le thème Shopify Horizon."
+        ]
       },
       {
-        "title": "Soraali et LXIR — maintenance Shopify",
-        "desc": "Sections, snippets et boutons sur mesure, débogage de thème et corrections ponctuelles sur Shopify Horizon, pour une marque de mode et une marque de pastilles d'hydratation. 2026."
+        "title": "Soraali — corrections Shopify",
+        "desc": "Mission ponctuelle : correction de bugs à l'ajout au panier sur le thème Horizon. Marque de mode. Juin 2026.",
+        "meta": "Marque de mode · Juin 2026",
+        "details": [
+          "Correction de bugs à l'ajout au panier sur le thème Horizon.",
+          "Mission ponctuelle."
+        ]
       }
     ],
     "previewDesktop": "Page d’accueil de {site} sur ordinateur",

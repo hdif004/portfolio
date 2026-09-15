@@ -1,5 +1,8 @@
 <script setup>
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import BrowserMock from '../BrowserMock.vue'
+import ProjectModal from '../ProjectModal.vue'
 
 const { t } = useI18n()
 
@@ -7,52 +10,45 @@ const { t } = useI18n()
  * Uniquement des missions livrées pour des clients : les projets d'études et de stage ont été
  * retirés, ils diluaient la preuve plus qu'ils ne l'appuyaient.
  *
+ * `key` : préfixe des textes dans les fichiers de langue (`title`, `desc`, `meta`, `details`).
  * `preview` : nom des captures dans `public/previews/` (`<preview>-desktop.webp` et
  * `<preview>-mobile.webp`), générées par `npm run screenshots`. Les boutiques Shopify refusent
  * d'être affichées dans une iframe : une capture est le seul aperçu fiable.
  */
 const projectItems = [
   {
-    titleKey: 'projects.items[0].title',
-    descKey: 'projects.items[0].desc',
+    key: 'projects.items[0]',
     link: 'https://mudaparis.com',
-    linkKey: 'projects.viewSite',
     preview: 'mudaparis',
-    technos: ['Shopify', 'Liquid', 'WooCommerce', 'Migration'],
+    technos: ['Shopify', 'WooCommerce', 'Migration', 'Redirections 301'],
   },
   {
-    titleKey: 'projects.items[1].title',
-    descKey: 'projects.items[1].desc',
+    key: 'projects.items[1]',
     link: 'https://amadal.ma',
-    linkKey: 'projects.viewSite',
     preview: 'amadal',
-    technos: ['WordPress headless', 'PHP', 'SEO', 'Performance'],
+    technos: ['React', 'WordPress headless', 'SEO', 'Performance'],
   },
   {
-    titleKey: 'projects.items[2].title',
-    descKey: 'projects.items[2].desc',
+    key: 'projects.items[2]',
     link: 'https://santibe.fr',
-    linkKey: 'projects.viewSite',
     preview: 'santibe',
-    technos: ['Shopify', 'Liquid', 'JavaScript', 'UX e-commerce'],
+    technos: ['Shopify', 'Liquid', 'JavaScript', 'Upsell'],
   },
   {
-    titleKey: 'projects.items[3].title',
-    descKey: 'projects.items[3].desc',
+    key: 'projects.items[3]',
     link: 'https://soliferme.fr',
-    linkKey: 'projects.viewSite',
     preview: 'soliferme',
-    technos: ['Shopify', 'Liquid', 'Tailwind CSS', 'Responsive'],
+    technos: ['Shopify', 'Liquid', 'Intégration de maquette'],
   },
   {
-    titleKey: 'projects.items[4].title',
-    descKey: 'projects.items[4].desc',
+    key: 'projects.items[4]',
     link: 'https://soraali.com',
-    linkKey: 'projects.viewSite',
     preview: 'soraali',
     technos: ['Shopify', 'Liquid', 'JavaScript', 'Debug'],
   },
 ]
+
+const selected = ref(null)
 
 const previewSrc = (project, format) =>
   `${import.meta.env.BASE_URL}previews/${project.preview}-${format}.webp`
@@ -69,43 +65,24 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
     <p class="text-text-muted mb-8 max-w-2xl">{{ t('projects.subtitle') }}</p>
 
     <div class="grid md:grid-cols-2 gap-6">
-      <div v-for="project in projectItems" :key="project.titleKey" class="bg-card p-6 rounded shadow-sm">
-        <!-- Aperçu : faux navigateur (capture bureau) et téléphone (capture mobile) par-dessus.
-             Le lien est retiré de la tabulation et masqué aux lecteurs d'écran : il double le lien
-             « Voir le site » plus bas, qui reste le chemin accessible. -->
-        <a
-          :href="project.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          tabindex="-1"
-          aria-hidden="true"
-          class="group relative mb-10 block"
+      <!-- Toute la carte ouvre le détail ; le bouton sur l'aperçu est le chemin clavier. -->
+      <div
+        v-for="project in projectItems"
+        :key="project.key"
+        class="group bg-card p-6 rounded shadow-sm cursor-pointer"
+        @click="selected = project"
+      >
+        <button
+          type="button"
+          class="relative mb-10 block w-full cursor-pointer text-left"
+          :aria-label="t('projects.openDetails', { project: t(`${project.key}.title`) })"
         >
-          <div
-            class="overflow-hidden rounded-lg border border-muted bg-background shadow-md transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
-          >
-            <div class="flex items-center gap-2 border-b border-muted bg-surface px-3 py-2">
-              <span class="flex gap-1.5">
-                <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
-              </span>
-              <span
-                class="mx-auto truncate rounded-md bg-background px-3 py-0.5 text-xs text-text-muted"
-              >
-                {{ hostname(project.link) }}
-              </span>
-            </div>
-            <img
-              :src="previewSrc(project, 'desktop')"
-              :alt="t('projects.previewDesktop', { site: hostname(project.link) })"
-              width="1200"
-              height="750"
-              loading="lazy"
-              decoding="async"
-              class="block aspect-[8/5] w-full object-cover object-top"
-            />
-          </div>
+          <BrowserMock
+            :src="previewSrc(project, 'desktop')"
+            :alt="t('projects.previewDesktop', { site: hostname(project.link) })"
+            :host="hostname(project.link)"
+            class="transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
+          />
 
           <img
             :src="previewSrc(project, 'mobile')"
@@ -116,13 +93,13 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
             decoding="async"
             class="absolute -bottom-6 right-3 w-[22%] min-w-20 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
           />
-        </a>
+        </button>
 
         <h3 class="text-xl font-semibold mb-2">
-          {{ t(project.titleKey) }}
+          {{ t(`${project.key}.title`) }}
         </h3>
         <p class="text-sm text-text-muted mb-4">
-          {{ t(project.descKey) }}
+          {{ t(`${project.key}.desc`) }}
         </p>
 
         <ul class="flex flex-wrap gap-2 text-sm my-2 text-primary">
@@ -135,15 +112,23 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
           </li>
         </ul>
 
-        <a
-          :href="project.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-primary hover:underline"
-        >
-          {{ t(project.linkKey || 'projects.view') }}
-        </a>
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-semibold text-primary group-hover:underline">
+            {{ t('projects.details') }}
+          </span>
+          <a
+            :href="project.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary hover:underline"
+            @click.stop
+          >
+            {{ t('projects.viewSite') }}
+          </a>
+        </div>
       </div>
     </div>
+
+    <ProjectModal :project="selected" @close="selected = null" />
   </section>
 </template>

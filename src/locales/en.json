@@ -34,13 +34,13 @@
         "date": "Since November 2025",
         "role": "Freelance web developer",
         "place": "remote",
-        "text": "Migrations, rebuilds and fixes on Shopify and WordPress for six clients."
+        "text": "Migrations, rebuilds and fixes on Shopify and WordPress for five clients."
       },
       {
         "date": "March – June 2025",
         "role": "Final-year internship",
         "place": "TheWebcake, Casablanca",
-        "text": "Built MonFeed, an AI-powered social media management SaaS."
+        "text": "Built MonFeed, an AI-powered social media management SaaS, with Vue.js and Strapi."
       },
       {
         "date": "March – May 2024",
@@ -72,30 +72,66 @@
   },
   "projects": {
     "title": "Work",
-    "subtitle": "Six clients since November 2025.",
-    "view": "View project",
+    "subtitle": "Five clients since November 2025.",
     "viewSite": "Visit the site",
-    "viewCode": "View the code",
+    "details": "See details",
+    "openDetails": "See details: {project}",
+    "close": "Close",
+    "work": "What I did",
+    "stack": "Stack",
     "items": [
       {
         "title": "Mudaparis — WooCommerce to Shopify migration",
-        "desc": "Full store migration: products, collections and customer reviews transferred, then Horizon theme customisation. A brand of traditional Moroccan menswear. November 2025."
+        "desc": "Over 100 products, a dozen collections and the customer reviews moved from WooCommerce to Shopify using CSV exports and a script. 301 redirects for every old URL, then Horizon theme setup. A brand of traditional Moroccan menswear. November 2025.",
+        "meta": "Traditional Moroccan menswear brand · November 2025",
+        "details": [
+          "Exported the WooCommerce catalogue to CSV: over 100 products and more than ten collections.",
+          "Imported the products and customer reviews into Shopify with a script.",
+          "301 redirects from every old URL to the new Shopify pages.",
+          "Set up the Horizon theme in the Shopify editor, no code."
+        ]
       },
       {
-        "title": "Amadal — rebuild and headless back office",
-        "desc": "Site rebuilt with WordPress used headless as the back office, back-end work, SEO and performance. The homepage renders in under a second, with 286 KB transferred and a CLS of 0. Irrigation systems company. April 2026."
+        "title": "Amadal — React and headless WordPress rebuild",
+        "desc": "React front end connected to a headless WordPress: API development and admin setup, where the client manages the content. SEO and performance work: homepage renders in under a second, 286 KB transferred, CLS of 0 (measured with PageSpeed Insights). Irrigation systems company. April 2026.",
+        "meta": "Irrigation systems company · April 2026",
+        "details": [
+          "Built the front end in React.",
+          "WordPress used headless: developed the API that serves content to the front end.",
+          "Set up the WordPress admin, where the client edits the site content.",
+          "SEO and performance work. Homepage measured with PageSpeed Insights: renders in under a second, 286 KB transferred, CLS of 0."
+        ]
       },
       {
         "title": "Sàntibé — cart rebuild",
-        "desc": "Rebuild of the Horizon theme cart drawer: quantity updates, checkout path, visual consistency with the rest of the store. A jewellery brand. April 2026."
+        "desc": "New interface and flow for the cart drawer, with a free shipping bar and product suggestions. Built in Liquid and JavaScript, no third-party app. A jewellery brand. April 2026.",
+        "meta": "Jewellery brand · April 2026",
+        "details": [
+          "New interface for the Horizon theme cart drawer.",
+          "New flow inside the cart.",
+          "Progress bar towards free shipping.",
+          "Product suggestions in the cart.",
+          "Built in Liquid and JavaScript, no third-party app."
+        ]
       },
       {
-        "title": "Soliferme — homepage rebuild",
-        "desc": "New section structure, responsive build and Horizon theme customisation. December 2025."
+        "title": "Soliferme — homepage and product page",
+        "desc": "New homepage built from a supplied mockup, plus changes to the product page, on the Horizon theme. December 2025.",
+        "meta": "December 2025",
+        "details": [
+          "Built the whole homepage from a supplied mockup.",
+          "Changes to the product page.",
+          "Built in Liquid on the Shopify Horizon theme."
+        ]
       },
       {
-        "title": "Soraali and LXIR — Shopify maintenance",
-        "desc": "Custom sections, snippets and buttons, theme debugging and one-off fixes on Shopify Horizon, for a fashion brand and a hydration tablet brand. 2026."
+        "title": "Soraali — Shopify fixes",
+        "desc": "One-off job: fixed add-to-cart bugs on the Horizon theme. A fashion brand. June 2026.",
+        "meta": "Fashion brand · June 2026",
+        "details": [
+          "Fixed add-to-cart bugs on the Horizon theme.",
+          "One-off job."
+        ]
       }
     ],
     "previewDesktop": "{site} homepage on desktop",
