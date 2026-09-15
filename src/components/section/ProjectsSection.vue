@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ArrowUpRight } from 'lucide-vue-next'
 import BrowserMock from '../BrowserMock.vue'
 import ProjectModal from '../ProjectModal.vue'
 
@@ -120,10 +121,11 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
             :href="project.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-primary hover:underline"
+            class="inline-flex items-center gap-1 text-primary hover:underline"
             @click.stop
           >
             {{ t('projects.viewSite') }}
+            <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
           </a>
         </div>
       </div>

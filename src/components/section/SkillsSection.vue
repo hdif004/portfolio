@@ -18,7 +18,8 @@
             :key="skill.name"
             class="inline-flex items-center gap-2 rounded-full border border-primary/30 px-3 py-1.5 text-sm text-card-text"
           >
-            <component :is="skill.icon" class="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
+            <BrandIcon v-if="skill.brand" :icon="skill.brand" class="w-4 h-4 text-primary shrink-0" />
+            <component v-else :is="skill.icon" class="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
             {{ skill.name }}
           </li>
         </ul>
@@ -29,58 +30,62 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { Braces, Gauge, SquareTerminal } from 'lucide-vue-next'
 import {
-  Code2,
-  FileCode,
-  LayoutDashboard,
-  Server,
-  Boxes,
-  Settings2,
-  GitBranch,
-  Container,
-  PenTool,
-  ShoppingBag,
-  Globe,
-  Gauge,
-  Terminal,
-} from 'lucide-vue-next'
+  siBootstrap,
+  siDocker,
+  siFigma,
+  siGit,
+  siJavascript,
+  siPhp,
+  siPython,
+  siReact,
+  siShopify,
+  siStrapi,
+  siSymfony,
+  siTailwindcss,
+  siVuedotjs,
+  siWordpress,
+} from 'simple-icons'
+import BrandIcon from '../BrandIcon.vue'
 
 const { t } = useI18n()
 
+/** `brand` : logo officiel (simple-icons). `icon` : pictogramme Lucide quand il n'existe pas de logo. */
 const skillGroups = [
   {
     titleKey: 'skills.categories.daily',
     captionKey: 'skills.captions.daily',
     items: [
-      { name: 'Shopify', icon: ShoppingBag },
-      { name: 'Liquid', icon: FileCode },
-      { name: 'JavaScript', icon: FileCode },
-      { name: 'Tailwind CSS', icon: LayoutDashboard },
-      { name: 'WordPress / WooCommerce', icon: Globe },
+      { name: 'Shopify', brand: siShopify },
+      { name: 'Liquid', icon: Braces },
+      { name: 'JavaScript', brand: siJavascript },
+      { name: 'Tailwind CSS', brand: siTailwindcss },
+      { name: 'WordPress / WooCommerce', brand: siWordpress },
       { name: 'SEO & performance', icon: Gauge },
-      { name: 'Git', icon: GitBranch },
+      { name: 'Git', brand: siGit },
     ],
   },
   {
     titleKey: 'skills.categories.solid',
     captionKey: 'skills.captions.solid',
     items: [
-      { name: 'Vue.js', icon: Code2 },
-      { name: 'PHP', icon: FileCode },
-      { name: 'Strapi', icon: Server },
-      { name: 'Bootstrap', icon: Boxes },
-      { name: 'Shopify CLI', icon: Terminal },
+      { name: 'Vue.js', brand: siVuedotjs },
+      { name: 'PHP', brand: siPhp },
+      { name: 'Strapi', brand: siStrapi },
+      { name: 'Bootstrap', brand: siBootstrap },
+      { name: 'Shopify CLI', icon: SquareTerminal },
     ],
   },
   {
     titleKey: 'skills.categories.learning',
     captionKey: 'skills.captions.learning',
     items: [
-      { name: 'React.js', icon: Code2 },
-      { name: 'Symfony', icon: Settings2 },
-      { name: 'Python', icon: Terminal },
-      { name: 'Docker', icon: Container },
-      { name: 'Figma', icon: PenTool },
+      { name: 'React.js', brand: siReact },
+      { name: 'Symfony', brand: siSymfony },
+      { name: 'Python', brand: siPython },
+      { name: 'Docker', brand: siDocker },
+      { name: 'Figma', brand: siFigma },
     ],
   },
 ]

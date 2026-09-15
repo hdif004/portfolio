@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Send, Mail, Github, Linkedin, Loader2 } from 'lucide-vue-next'
+import { Send, Mail, Linkedin, Loader2 } from 'lucide-vue-next'
+import { siGithub } from 'simple-icons'
+import BrandIcon from '../BrandIcon.vue'
 
 const { t } = useI18n()
 
@@ -185,7 +187,7 @@ async function handleSubmit() {
           class="flex items-center gap-3 text-text hover:text-primary transition"
         >
           <span class="p-3 rounded-full bg-primary/10 text-primary">
-            <Github class="w-5 h-5" />
+            <BrandIcon :icon="siGithub" class="w-5 h-5" />
           </span>
           <span>github.com/hdif004</span>
         </a>

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { X } from 'lucide-vue-next'
+import { X, ArrowUpRight } from 'lucide-vue-next'
 import BrowserMock from './BrowserMock.vue'
 
 /**
@@ -148,9 +148,10 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
               :href="project.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-semibold text-primary hover:underline"
+              class="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
             >
               {{ t('projects.viewSite') }}
+              <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>
