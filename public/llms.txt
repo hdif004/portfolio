@@ -1,9 +1,8 @@
 # Hudayfa Koujdal
 
-> Hudayfa Koujdal est un développeur web freelance basé en France, disponible pour de nouvelles
-> missions. Il crée des sites vitrines pour les artisans et les petites entreprises, et développe,
-> migre et refond des boutiques Shopify. Il travaille seul, sans agence ni intermédiaire, du premier
-> échange jusqu'à la mise en ligne. Contact : hudayfa.k.pro@gmail.com
+> Hudayfa Koujdal est un développeur web freelance basé en France. Il crée des sites vitrines pour
+> les artisans et les petites entreprises, et développe, migre et refond des boutiques Shopify.
+> Contact : hudayfa.k.pro@gmail.com
 
 ## Prestations
 
@@ -15,12 +14,7 @@
 - Optimisation SEO technique et performance (Core Web Vitals, poids des pages, images, CLS).
 - Sites WordPress, y compris en headless.
 
-## Déroulé d'un projet
-
-Un échange de vingt minutes, puis un périmètre écrit avec un prix et une date. Le travail se fait
-sur une préproduction consultable par le client, et rien n'est publié sans son accord.
-
-## Réalisations vérifiables
+## Réalisations
 
 - **Mudaparis** (novembre 2025) — migration complète WooCommerce → Shopify d'une marque de tenues
   traditionnelles marocaines pour hommes : produits, collections et avis clients transférés, thème
@@ -37,14 +31,14 @@ sur une préproduction consultable par le client, et rien n'est publié sans son
 
 ## Parcours
 
-Licence professionnelle « Métiers de l'informatique – Applications web », Université de Limoges
-(2025). Expériences en entreprise : WordPress chez Synergie Media, Shopify et Liquid chez Zakaria
-Outahar, Vue.js et Strapi chez monFeed. Freelance depuis novembre 2025, six clients accompagnés.
+Licence professionnelle en programmation informatique, Université de Limoges, suivie à distance
+(2022 – 2025). Stages : Synergie Media à Agadir (2023, intégration Bootstrap et thèmes WordPress),
+Zakaria Outahar (2024, thèmes Shopify et Liquid), TheWebcake à Casablanca (2025, MonFeed, SaaS de
+gestion de réseaux sociaux avec IA). Freelance depuis novembre 2025, six clients.
 
 ## Contact
 
 - E-mail : hudayfa.k.pro@gmail.com
-- Téléphone : +33 7 68 64 45 45
 - GitHub : https://github.com/hdif004
 - LinkedIn : https://www.linkedin.com/in/hudayfa-koujdal-930068258/
 - Site : https://devay.dev/

@@ -1,35 +1,38 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
-
-const steps = [0, 1, 2]
+const { t, tm } = useI18n()
 </script>
 
 <template>
   <section id="about" class="py-16 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-10 text-primary">{{ t('about.title') }}</h2>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <div
-        v-for="(step, index) in steps"
-        :key="step"
-        v-reveal="{ delay: index * 100 }"
-        class="about-step bg-card p-6 rounded-xl shadow-sm border-l-4 border-primary relative transition-colors duration-300"
-      >
-        <div
-          class="absolute -left-3 top-6 bg-primary-strong text-on-primary w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-md"
-          aria-hidden="true"
-        >
-          {{ index + 1 }}
-        </div>
-        <h3 class="text-xl font-semibold text-primary mb-2">
-          {{ t(`about.steps[${step}].label`) }}
-        </h3>
-        <p class="text-card-text text-base">
-          {{ t(`about.steps[${step}].text`) }}
-        </p>
+    <div class="grid md:grid-cols-5 gap-10 md:gap-16">
+      <!-- Présentation courte -->
+      <div class="md:col-span-2 space-y-4">
+        <h2 class="text-3xl font-bold text-primary">{{ t('about.title') }}</h2>
+        <p class="text-lg text-text">{{ t('about.intro') }}</p>
       </div>
+
+      <!-- Parcours daté -->
+      <ol class="md:col-span-3 relative border-l-2 border-primary-fill ml-2">
+        <li
+          v-for="(_, index) in tm('about.timeline')"
+          :key="index"
+          v-reveal="{ delay: index * 80 }"
+          class="relative pl-8 pb-8 last:pb-0"
+        >
+          <span
+            class="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-4 border-background bg-primary-fill"
+            aria-hidden="true"
+          ></span>
+          <p class="text-sm font-medium text-text-muted">{{ t(`about.timeline[${index}].date`) }}</p>
+          <h3 class="text-lg font-semibold text-primary">
+            {{ t(`about.timeline[${index}].role`) }}
+            <span class="font-normal text-text">· {{ t(`about.timeline[${index}].place`) }}</span>
+          </h3>
+          <p class="text-text-muted">{{ t(`about.timeline[${index}].text`) }}</p>
+        </li>
+      </ol>
     </div>
   </section>
 </template>

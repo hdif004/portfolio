@@ -19,7 +19,7 @@
     "name": "Hudayfa",
     "title": "Freelance web developer",
     "offers": "Business websites and Shopify stores.",
-    "desc": "I build business websites and develop Shopify stores: setup, migration from WooCommerce, theme rebuilds, one-off fixes. I work alone, directly with the client.",
+    "desc": "I build business websites and develop Shopify stores: setup, migration from WooCommerce, theme rebuilds, one-off fixes.",
     "ctaPrimary": "Get in touch",
     "ctaSecondary": "See my work",
     "github": "GitHub",
@@ -28,18 +28,31 @@
   },
   "about": {
     "title": "About",
-    "steps": [
+    "intro": "Professional Bachelor's degree in computer programming from the University of Limoges, studied remotely from 2022 to 2025, with three company internships. Freelance since November 2025.",
+    "timeline": [
       {
-        "label": "What I do",
-        "text": "Business websites for small companies and independent makers, and Shopify stores: setup, migration from WooCommerce, theme rebuilds and one-off fixes."
+        "date": "Since November 2025",
+        "role": "Freelance web developer",
+        "place": "remote",
+        "text": "Migrations, rebuilds and fixes on Shopify and WordPress for six clients."
       },
       {
-        "label": "My background",
-        "text": "I learned on the job before I learned in class: WordPress at Synergie Media, Shopify and Liquid at Zakaria Outahar, then Vue.js and Strapi at monFeed. Professional Bachelor's degree in 'IT Professions – Web Applications' from the University of Limoges in 2025. Freelance since November 2025."
+        "date": "March – June 2025",
+        "role": "Final-year internship",
+        "place": "TheWebcake, Casablanca",
+        "text": "Built MonFeed, an AI-powered social media management SaaS."
       },
       {
-        "label": "How I work",
-        "text": "We discuss what you need, then I send a written scope with a price and a date. The work happens on a staging site, and it goes live once you have approved it."
+        "date": "March – May 2024",
+        "role": "Front-end internship",
+        "place": "Zakaria Outahar",
+        "text": "Shopify themes, Liquid and custom integrations for his clients."
+      },
+      {
+        "date": "April – May 2023",
+        "role": "Front-end internship",
+        "place": "Synergie Media, Agadir",
+        "text": "Bootstrap mockup integration and WordPress themes."
       }
     ]
   },
@@ -88,14 +101,9 @@
     "previewDesktop": "{site} homepage on desktop",
     "previewMobile": "{site} homepage on mobile"
   },
-  "banner": {
-    "title": "A site to build or a store to take over?",
-    "subtitle": "Write to me — I reply within one business day.",
-    "button": "Get in touch"
-  },
   "contact": {
     "title": "Contact",
-    "subtitle": "Describe your project in a few lines. I reply within one business day.",
+    "subtitle": "Through the form or by email.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -123,7 +131,7 @@
     "select": "Select…",
     "send": "Send",
     "sending": "Sending…",
-    "success": "Message sent. I reply within one business day.",
+    "success": "Message sent, thank you.",
     "error": "That didn't go through. You can email me directly at hudayfa.k.pro{'@'}gmail.com.",
     "privacy": "Your details are only used to answer your request. They are never sold or used for outreach, and are deleted on request."
   },

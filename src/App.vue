@@ -8,7 +8,6 @@ import HeroSection from './components/section/HeroSection.vue'
 import AboutSection from './components/section/AboutSection.vue'
 import SkillsSection from './components/section/SkillsSection.vue'
 import ProjectsSection from './components/section/ProjectsSection.vue'
-import SoftBannerSection from './components/section/SoftBannerSection.vue'
 import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
 
@@ -146,7 +145,6 @@ onMounted(() => {
       <AboutSection v-reveal />
       <SkillsSection v-reveal />
       <ProjectsSection v-reveal />
-      <SoftBannerSection v-reveal />
       <ContactSection v-reveal />
     </main>
     <Footer />

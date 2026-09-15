@@ -19,7 +19,7 @@
     "name": "Hudayfa",
     "title": "Développeur web freelance",
     "offers": "Sites vitrines et boutiques Shopify.",
-    "desc": "Je crée des sites vitrines et je développe des boutiques Shopify : mise en place, migration depuis WooCommerce, refonte de thème, corrections ponctuelles. Je travaille seul, en direct avec le client.",
+    "desc": "Je crée des sites vitrines et je développe des boutiques Shopify : mise en place, migration depuis WooCommerce, refonte de thème, corrections ponctuelles.",
     "ctaPrimary": "Me contacter",
     "ctaSecondary": "Voir mes réalisations",
     "github": "GitHub",
@@ -28,18 +28,31 @@
   },
   "about": {
     "title": "À propos",
-    "steps": [
+    "intro": "Licence professionnelle en programmation informatique à l'Université de Limoges, suivie à distance de 2022 à 2025, avec trois stages en entreprise. Freelance depuis novembre 2025.",
+    "timeline": [
       {
-        "label": "Ce que je fais",
-        "text": "Des sites vitrines pour des artisans et des petites entreprises, et des boutiques Shopify : création, migration depuis WooCommerce, refonte de thème et corrections ponctuelles."
+        "date": "Depuis novembre 2025",
+        "role": "Développeur web freelance",
+        "place": "à distance",
+        "text": "Migrations, refontes et corrections sur Shopify et WordPress pour six clients."
       },
       {
-        "label": "Mon parcours",
-        "text": "J'ai appris en entreprise avant d'apprendre en cours : WordPress chez Synergie Media, Shopify et Liquid chez Zakaria Outahar, puis Vue.js et Strapi chez monFeed. Licence professionnelle « Métiers de l'informatique – Applications web » à l'Université de Limoges en 2025. Je travaille à mon compte depuis novembre 2025."
+        "date": "Mars – juin 2025",
+        "role": "Stage de fin de licence",
+        "place": "TheWebcake, Casablanca",
+        "text": "Développement de MonFeed, un SaaS de gestion de réseaux sociaux avec IA."
       },
       {
-        "label": "Comment je travaille",
-        "text": "On échange sur le besoin, puis je propose un périmètre écrit avec un prix et une date. Le travail se fait sur une préproduction, et la mise en ligne se fait après votre validation."
+        "date": "Mars – mai 2024",
+        "role": "Stage front-end",
+        "place": "Zakaria Outahar",
+        "text": "Thèmes Shopify, Liquid et intégrations sur mesure pour ses clients."
+      },
+      {
+        "date": "Avril – mai 2023",
+        "role": "Stage front-end",
+        "place": "Synergie Media, Agadir",
+        "text": "Intégration de maquettes avec Bootstrap et thèmes WordPress."
       }
     ]
   },
@@ -88,14 +101,9 @@
     "previewDesktop": "Page d’accueil de {site} sur ordinateur",
     "previewMobile": "Page d’accueil de {site} sur mobile"
   },
-  "banner": {
-    "title": "Un site à créer ou une boutique à reprendre ?",
-    "subtitle": "Écrivez-moi, je réponds sous 24 h ouvrées.",
-    "button": "Me contacter"
-  },
   "contact": {
     "title": "Contact",
-    "subtitle": "Décrivez votre projet en quelques lignes. Je réponds sous 24 h ouvrées.",
+    "subtitle": "Par le formulaire ou par e-mail.",
     "name": "Nom",
     "email": "E-mail",
     "message": "Message",
@@ -123,7 +131,7 @@
     "select": "Sélectionnez…",
     "send": "Envoyer",
     "sending": "Envoi…",
-    "success": "Message envoyé. Je réponds sous 24 h ouvrées.",
+    "success": "Message envoyé, merci.",
     "error": "L'envoi a échoué. Vous pouvez m'écrire directement à hudayfa.k.pro{'@'}gmail.com.",
     "privacy": "Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées pour de la prospection, et sont supprimées sur demande."
   },

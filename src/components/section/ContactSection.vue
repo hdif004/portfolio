@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Send, Mail, Phone, Github, Linkedin, Loader2 } from 'lucide-vue-next'
+import { Send, Mail, Github, Linkedin, Loader2 } from 'lucide-vue-next'
 
 const { t } = useI18n()
 
@@ -176,16 +176,6 @@ async function handleSubmit() {
             <Mail class="w-5 h-5" />
           </span>
           <span>hudayfa.k.pro@gmail.com</span>
-        </a>
-
-        <a
-          href="tel:+33768644545"
-          class="flex items-center gap-3 text-text hover:text-primary transition"
-        >
-          <span class="p-3 rounded-full bg-primary/10 text-primary">
-            <Phone class="w-5 h-5" />
-          </span>
-          <span>+33 7 68 64 45 45</span>
         </a>
 
         <a

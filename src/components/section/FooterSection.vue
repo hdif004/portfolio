@@ -3,13 +3,9 @@
     <div class="container mx-auto px-4">
       <p class="text-xl font-semibold mb-4">Hudayfa Koujdal – {{ t('footer.role') }}</p>
 
-      <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-4 text-sm">
+      <div class="flex justify-center items-center mb-4 text-sm">
         <a href="mailto:hudayfa.k.pro@gmail.com" class="flex items-center gap-2 hover:underline">
           <Mail class="w-4 h-4" /> hudayfa.k.pro@gmail.com
-        </a>
-        <span>|</span>
-        <a href="tel:+33768644545" class="flex items-center gap-2 hover:underline">
-          <Phone class="w-4 h-4" /> +33 7 68 64 45 45
         </a>
       </div>
 
@@ -40,7 +36,7 @@
 </template>
 
 <script setup>
-import { Mail, Phone, Github, Linkedin } from 'lucide-vue-next'
+import { Mail, Github, Linkedin } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
