@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ArrowUpRight } from 'lucide-vue-next'
 import BrowserMock from '../BrowserMock.vue'
@@ -49,6 +49,10 @@ const projectItems = [
   },
 ]
 
+/** Le premier projet est mis en avant sur toute la largeur, les suivants passent en grille. */
+const featured = computed(() => projectItems[0])
+const others = computed(() => projectItems.slice(1))
+
 const selected = ref(null)
 
 const previewSrc = (project, format) =>
@@ -59,23 +63,87 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
 </script>
 
 <template>
-  <section id="projects" class="py-20 px-6 w-10/12 mx-auto">
-    <h2 class="text-3xl font-bold mb-2 text-primary">
-      {{ t('projects.title') }}
-    </h2>
-    <p class="text-text-muted mb-8 max-w-2xl">{{ t('projects.subtitle') }}</p>
+  <section id="projects" class="py-20 px-6 w-11/12 max-w-6xl mx-auto">
+    <div class="mb-10">
+      <h2 class="text-3xl md:text-5xl font-extrabold text-primary">
+        {{ t('projects.title') }}
+      </h2>
+      <p class="mt-3 text-text-muted md:text-lg">{{ t('projects.subtitle') }}</p>
+    </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
-      <!-- Toute la carte ouvre le détail ; le bouton sur l'aperçu est le chemin clavier. -->
-      <div
-        v-for="project in projectItems"
+    <!-- Projet mis en avant -->
+    <article
+      class="group mb-8 grid cursor-pointer items-center gap-8 rounded-3xl bg-surface p-5 md:grid-cols-5 md:p-8"
+      @click="selected = featured"
+    >
+      <button
+        type="button"
+        class="relative block w-full cursor-pointer text-left md:col-span-3"
+        :aria-label="t('projects.openDetails', { project: t(`${featured.key}.title`) })"
+      >
+        <BrowserMock
+          :src="previewSrc(featured, 'desktop')"
+          :alt="t('projects.previewDesktop', { site: hostname(featured.link) })"
+          :host="hostname(featured.link)"
+          class="transition duration-300 group-hover:-translate-y-1 group-hover:shadow-xl"
+        />
+        <img
+          :src="previewSrc(featured, 'mobile')"
+          :alt="t('projects.previewMobile', { site: hostname(featured.link) })"
+          width="390"
+          height="844"
+          loading="lazy"
+          decoding="async"
+          class="absolute -bottom-4 -right-2 w-[20%] min-w-20 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
+        />
+      </button>
+
+      <div class="md:col-span-2">
+        <!-- Pas de ligne `meta` ici : la description complète mentionne déjà le client et la date. -->
+        <h3 class="text-2xl md:text-3xl font-bold leading-snug">
+          {{ t(`${featured.key}.title`) }}
+        </h3>
+        <p class="mt-4 text-text">{{ t(`${featured.key}.desc`) }}</p>
+        <ul class="mt-5 flex flex-wrap gap-2 text-sm">
+          <li
+            v-for="tech in featured.technos"
+            :key="tech"
+            class="rounded-full bg-background px-3 py-1 font-semibold text-primary"
+          >
+            {{ tech }}
+          </li>
+        </ul>
+        <div class="mt-6 flex flex-wrap items-center gap-5">
+          <span
+            class="inline-flex rounded-md bg-primary-strong px-5 py-2.5 font-semibold text-on-primary transition group-hover:bg-primary-dark"
+          >
+            {{ t('projects.details') }}
+          </span>
+          <a
+            :href="featured.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+            @click.stop
+          >
+            {{ t('projects.viewSite') }}
+            <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Autres projets -->
+    <div class="grid gap-x-8 gap-y-12 md:grid-cols-2">
+      <article
+        v-for="project in others"
         :key="project.key"
-        class="group bg-card p-6 rounded shadow-sm cursor-pointer"
+        class="group cursor-pointer"
         @click="selected = project"
       >
         <button
           type="button"
-          class="relative mb-10 block w-full cursor-pointer text-left"
+          class="relative block w-full cursor-pointer rounded-3xl bg-surface px-6 pt-6 pb-10 text-left"
           :aria-label="t('projects.openDetails', { project: t(`${project.key}.title`) })"
         >
           <BrowserMock
@@ -84,7 +152,6 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
             :host="hostname(project.link)"
             class="transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
           />
-
           <img
             :src="previewSrc(project, 'mobile')"
             :alt="t('projects.previewMobile', { site: hostname(project.link) })"
@@ -92,43 +159,36 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
             height="844"
             loading="lazy"
             decoding="async"
-            class="absolute -bottom-6 right-3 w-[22%] min-w-20 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
+            class="absolute bottom-4 right-8 w-[20%] min-w-16 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
           />
         </button>
 
-        <h3 class="text-xl font-semibold mb-2">
-          {{ t(`${project.key}.title`) }}
-        </h3>
-        <p class="text-sm text-text-muted mb-4">
-          {{ t(`${project.key}.desc`) }}
-        </p>
-
-        <ul class="flex flex-wrap gap-2 text-sm my-2 text-primary">
-          <li
-            v-for="tech in project.technos"
-            :key="tech"
-            class="bg-primary/10 px-2 py-1 border font-bold rounded"
-          >
-            {{ tech }}
-          </li>
-        </ul>
-
-        <div class="flex flex-wrap items-center gap-4">
-          <span class="font-semibold text-primary group-hover:underline">
-            {{ t('projects.details') }}
-          </span>
+        <div class="mt-5 px-1">
+          <p class="text-sm font-semibold text-primary">{{ t(`${project.key}.meta`) }}</p>
+          <h3 class="mt-1 text-xl font-bold leading-snug group-hover:underline">
+            {{ t(`${project.key}.title`) }}
+          </h3>
+          <ul class="mt-3 flex flex-wrap gap-2 text-sm">
+            <li
+              v-for="tech in project.technos"
+              :key="tech"
+              class="rounded-full bg-surface px-3 py-1 font-semibold text-primary"
+            >
+              {{ tech }}
+            </li>
+          </ul>
           <a
             :href="project.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-primary hover:underline"
+            class="mt-4 inline-flex items-center gap-1 font-semibold text-primary hover:underline"
             @click.stop
           >
             {{ t('projects.viewSite') }}
             <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
           </a>
         </div>
-      </div>
+      </article>
     </div>
 
     <ProjectModal :project="selected" @close="selected = null" />

@@ -183,6 +183,36 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
   animation: fade-in 200ms ease-out 550ms both;
 }
 
+/*
+ * Barre de défilement aux couleurs du site. Chrome/Safari/Edge : pseudo-éléments WebKit (pouce
+ * arrondi). Firefox ne les connaît pas : `scrollbar-color`, réservé à Firefox car dans Chrome cette
+ * propriété désactive les pseudo-éléments.
+ */
+.modal-inner::-webkit-scrollbar {
+  width: 12px;
+}
+
+.modal-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-inner::-webkit-scrollbar-thumb {
+  background-color: var(--app-primary);
+  border: 3px solid var(--app-card-bg);
+  border-radius: 9999px;
+}
+
+.modal-inner::-webkit-scrollbar-thumb:hover {
+  background-color: var(--app-primary-dark);
+}
+
+@supports (-moz-appearance: none) {
+  .modal-inner {
+    scrollbar-width: thin;
+    scrollbar-color: var(--app-primary) transparent;
+  }
+}
+
 .is-closing .modal-inner {
   animation: fade-out 120ms ease-in both;
 }
