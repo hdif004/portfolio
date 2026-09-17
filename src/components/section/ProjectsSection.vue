@@ -63,7 +63,7 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
 </script>
 
 <template>
-  <section id="projects" class="py-20 px-6 w-11/12 max-w-6xl mx-auto">
+  <section id="projects" class="py-16 md:py-20 px-4 sm:px-6 w-full md:w-11/12 max-w-6xl mx-auto">
     <div class="mb-10">
       <h2 class="text-3xl md:text-5xl font-extrabold text-primary">
         {{ t('projects.title') }}
@@ -73,7 +73,7 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
 
     <!-- Projet mis en avant -->
     <article
-      class="group mb-8 grid cursor-pointer items-center gap-8 rounded-3xl bg-surface p-5 md:grid-cols-5 md:p-8"
+      class="group mb-10 grid cursor-pointer items-center gap-8 rounded-3xl bg-surface p-4 sm:p-5 md:mb-8 md:grid-cols-5 md:p-8"
       @click="selected = featured"
     >
       <button
@@ -143,7 +143,7 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
       >
         <button
           type="button"
-          class="relative block w-full cursor-pointer rounded-3xl bg-surface px-6 pt-6 pb-10 text-left"
+          class="relative block w-full cursor-pointer rounded-3xl bg-surface px-4 pt-4 pb-8 text-left sm:px-6 sm:pt-6 sm:pb-10"
           :aria-label="t('projects.openDetails', { project: t(`${project.key}.title`) })"
         >
           <BrowserMock
@@ -159,7 +159,7 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
             height="844"
             loading="lazy"
             decoding="async"
-            class="absolute bottom-4 right-8 w-[20%] min-w-16 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
+            class="absolute bottom-3 right-5 w-[20%] min-w-16 sm:bottom-4 sm:right-8 rounded-xl border-4 border-card-text bg-background shadow-xl transition duration-300 group-hover:-translate-y-2"
           />
         </button>
 

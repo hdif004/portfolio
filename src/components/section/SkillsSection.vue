@@ -1,35 +1,39 @@
 <template>
-  <section id="skills" class="py-20 px-6 w-11/12 max-w-6xl mx-auto">
+  <section id="skills" class="py-16 md:py-20 px-4 sm:px-6 w-full md:w-11/12 max-w-6xl mx-auto">
     <h2 class="text-3xl md:text-5xl font-extrabold text-primary">{{ t('skills.title') }}</h2>
     <p class="mt-3 mb-10 text-text-muted md:text-lg">{{ t('skills.subtitle') }}</p>
 
     <div class="grid gap-5 md:grid-cols-3">
       <!-- Au quotidien : bloc plein, sur toute la hauteur, logos en grand -->
       <div
-        class="rounded-3xl bg-primary-strong p-6 md:row-span-2 md:col-span-2 md:p-8 text-on-primary"
+        class="rounded-3xl bg-primary-strong p-5 sm:p-6 md:row-span-2 md:col-span-2 md:p-8 text-on-primary"
       >
         <h3 class="text-2xl font-bold">{{ t(daily.titleKey) }}</h3>
         <p class="mt-1 mb-6">{{ t(daily.captionKey) }}</p>
 
-        <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <ul class="grid grid-cols-2 gap-2 sm:gap-3 sm:grid-cols-3">
           <li
             v-for="skill in daily.items"
             :key="skill.name"
-            class="flex items-center gap-3 rounded-2xl bg-background px-4 py-4 font-semibold text-text"
+            class="flex items-center gap-2 rounded-2xl bg-background px-3 py-3 text-sm font-semibold text-text sm:gap-3 sm:px-4 sm:py-4 sm:text-base"
           >
             <span
-              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-primary"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface text-primary sm:h-10 sm:w-10 sm:rounded-xl"
             >
-              <BrandIcon v-if="skill.brand" :icon="skill.brand" class="w-5 h-5" />
-              <component v-else :is="skill.icon" class="w-5 h-5" aria-hidden="true" />
+              <BrandIcon v-if="skill.brand" :icon="skill.brand" class="w-4 h-4 sm:w-5 sm:h-5" />
+              <component v-else :is="skill.icon" class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
             </span>
-            <span class="leading-tight">{{ skill.name }}</span>
+            <span class="min-w-0 leading-tight">{{ skill.name }}</span>
           </li>
         </ul>
       </div>
 
       <!-- Maîtrisé / Notions : blocs plus discrets -->
-      <div v-for="group in secondary" :key="group.titleKey" class="rounded-3xl bg-surface p-6">
+      <div
+        v-for="group in secondary"
+        :key="group.titleKey"
+        class="rounded-3xl bg-surface p-5 sm:p-6"
+      >
         <h3 class="text-xl font-bold text-primary">{{ t(group.titleKey) }}</h3>
         <p class="mt-1 mb-5 text-sm text-text">{{ t(group.captionKey) }}</p>
 

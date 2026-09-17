@@ -14,18 +14,27 @@
     "contactShortcut": "Aller au formulaire de contact"
   },
   "hero": {
-    "available": "Disponible pour de nouvelles missions",
-    "greeting": "Salut, moi c'est",
-    "name": "Hudayfa",
+    "name": "Hudayfa Koujdal",
     "title": "Développeur web freelance",
-    "offers": "Sites vitrines et boutiques Shopify.",
-    "desc": "Je crée des sites vitrines et je développe des boutiques Shopify : mise en place, migration depuis WooCommerce, refonte de thème, corrections ponctuelles.",
-    "ctaPrimary": "Me contacter",
-    "ctaSecondary": "Voir mes réalisations",
-    "github": "GitHub",
-    "cv": "Télécharger mon CV",
-    "stack": "Outils principaux",
-    "imageAlt": "Hudayfa Koujdal, développeur web freelance, au travail sur son ordinateur"
+    "specialty": "Shopify & sites vitrines",
+    "os": {
+      "desktop": "Bureau interactif : ouvrez les fichiers pour en savoir plus",
+      "minimize": "Réduire",
+      "maximize": "Agrandir",
+      "restore": "Restaurer",
+      "close": "Fermer",
+      "download": "Télécharger le CV",
+      "projects": "Réalisations",
+      "contact": "Contact",
+      "cvTitle": "CV de Hudayfa Koujdal (PDF)",
+      "cvFallback": "L'aperçu du PDF n'est pas disponible sur cet appareil.",
+      "home": "Accueil",
+      "mail": "Mail",
+      "openCv": "Ouvrir le CV"
+    },
+    "profile": {
+      "role": "Développeur web freelance"
+    }
   },
   "about": {
     "title": "À propos",

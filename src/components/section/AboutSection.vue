@@ -5,7 +5,7 @@ const { t, tm } = useI18n()
 </script>
 
 <template>
-  <section id="about" class="py-16 px-6 w-10/12 mx-auto">
+  <section id="about" class="py-16 px-4 sm:px-6 w-full md:w-10/12 mx-auto">
     <div class="grid md:grid-cols-5 gap-10 md:gap-16">
       <!-- Présentation courte -->
       <div class="md:col-span-2 space-y-4">
@@ -25,7 +25,9 @@ const { t, tm } = useI18n()
             class="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-4 border-background bg-primary-fill"
             aria-hidden="true"
           ></span>
-          <p class="text-sm font-medium text-text-muted">{{ t(`about.timeline[${index}].date`) }}</p>
+          <p class="text-sm font-medium text-text-muted">
+            {{ t(`about.timeline[${index}].date`) }}
+          </p>
           <h3 class="text-lg font-semibold text-primary">
             {{ t(`about.timeline[${index}].role`) }}
             <span class="font-normal text-text">· {{ t(`about.timeline[${index}].place`) }}</span>

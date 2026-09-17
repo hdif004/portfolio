@@ -72,7 +72,7 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
   >
     <div v-if="project" class="modal-inner h-full overflow-y-auto">
       <header
-        class="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-muted bg-card px-6 py-4 md:px-10"
+        class="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-muted bg-card px-4 py-4 sm:px-6 md:px-10"
       >
         <div>
           <h2 id="project-modal-title" class="text-2xl font-bold md:text-3xl">
@@ -90,11 +90,9 @@ const hostname = (url) => new URL(url).hostname.replace(/^www\./, '')
         </button>
       </header>
 
-      <div class="px-6 py-8 md:px-10">
+      <div class="px-4 py-6 sm:px-6 sm:py-8 md:px-10">
         <!-- Mocks : ordinateur à gauche, téléphone à droite -->
-        <div
-          class="grid items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] md:gap-12"
-        >
+        <div class="grid items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] md:gap-12">
           <BrowserMock
             :src="previewSrc('desktop')"
             :alt="t('projects.previewDesktop', { site: hostname(project.link) })"

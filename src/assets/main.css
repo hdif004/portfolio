@@ -55,6 +55,11 @@
   --color-card-muted: var(--app-card-muted);
 }
 
+/* Défilement doux pour les ancres internes (désactivé plus bas si moins d'animations est demandé). */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Révélation au scroll : uniquement quand le JS a posé la classe `js` sur <html>. */
 .js .reveal {
   opacity: 0;

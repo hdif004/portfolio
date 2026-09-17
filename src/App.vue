@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Languages, Menu, X, MessageCircle } from 'lucide-vue-next'
 
@@ -10,9 +10,17 @@ import SkillsSection from './components/section/SkillsSection.vue'
 import ProjectsSection from './components/section/ProjectsSection.vue'
 import ContactSection from './components/section/ContactSection.vue'
 import Footer from './components/section/FooterSection.vue'
+import { navigateTo } from './navigation.js'
 
 const isDark = ref(false)
 const showMenu = ref(false)
+
+/**
+ * Bouton « Contact » flottant (mobile) : masqué tant que la hero, la section contact ou le pied de
+ * page sont à l'écran, où il masquerait le téléphone, le formulaire ou les liens.
+ */
+const showContactShortcut = ref(false)
+let shortcutObserver
 
 const { t, locale } = useI18n()
 
@@ -23,6 +31,11 @@ const applyTheme = (dark) => {
 }
 
 const toggleTheme = () => applyTheme(!isDark.value)
+
+const navigateFromMenu = (id) => {
+  showMenu.value = false
+  navigateTo(id)
+}
 
 const toggleLang = () => {
   locale.value = locale.value === 'fr' ? 'en' : 'fr'
@@ -40,9 +53,23 @@ watch(
 )
 
 onMounted(() => {
+  const visible = new Set()
+  shortcutObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) =>
+      entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target),
+    )
+    showContactShortcut.value = visible.size === 0
+  })
+  ;['hero', 'contact', 'footer'].forEach((id) => {
+    const el = document.getElementById(id)
+    if (el) shortcutObserver.observe(el)
+  })
+
   const saved = localStorage.getItem('theme')
   applyTheme(saved === 'dark')
 })
+
+onBeforeUnmount(() => shortcutObserver?.disconnect())
 </script>
 
 <template>
@@ -55,23 +82,53 @@ onMounted(() => {
     </a>
 
     <nav class="flex items-center justify-between w-11/12 mx-auto py-4 sm:px-8">
-      <a href="#hero" class="text-xl sm:text-4xl font-bold text-primary">{{ t('brand') }}</a>
+      <a
+        href="#hero"
+        @click.prevent="navigateTo('hero')"
+        class="text-xl sm:text-4xl font-bold text-primary"
+        >{{ t('brand') }}</a
+      >
 
       <ul class="hidden md:flex gap-6 text-sm">
         <li>
-          <a href="#hero" class="hover:underline font-semibold">{{ t('nav.home') }}</a>
+          <a
+            href="#hero"
+            @click.prevent="navigateTo('hero')"
+            class="hover:underline font-semibold"
+            >{{ t('nav.home') }}</a
+          >
         </li>
         <li>
-          <a href="#about" class="hover:underline font-semibold">{{ t('nav.about') }}</a>
+          <a
+            href="#about"
+            @click.prevent="navigateTo('about')"
+            class="hover:underline font-semibold"
+            >{{ t('nav.about') }}</a
+          >
         </li>
         <li>
-          <a href="#skills" class="hover:underline font-semibold">{{ t('nav.skills') }}</a>
+          <a
+            href="#skills"
+            @click.prevent="navigateTo('skills')"
+            class="hover:underline font-semibold"
+            >{{ t('nav.skills') }}</a
+          >
         </li>
         <li>
-          <a href="#projects" class="hover:underline font-semibold">{{ t('nav.projects') }}</a>
+          <a
+            href="#projects"
+            @click.prevent="navigateTo('projects')"
+            class="hover:underline font-semibold"
+            >{{ t('nav.projects') }}</a
+          >
         </li>
         <li>
-          <a href="#contact" class="hover:underline font-semibold">{{ t('nav.contact') }}</a>
+          <a
+            href="#contact"
+            @click.prevent="navigateTo('contact')"
+            class="hover:underline font-semibold"
+            >{{ t('nav.contact') }}</a
+          >
         </li>
       </ul>
 
@@ -105,21 +162,36 @@ onMounted(() => {
       id="mobile-menu"
       class="mobile-menu md:hidden flex flex-col gap-4 text-center py-4 border-t border-muted text-sm"
     >
-      <a href="#hero" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.home')
-      }}</a>
-      <a href="#about" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.about')
-      }}</a>
-      <a href="#skills" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.skills')
-      }}</a>
-      <a href="#projects" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.projects')
-      }}</a>
-      <a href="#contact" @click="showMenu = false" class="hover:underline font-semibold">{{
-        t('nav.contact')
-      }}</a>
+      <a
+        href="#hero"
+        @click.prevent="navigateFromMenu('hero')"
+        class="hover:underline font-semibold"
+        >{{ t('nav.home') }}</a
+      >
+      <a
+        href="#about"
+        @click.prevent="navigateFromMenu('about')"
+        class="hover:underline font-semibold"
+        >{{ t('nav.about') }}</a
+      >
+      <a
+        href="#skills"
+        @click.prevent="navigateFromMenu('skills')"
+        class="hover:underline font-semibold"
+        >{{ t('nav.skills') }}</a
+      >
+      <a
+        href="#projects"
+        @click.prevent="navigateFromMenu('projects')"
+        class="hover:underline font-semibold"
+        >{{ t('nav.projects') }}</a
+      >
+      <a
+        href="#contact"
+        @click.prevent="navigateFromMenu('contact')"
+        class="hover:underline font-semibold"
+        >{{ t('nav.contact') }}</a
+      >
       <button
         type="button"
         class="mx-auto inline-flex items-center gap-2 rounded-full border border-primary px-4 py-2 text-primary"
@@ -133,7 +205,11 @@ onMounted(() => {
     <!-- Raccourci mobile : la position la plus visible sert à convertir, pas à changer de langue. -->
     <a
       href="#contact"
-      class="md:hidden fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-primary-strong px-5 py-3 font-semibold text-on-primary shadow-lg"
+      @click.prevent="navigateTo('contact')"
+      class="md:hidden fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-primary-strong px-5 py-3 font-semibold text-on-primary shadow-lg transition duration-200"
+      :class="showContactShortcut ? 'opacity-100' : 'pointer-events-none translate-y-4 opacity-0'"
+      :aria-hidden="!showContactShortcut"
+      :tabindex="showContactShortcut ? undefined : -1"
       :aria-label="t('a11y.contactShortcut')"
     >
       <MessageCircle class="w-5 h-5" aria-hidden="true" />

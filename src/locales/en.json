@@ -14,18 +14,27 @@
     "contactShortcut": "Go to the contact form"
   },
   "hero": {
-    "available": "Available for new projects",
-    "greeting": "Hi, I'm",
-    "name": "Hudayfa",
+    "name": "Hudayfa Koujdal",
     "title": "Freelance web developer",
-    "offers": "Business websites and Shopify stores.",
-    "desc": "I build business websites and develop Shopify stores: setup, migration from WooCommerce, theme rebuilds, one-off fixes.",
-    "ctaPrimary": "Get in touch",
-    "ctaSecondary": "See my work",
-    "github": "GitHub",
-    "cv": "Download my CV",
-    "stack": "Main tools",
-    "imageAlt": "Hudayfa Koujdal, freelance web developer, working at his computer"
+    "specialty": "Shopify & business websites",
+    "os": {
+      "desktop": "Interactive desktop: open the files to learn more",
+      "minimize": "Minimize",
+      "maximize": "Maximize",
+      "restore": "Restore",
+      "close": "Close",
+      "download": "Download my CV",
+      "projects": "Projects",
+      "contact": "Contact",
+      "cvTitle": "Hudayfa Koujdal’s CV (PDF)",
+      "cvFallback": "The PDF preview is not available on this device.",
+      "home": "Home",
+      "mail": "Mail",
+      "openCv": "Open my CV"
+    },
+    "profile": {
+      "role": "Freelance web developer"
+    }
   },
   "about": {
     "title": "About",
