@@ -11,7 +11,7 @@
         checked ? 'bg-[#f3f0e7]' : 'bg-green-800',
       ]"
     >
-      <span class="sr-only">Toggle dark mode</span>
+      <span class="sr-only">{{ t('a11y.toggleTheme') }}</span>
 
       <!-- ☀️ Sun icon (left, light mode) -->
       <Sun
@@ -39,7 +39,10 @@
 <script setup>
 import { Switch } from '@headlessui/vue'
 import { Moon, Sun } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
 
 defineProps({ isDark: Boolean })
 defineEmits(['toggle'])
+
+const { t } = useI18n()
 </script>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Page introuvable – Hudayfa Koujdal</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      :root {
+        --bg: #dad7cd;
+        --text: #3a5a40;
+        --muted: #3f6046;
+        --btn: #46704a;
+        --btn-text: #ffffff;
+        --code-bg: #1f2b22;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #344e41;
+          --text: #dad7cd;
+          --muted: #c3cdb4;
+          --btn: #a3b18a;
+          --btn-text: #1b2820;
+          --code-bg: #1f2b22;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        min-height: 100svh;
+        margin: 0;
+        padding: 24px 16px;
+        place-items: center;
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      main {
+        width: 100%;
+        max-width: 34rem;
+        text-align: center;
+      }
+
+      pre {
+        margin: 0 auto 2rem;
+        padding: 1rem 1.25rem;
+        overflow-x: auto;
+        border-radius: 12px;
+        text-align: left;
+        font: 0.95rem/1.6 Consolas, ui-monospace, monospace;
+        color: #dad7cd;
+        background: var(--code-bg);
+      }
+
+      .k {
+        color: #e9c46a;
+      }
+
+      .s {
+        color: #f4a582;
+      }
+
+      .n {
+        color: #a3d9a5;
+      }
+
+      .p {
+        color: #8fa37f;
+      }
+
+      h1 {
+        margin: 0 0 0.5rem;
+        font-size: 2rem;
+      }
+
+      p {
+        margin: 0 0 1.75rem;
+        color: var(--muted);
+      }
+
+      a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--btn-text);
+        background: var(--btn);
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <pre aria-hidden="true"><span class="p">{</span>
+  <span class="k">"status"</span><span class="p">:</span> <span class="n">404</span><span class="p">,</span>
+  <span class="k">"message"</span><span class="p">:</span> <span class="s">"Page introuvable"</span>
+<span class="p">}</span></pre>
+      <h1>Page introuvable</h1>
+      <p>Cette adresse n'existe pas ou a changé. Page not found.</p>
+      <a href="/">Retour à l'accueil</a>
+    </main>
+  </body>
+</html>

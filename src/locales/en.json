@@ -11,7 +11,8 @@
     "skipToContent": "Skip to main content",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
-    "contactShortcut": "Go to the contact form"
+    "contactShortcut": "Go to the contact form",
+    "toggleTheme": "Toggle dark mode"
   },
   "hero": {
     "name": "Hudayfa Koujdal",
