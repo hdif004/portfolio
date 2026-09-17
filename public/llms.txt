@@ -1,13 +1,11 @@
 # Hudayfa Koujdal
 
-> Hudayfa Koujdal est un développeur web freelance basé en France. Il crée des sites vitrines pour
-> les artisans et les petites entreprises, et développe, migre et refond des boutiques Shopify.
+> Hudayfa Koujdal est un développeur web freelance. Il réalise des migrations, des refontes et des
+> corrections sur Shopify et WordPress.
 > Contact : hudayfa.k.pro@gmail.com
 
 ## Prestations
 
-- Sites vitrines pour artisans, commerçants et petites entreprises.
-- Création de boutiques Shopify.
 - Migration WooCommerce → Shopify : produits, collections, clients, avis, redirections 301 et
   préservation du référencement existant.
 - Développement et refonte de thèmes Shopify en Liquid (sections, blocs, panier, tunnel d'achat).

@@ -10,7 +10,8 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "build:client": "vite build",
-    "screenshots": "node scripts/screenshots.mjs"
+    "screenshots": "node scripts/screenshots.mjs",
+    "og-image": "node scripts/og-image.mjs"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",

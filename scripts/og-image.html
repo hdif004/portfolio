@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>OG image</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        color: #3a5a40;
+        background:
+          radial-gradient(circle at 78% 50%, rgb(88 129 87 / 0.22), transparent 42%),
+          #dad7cd;
+      }
+
+      .layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 72px;
+      }
+
+      .name {
+        font-size: 76px;
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -1.5px;
+      }
+
+      .role {
+        margin-top: 26px;
+        font-size: 34px;
+        font-weight: 600;
+        color: #588157;
+      }
+
+      .work {
+        margin-top: 22px;
+        font-size: 25px;
+        line-height: 1.45;
+      }
+
+      .domain {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #588157;
+      }
+
+      .window {
+        width: 540px;
+        overflow: hidden;
+        border-radius: 14px;
+        background: #1f2b22;
+        box-shadow:
+          0 30px 60px -20px rgb(0 0 0 / 0.45),
+          0 0 0 1px rgb(0 0 0 / 0.15);
+        transform: rotate(2deg);
+      }
+
+      .bar {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        padding: 0 18px;
+        border-bottom: 1px solid rgb(255 255 255 / 0.08);
+        background: #18221b;
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .file {
+        flex: 1;
+        margin-right: 52px;
+        text-align: center;
+        font-family: Consolas, monospace;
+        font-size: 17px;
+        color: #a3b18a;
+      }
+
+      pre {
+        padding: 22px 26px 26px;
+        font-family: Consolas, monospace;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #dad7cd;
+      }
+
+      .n {
+        display: inline-block;
+        width: 28px;
+        margin-right: 18px;
+        text-align: right;
+        color: #5f7a63;
+      }
+
+      .p {
+        color: #8fa37f;
+      }
+
+      .k {
+        color: #e9c46a;
+      }
+
+      .s {
+        color: #f4a582;
+      }
+
+      .d {
+        color: #a3d9a5;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <div>
+        <p class="name">Hudayfa<br />Koujdal</p>
+        <p class="role">Développeur web freelance</p>
+        <p class="work">Migrations, refontes et corrections<br />sur Shopify et WordPress</p>
+        <p class="domain">devay.dev</p>
+      </div>
+
+      <div class="window">
+        <div class="bar">
+          <span class="dots">
+            <span style="background: #ff5f57"></span>
+            <span style="background: #febc2e"></span>
+            <span style="background: #28c840"></span>
+          </span>
+          <span class="file">hudayfa.json</span>
+        </div>
+        <pre><span class="n">1</span><span class="p">{</span>
+<span class="n">2</span>  <span class="k">"firstName"</span><span class="p">: </span><span class="s">"Hudayfa"</span><span class="p">,</span>
+<span class="n">3</span>  <span class="k">"lastName"</span><span class="p">: </span><span class="s">"Koujdal"</span><span class="p">,</span>
+<span class="n">4</span>  <span class="k">"stack"</span><span class="p">: [</span><span class="s">"Shopify"</span><span class="p">, </span><span class="s">"WordPress"</span><span class="p">],</span>
+<span class="n">5</span>  <span class="k">"projects"</span><span class="p">: </span><span class="d">5</span><span class="p">,</span>
+<span class="n">6</span>  <span class="k">"coffeeAddict"</span><span class="p">: </span><span class="s">"☕ of course"</span>
+<span class="n">7</span><span class="p">}</span></pre>
+      </div>
+    </main>
+  </body>
+</html>
