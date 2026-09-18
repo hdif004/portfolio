@@ -73,9 +73,10 @@ const updateLid = () => {
   if (!hero || !scene) return
 
   const scrolled = scrollProgress()
-  // Hystérésis : le téléphone ne clignote pas quand on s'arrête pile sur le seuil.
-  if (forcedPhoneOff || scrolled > 0.15) phoneOff.value = true
-  else if (scrolled < 0.05) phoneOff.value = false
+  // Hystérésis : le téléphone ne clignote pas quand on s'arrête pile sur le seuil. Sur mobile,
+  // la zone collante est courte (voir .hero) : il se rallume peu après être remonté.
+  if (forcedPhoneOff || scrolled > 0.4) phoneOff.value = true
+  else if (scrolled < 0.25) phoneOff.value = false
 
   if (reducedMotion) return
 
@@ -480,6 +481,13 @@ const keyboardRows = [
 /* ---------- Dimensions ---------- */
 .hero {
   height: 150svh;
+}
+
+/* Mobile : le téléphone s'éteint sans animation de couvercle, une zone collante courte suffit. */
+@media (max-width: 767.98px) {
+  .hero {
+    height: 120svh;
+  }
 }
 
 /*

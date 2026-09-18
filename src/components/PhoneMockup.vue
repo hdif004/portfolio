@@ -9,7 +9,7 @@ import { navigateTo } from '../navigation.js'
 
 /**
  * Hero mobile : un téléphone avec un écran d'accueil dans l'esprit du bureau de l'ordinateur.
- * `off` : écran éteint (scroll ou navigation), avec le bruit de verrouillage quand c'est possible.
+ * `off` : écran éteint (scroll ou navigation).
  */
 const props = defineProps({
   off: { type: Boolean, default: false },
@@ -63,82 +63,6 @@ const openSection = (id) => {
   navigateTo(id)
 }
 
-/* ---------- Son de verrouillage ---------- */
-
-/**
- * Les navigateurs n'autorisent le son qu'après une vraie interaction : un appui (fin du toucher),
- * un clic ou une touche. Un simple `pointerdown` au doigt ou un scroll ne suffisent pas. Les
- * écouteurs restent donc en place tant que le contexte audio n'est pas réellement débloqué.
- */
-let audio = null
-const gestureEvents = ['pointerup', 'touchend', 'click', 'keydown']
-
-const removeGestureListeners = () =>
-  gestureEvents.forEach((type) => window.removeEventListener(type, unlockAudio))
-
-const unlockAudio = () => {
-  const AudioContext = window.AudioContext || window.webkitAudioContext
-  if (!AudioContext) return removeGestureListeners()
-  audio ??= new AudioContext()
-
-  // iOS : jouer un son vide pendant le geste finit de débloquer la sortie audio.
-  const silent = audio.createBufferSource()
-  silent.buffer = audio.createBuffer(1, 1, 22050)
-  silent.connect(audio.destination)
-  silent.start(0)
-
-  if (audio.state === 'running') return removeGestureListeners()
-  audio
-    .resume()
-    .then(() => audio.state === 'running' && removeGestureListeners())
-    .catch(() => {})
-}
-
-/** « Clac » de verrouillage synthétisé : un clic aigu très court suivi d'un petit coup sourd. */
-const scheduleLockSound = () => {
-  const start = audio.currentTime + 0.01
-
-  const click = audio.createOscillator()
-  const clickFilter = audio.createBiquadFilter()
-  const clickGain = audio.createGain()
-  click.type = 'square'
-  click.frequency.setValueAtTime(2600, start)
-  click.frequency.exponentialRampToValueAtTime(900, start + 0.025)
-  clickFilter.type = 'bandpass'
-  clickFilter.frequency.value = 1800
-  clickGain.gain.setValueAtTime(0.0001, start)
-  clickGain.gain.exponentialRampToValueAtTime(0.25, start + 0.002)
-  clickGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.04)
-  click.connect(clickFilter).connect(clickGain).connect(audio.destination)
-  click.start(start)
-  click.stop(start + 0.05)
-
-  const thud = audio.createOscillator()
-  const thudGain = audio.createGain()
-  thud.type = 'sine'
-  thud.frequency.setValueAtTime(160, start + 0.01)
-  thud.frequency.exponentialRampToValueAtTime(60, start + 0.09)
-  thudGain.gain.setValueAtTime(0.0001, start + 0.01)
-  thudGain.gain.exponentialRampToValueAtTime(0.45, start + 0.015)
-  thudGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.1)
-  thud.connect(thudGain).connect(audio.destination)
-  thud.start(start + 0.01)
-  thud.stop(start + 0.12)
-}
-
-/**
- * Joue le son si l'audio est débloqué. Quand l'extinction suit directement un appui (appli
- * Réalisations ou Contact), le déblocage est encore en cours : on attend qu'il aboutisse.
- */
-const playLockSound = () => {
-  if (!audio) return
-  if (audio.state === 'running') return scheduleLockSound()
-  audio
-    .resume()
-    .then(() => audio.state === 'running' && scheduleLockSound())
-    .catch(() => {})
-}
-
 /**
  * Écran de verrouillage : visible pendant l'intro (animation CSS), puis à chaque rallumage du
  * téléphone, le temps d'un « déverrouillage » automatique.
@@ -153,7 +77,6 @@ watch(
     if (off) {
       endIntro()
       locked.value = true
-      playLockSound()
     } else {
       unlockTimer = setTimeout(() => (locked.value = false), 800)
     }
@@ -166,16 +89,12 @@ onMounted(() => {
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) endIntro()
   else introTimer = setTimeout(endIntro, 4400)
-
-  gestureEvents.forEach((type) => window.addEventListener(type, unlockAudio, { passive: true }))
 })
 
 onBeforeUnmount(() => {
   clearInterval(clockTimer)
   clearTimeout(introTimer)
   clearTimeout(unlockTimer)
-  removeGestureListeners()
-  audio?.close()
 })
 </script>
 
